@@ -1,0 +1,268 @@
+.refer-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+}
+
+.refer-card {
+  padding: 28px 32px;
+}
+
+/* ── Brand row ── */
+.refer-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.refer-brand-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+}
+.refer-brand-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+/* ── Hero ── */
+.refer-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.refer-hero-text {
+  flex: 1;
+  min-width: 0;
+}
+.refer-hero-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+.refer-hero-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+.refer-hero-illustration {
+  flex-shrink: 0;
+  opacity: 0.92;
+}
+
+/* ── Referral link row ── */
+.refer-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 6px 6px 6px 14px;
+  margin-bottom: 12px;
+}
+.refer-link-input {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.refer-copy-btn {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  font-size: 12px;
+  border-radius: 30px;
+  transition: background 0.2s, transform 0.1s;
+}
+.refer-copy-btn--copied {
+  background: var(--success-green, #2e7d32) !important;
+}
+
+/* ── Terms ── */
+.refer-terms {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.refer-terms-link {
+  color: var(--accent-blue);
+  text-decoration: underline;
+}
+
+/* ── Divider ── */
+.refer-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 24px 0;
+}
+
+/* ── How it works ── */
+.refer-how-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+.refer-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.refer-step {
+  display: flex;
+  gap: 14px;
+  position: relative;
+}
+.refer-step-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.refer-step-icon--blue {
+  background: var(--accent-blue, #3b5bdb);
+  color: #fff;
+}
+.refer-step-connector {
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  width: 2px;
+  height: calc(100% + 8px);
+  background: var(--border-light);
+  z-index: 0;
+}
+.refer-step-body {
+  padding-bottom: 20px;
+  padding-top: 6px;
+}
+.refer-step:last-child .refer-step-connector { display: none; }
+.refer-step:last-child .refer-step-body { padding-bottom: 0; }
+.refer-step-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.refer-step-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Sidebar ── */
+.refer-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+/* ── Rewards card ── */
+.refer-rewards-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+.refer-rewards-header {
+  background: #f5c842;
+  color: #7a5c00;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  padding: 14px 16px;
+}
+.dark .refer-rewards-header {
+  background: #b8920f;
+  color: #fff8e1;
+}
+.refer-rewards-body {
+  background: var(--bg-card);
+  padding: 18px 20px;
+}
+.refer-rewards-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.refer-rewards-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.refer-rewards-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+.refer-rewards-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.refer-side-active {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 14px 0 0;
+  text-align: center;
+  line-height: 1.5;
+}
+.refer-rewards-card {
+  animation: fadeUp 0.4s ease-out 0.05s both;
+  animation-delay: 0.1s;
+}
+
+.refer-faq-card {
+  background: transparent;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1190px) {
+  .refer-layout {
+    grid-template-columns: 1fr;
+  }
+  .refer-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+}
+@media (max-width: 600px) {
+  .refer-hero-illustration { display: none; }
+}
+@media (max-width: 560px) {
+  .refer-sidebar {
+    grid-template-columns: 1fr;
+  }
+  .refer-card {
+    padding: 20px 18px;
+  }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

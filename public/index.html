@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Account Overview | {appName} Account</title>
+    <link rel="icon" href="/assets/images/Favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/styling.css" />
+    <link rel="stylesheet" href="/css/billing.css" />
+    <link rel="stylesheet" href="/css/support.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-logo"></div>
+          <div>
+            <span class="sidebar-brand-name">{appName}</span>
+            <span class="sidebar-brand-sub"> Account</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <div
+            class="sidebar-nav-item active"
+            onclick="navigateTo('home')"
+            data-page="home"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            Home
+          </div>
+
+          <div class="sidebar-divider"></div>
+
+          <div class="sidebar-nav-item" onclick="showToast('Downloads')">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Downloads
+          </div>
+          <div
+            class="sidebar-nav-item"
+            onclick="navigateTo('pricing')"
+            data-page="pricing"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            Available plans
+          </div>
+          <div
+            class="sidebar-nav-item"
+            onclick="navigateTo('billing')"
+            data-page="billing"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+              <line x1="1" y1="10" x2="23" y2="10" />
+            </svg>
+            Billing
+          </div>
+          <div
+            class="sidebar-nav-item"
+            onclick="navigateTo('redeem')"
+            data-page="redeem"
+          >
+            <svg viewBox="0 0 24 24">
+              <polyline points="21 8 21 21 3 21 3 8" />
+              <rect x="1" y="3" width="22" height="5" />
+              <line x1="10" y1="12" x2="14" y2="12" />
+            </svg>
+            Redeem
+          </div>
+          <div
+            class="sidebar-nav-item"
+            data-page="refer"
+            onclick="navigateTo('refer')"
+          >
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 12 20 22 4 22 4 12" />
+              <rect x="2" y="7" width="20" height="5" />
+              <path d="M12 22V7" />
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+            </svg>
+            Refer a friend
+          </div>
+        </nav>
+      </aside>
+
+      <!-- DESKTOP TOPBAR -->
+      <header class="topbar">
+        <span class="topbar-title">Home</span>
+        <span class="topbar-right">
+          <button
+            class="theme-toggle-btn"
+            id="darkModeToggle"
+            aria-label="Toggle theme"
+          >
+            <span id="themeIcon" class="darkmode-icon"></span>
+            <span id="themeText">Dark mode</span>
+          </button>
+          <a
+            class="support-link"
+            href="#"
+            onclick="
+              navigateTo('support');
+              return false;
+            "
+          >
+            <span class="support-link-icon"></span>
+            <span>Support center</span>
+          </a>
+          <div class="user-chip-wrapper">
+            <div class="user-chip" id="userChip">
+              <div class="user-chip-avatar" id="chipAvatar"></div>
+              <span id="chipEmail" style="font-size: 12.5px">{userEmail}</span>
+              <span class="user-chip-caret" id="chipCaret">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </div>
+
+            <div class="chip-popup" id="chipPopup">
+              <button
+                class="chip-popup-item"
+                id="chipAccountSettingsBtn"
+                onclick="
+                  navigateTo('account-settings');
+                  closeChipPopup();
+                "
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  />
+                </svg>
+                Account settings
+              </button>
+              <button class="chip-popup-item" id="chipLogoutBtn">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log out
+              </button>
+            </div>
+          </div>
+        </span>
+      </header>
+
+      <!-- MOBILE TOPBAR -->
+      <header class="mobile-topbar">
+        <div class="mobile-brand">
+          <span class="brand-logo"></span>
+          <span class="mobile-brand-name">{appName}</span>
+          <span class="mobile-brand-sub">Account</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <button
+            class="mobile-theme-toggle"
+            id="mobileThemeToggle"
+            aria-label="Toggle theme"
+          >
+            <span id="mobileThemeIcon" class="darkmode-icon"></span>
+          </button>
+          <button class="mobile-burger" id="burgerMenuBtn" aria-label="Menu">
+            <svg viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- MENU OVERLAY & DRAWER PANEL -->
+      <div
+        id="menuOverlay"
+        class="menu-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+      >
+        <div class="menu-panel">
+          <!-- Panel top bar -->
+          <div class="menu-topbar">
+            <div class="menu-brand">
+              <div class="brand-logo"></div>
+              <span class="menu-brand-name">{appName}</span>
+              <span class="menu-brand-sub">Account</span>
+            </div>
+            <button
+              class="close-menu-btn"
+              id="closeMenuBtn"
+              aria-label="Close menu"
+            >
+              <svg viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- User info -->
+          <div class="user-row" id="menuUserRow">
+            <div class="user-avatar" id="menuAvatar">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <g fill="none">
+                  <path
+                    d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M16 14a5 5 0 0 1 4.995 4.783L21 19v1a2 2 0 0 1-1.85 1.995L19 22H5a2 2 0 0 1-1.995-1.85L3 20v-1a5 5 0 0 1 4.783-4.995L8 14zM12 2a5 5 0 1 1 0 10a5 5 0 0 1 0-10"
+                  />
+                </g>
+              </svg>
+            </div>
+            <span class="user-email" id="menuEmail">{userEmail}</span>
+          </div>
+
+          <!-- Login shortcut (shown when no email) -->
+          <button class="settings-btn" id="menuLoginBtn" style="display: none">
+            <svg
+              viewBox="0 0 24 24"
+              width="16"
+              height="16"
+              style="flex-shrink: 0"
+            >
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" y1="12" x2="3" y2="12" />
+            </svg>
+            Login
+          </button>
+
+          <!-- Account settings shortcut (hidden when no email) -->
+          <button class="settings-btn" id="menuAccountSettingsBtn">
+            <span class="settings-btn-icon"></span>
+            Account settings
+          </button>
+
+          <!-- Nav items -->
+          <nav class="menu-nav" aria-label="Main navigation">
+            <div class="nav-item" data-action="Home" role="button" tabindex="0">
+              <span class="nav-icon"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                  <polyline points="9 22 9 12 15 12 15 22" /></svg
+              ></span>
+              <span class="nav-label">Home</span>
+              <span class="chevron-right-icon nav"></span>
+            </div>
+            <div class="menu-divider"></div>
+            <div
+              class="nav-item"
+              data-action="Downloads"
+              role="button"
+              tabindex="0"
+            >
+              <span class="nav-icon"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" /></svg
+              ></span>
+              <span class="nav-label">Downloads</span>
+              <span class="chevron-right-icon nav"></span>
+            </div>
+            <div class="menu-divider"></div>
+            <div
+              class="nav-item"
+              data-action="Available plans"
+              role="button"
+              tabindex="0"
+            >
+              <span class="nav-icon"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+                  />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <path d="M16 10a4 4 0 0 1-8 0" /></svg
+              ></span>
+              <span class="nav-label">Available plans</span>
+              <span class="chevron-right-icon nav"></span>
+            </div>
+            <div class="menu-divider"></div>
+            <div
+              class="nav-item"
+              data-action="Billing"
+              role="button"
+              tabindex="0"
+            >
+              <span class="nav-icon"
+                ><svg viewBox="0 0 24 24">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" /></svg
+              ></span>
+              <span class="nav-label">Billing</span>
+              <span class="chevron-right-icon nav"></span>
+            </div>
+            <div class="menu-divider"></div>
+            <div
+              class="nav-item"
+              data-action="Redeem"
+              role="button"
+              tabindex="0"
+            >
+              <span class="nav-icon"
+                ><svg viewBox="0 0 24 24">
+                  <polyline points="21 8 21 21 3 21 3 8" />
+                  <rect x="1" y="3" width="22" height="5" />
+                  <line x1="10" y1="12" x2="14" y2="12" /></svg
+              ></span>
+              <span class="nav-label">Redeem</span>
+              <span class="chevron-right-icon nav"></span>
+            </div>
+            <div class="menu-divider"></div>
+            <div
+              class="nav-item"
+              data-action="Refer a friend"
+              role="button"
+              tabindex="0"
+            >
+              <span class="nav-icon"
+                ><svg viewBox="0 0 24 24">
+                  <polyline points="20 12 20 22 4 22 4 12" />
+                  <rect x="2" y="7" width="20" height="5" />
+                  <path d="M12 22V7" />
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" /></svg
+              ></span>
+              <span class="nav-label">Refer a friend</span>
+              <span class="chevron-right-icon nav"></span>
+            </div>
+            <div class="menu-divider"></div>
+            <div
+              class="nav-item"
+              data-action="Support"
+              role="button"
+              tabindex="0"
+            >
+              <span class="nav-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                  <circle cx="12" cy="17" r="0.5" fill="currentColor" />
+                </svg>
+              </span>
+              <span class="nav-label">Support center</span>
+              <span class="chevron-right-icon nav"></span>
+            </div>
+            <div class="menu-divider"></div>
+          </nav>
+
+          <!-- Logout -->
+          <button class="logout-btn" id="menuLogoutBtn">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Log out
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <div id="pageSpinner" class="page-spinner" aria-hidden="true">
+          <div class="page-spinner-inner">
+            <svg class="spinner-svg" viewBox="0 0 50 50">
+              <circle cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+            </svg>
+          </div>
+        </div>
+        <div id="panel-home">
+          <div class="home-welcome">
+            <h1 class="home-welcome-title">
+              Welcome <span class="home-wave">👋</span>
+            </h1>
+            <p class="home-welcome-sub">
+              Download apps, manage your billing and account settings.
+            </p>
+          </div>
+
+          <!-- MOBILE: Quick access cards -->
+          <div class="home-mobile-section">
+            <p class="section-label">Quick access</p>
+            <div class="home-quick-list">
+              <a
+                href="#"
+                onclick="
+                  navigateTo('account-settings');
+                  return false;
+                "
+                class="home-quick-item"
+                id="quickItemAccountSettings"
+              >
+                <span class="home-quick-icon">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    />
+                  </svg>
+                </span>
+                <span class="home-quick-label">Account settings</span>
+                <span class="home-quick-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </span>
+              </a>
+              <a
+                href="#"
+                onclick="
+                  navigateTo('billing');
+                  return false;
+                "
+                class="home-quick-item"
+              >
+                <span class="home-quick-icon">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                    <line x1="1" y1="10" x2="23" y2="10" />
+                  </svg>
+                </span>
+                <span class="home-quick-label">Billing information</span>
+                <span class="home-quick-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </span>
+              </a>
+              <a
+                href="#"
+                onclick="
+                  navigateTo('pricing');
+                  return false;
+                "
+                class="home-quick-item"
+              >
+                <span class="home-quick-icon">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </span>
+                <span class="home-quick-label">Your deals</span>
+                <span class="home-quick-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </span>
+              </a>
+              <a
+                href="#"
+                onclick="
+                  navigateTo('downloads');
+                  return false;
+                "
+                class="home-quick-item"
+              >
+                <span class="home-quick-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                </span>
+                <span class="home-quick-label">Downloads</span>
+                <span class="home-quick-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </span>
+              </a>
+              <a
+                href="#"
+                onclick="
+                  navigateTo('refer');
+                  return false;
+                "
+                class="home-quick-item"
+              >
+                <span class="home-quick-icon">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="20 12 20 22 4 22 4 12" />
+                    <rect x="2" y="7" width="20" height="5" />
+                    <path d="M12 22V7" />
+                    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+                    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+                  </svg>
+                </span>
+                <span class="home-quick-label">Refer a friend</span>
+                <span class="home-quick-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <!-- DESKTOP: Products + Sidebar cards -->
+          <div class="home-desktop-section">
+            <div class="home-desktop-main">
+              <p class="section-label">Products and services</p>
+              <div class="card home-products-card">
+                <a href="#" class="home-product-item">
+                  <div class="home-product-logo home-product-logo--teal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <defs>
+                        <style>
+                          .cls-1 {
+                            fill: currentColor;
+                          }
+                        </style>
+                      </defs>
+                      <g id="brand">
+                        <path
+                          class="cls-1"
+                          d="M19,5.4c-1.8-1.9-4.2-3-7-3s-5.2,1.1-6.9,2.9l7.1,2.6,6.8-2.5Z"
+                        />
+                        <path
+                          class="cls-1"
+                          d="M20.6,7.8C20.9,7.1 20.8,6.2 20.3,5.8L12.1,8.8 3.8,5.7C3.3,6.1 3.2,6.9 3.4,7.6C2.7,8.9 2.3,10.4 2.3,12C2.3,17.3 6.6,21.6 11.9,21.6C17.2,21.6 21.5,17.3 21.5,12C21.5,9.608 20.6,7.8 20.6,7.8 ZM16,16.2C14.9,16.2 13.9,15.8 13.1,15.2L12.1,17.4 11,15.2C10.2,15.9 9.2,16.3 8.1,16.3C5.6,16.3 3.5,14.3 3.5,11.7C3.5,10.417 3.9,9.6 4.5,8.8L7.4,9.7C6.8,10 6.3,10.6 6.3,11.4C6.3,12.2 7.1,13.3 8.2,13.3C9.3,13.3 10.1,12.5 10.1,11.4C10.1,10.986 10,10.7 9.8,10.4L11.9,11 14.2,10.3C14,10.6 13.9,10.9 13.9,11.2C13.9,12.2 14.7,13.1 15.8,13.1C16.9,13.1 17.7,12.3 17.7,11.2C17.7,10.214 17.106,9.668 16.7,9.5L19.4,8.7C20.1,9.5 20.4,10.5 20.4,11.6C20.4,14.1 18.4,16.2 15.8,16.2Z"
+                        />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="home-product-info">
+                    <span class="home-product-name">{appName} Premium</span>
+                    <span class="home-product-renew"
+                      >Renews on February 21, 2028
+                      <svg viewBox="0 0 24 24" width="13" height="13">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" /></svg
+                    ></span>
+                  </div>
+                  <span class="home-product-chevron"
+                    ><svg viewBox="0 0 24 24">
+                      <polyline points="9 18 15 12 9 6" /></svg
+                  ></span>
+                </a>
+                <a href="#" class="home-product-item home-product-item--last">
+                  <div class="home-product-logo home-product-logo--purple">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <g fill="none">
+                        <path
+                          d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                        />
+                        <path
+                          fill="currentColor"
+                          d="M17 4a2 2 0 0 1 1.995 1.85L19 6v2h1a2 2 0 0 1 1.995 1.85L22 10v9a2 2 0 0 1-1.85 1.995L20 21h-4a2 2 0 0 1-1.647-.866L14.268 20H4a2 2 0 0 1-1.995-1.85L2 18V6a2 2 0 0 1 1.85-1.995L4 4zm3 6h-4v9h4zm-3-4H4v12h10v-8a2 2 0 0 1 2-2h1z"
+                        />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="home-product-info">
+                    <span class="home-product-name">Multi Device</span>
+                    <span class="home-product-sub"
+                      >Set up a {appName} between multiple devices.</span
+                    >
+                  </div>
+                  <span class="home-product-chevron"
+                    ><svg viewBox="0 0 24 24">
+                      <polyline points="9 18 15 12 9 6" /></svg
+                  ></span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Desktop sidebar cards -->
+            <div class="home-desktop-side">
+              <div class="home-side-card">
+                <h3 class="home-side-title">Downloads center</h3>
+                <p class="home-side-desc">
+                  Get the tools you need to protect your files, passwords, and
+                  privacy.
+                </p>
+                <a href="#" class="home-side-link">
+                  <span>Download apps</span>
+                  <span class="arrow-right-icon"></span>
+                </a>
+              </div>
+              <div class="home-side-card" id="desktopCardAccountSettings">
+                <p class="home-side-desc">
+                  Manage your account details, multi-factor authentication
+                  (MFA), and notification preferences.
+                </p>
+                <a
+                  href="#"
+                  onclick="
+                    navigateTo('account-settings');
+                    return false;
+                  "
+                  class="home-side-link"
+                >
+                  <span>Manage account</span>
+                  <span class="arrow-right-icon"></span
+                ></a>
+              </div>
+              <div class="home-side-card">
+                <h3 class="home-side-title">
+                  Your deals
+                  <span class="deals-icon"></span>
+                </h3>
+                <p class="home-side-desc">
+                  Explore special offers and save on services that enhance your
+                  online security.
+                </p>
+                <a
+                  href="#"
+                  onclick="
+                    navigateTo('pricing');
+                    return false;
+                  "
+                  class="home-side-link"
+                >
+                  <span>View your deals</span>
+                  <span class="arrow-right-icon"></span
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end #panel-home -->
+
+        <!-- ===== ACCOUNT SETTINGS PANEL ===== -->
+        <div id="panel-account-settings" style="display: none"></div>
+        <div id="panel-billing" style="display: none"></div>
+        <div id="panel-pricing" style="display: none"></div>
+        <div id="panel-refer" style="display: none"></div>
+        <div id="panel-redeem" style="display: none"></div>
+        <div id="panel-support" style="display: none"></div>
+
+        <!-- Footer -->
+        <div class="page-footer">
+          <div class="lang-select">
+            <div class="language-icon"></div>
+            <select id="languageSelect">
+              <option value="en">English</option>
+              <option value="id">Bahasa Indonesia</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+              <option value="zh">中文</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="ru">Русский</option>
+            </select>
+          </div>
+          <div class="footer-links">
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Support center</a
+            >
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Terms of service</a
+            >
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Privacy policy</a
+            >
+            <span style="padding: 4px 10px; border-radius: 6px"
+              >© 2026 {appName} security. All rights reserved.</span
+            >
+          </div>
+        </div>
+      </main>
+    </div>
+    <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
+    <script src="/scripts/utils/app_settings.js"></script>
+    <script src="/scripts/utils/navigate.js"></script>
+    <script src="/scripts/utils/prefill_from_app.js"></script>
+    <script src="/scripts/utils/data.js"></script>
+    <script src="/scripts/pages/change-password-snippet.js"></script>
+    <script src="/scripts/pages/account-settings.js"></script>
+    <script src="/scripts/pages/pricing-inapp.js"></script>
+    <script src="/scripts/pages/billing-settings.js"></script>
+    <script src="/scripts/pages/refer-settings.js"></script>
+    <script src="/scripts/pages/redeem.js"></script>
+    <script src="/scripts/pages/support.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var email =
+          (window.AppPrefill && window.AppPrefill.email) ||
+          sessionStorage.getItem("app_email") ||
+          localStorage.getItem("app_email") ||
+          "";
+
+        if (!email) {
+          // Mobile quick access
+          var quickItem = document.getElementById("quickItemAccountSettings");
+          if (quickItem) quickItem.style.display = "none";
+
+          // Desktop side card
+          var desktopCard = document.getElementById(
+            "desktopCardAccountSettings",
+          );
+          if (desktopCard) desktopCard.style.display = "none";
+
+          // Chip popup button
+          var chipBtn = document.getElementById("chipAccountSettingsBtn");
+          if (chipBtn) chipBtn.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

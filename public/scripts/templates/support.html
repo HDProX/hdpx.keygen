@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Support Center</title>
+    <link rel="icon" href="/assets/images/Favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/styling.css" />
+    <link rel="stylesheet" href="/css/support.css" />
+  </head>
+  <body>
+    <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
+
+    <div class="support-root">
+      <!-- ── Topbar ── -->
+      <header class="support-topbar">
+        <div class="support-topbar-brand">
+          <div class="brand-logo"></div>
+          <span class="support-topbar-brand-name">{appName}</span>
+          <span class="support-topbar-brand-sub">Support center</span>
+        </div>
+        <div class="support-topbar-right">
+          <button
+            class="theme-toggle-btn"
+            id="darkModeToggle"
+            aria-label="Toggle theme"
+          >
+            <span id="themeIcon" class="darkmode-icon"></span>
+          </button>
+          <div class="user-chip-wrapper">
+            <div class="user-chip" id="userChip">
+              <div class="user-chip-avatar" id="chipAvatar">C</div>
+              <span id="chipEmail" style="font-size: 12.5px">{userEmail}</span>
+              <span class="user-chip-caret">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </div>
+            <div class="chip-popup" id="chipPopup">
+              <button class="chip-popup-item" id="chipLogoutBtn">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log out
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Main body ── -->
+      <div class="support-body">
+        <div class="support-hero">
+          <h1 class="support-title">How can we help you?</h1>
+          <p class="support-subtitle">
+            Pick a category that matches your issue.
+          </p>
+        </div>
+
+        <div class="support-categories">
+          <button
+            class="support-category-item"
+            onclick="openSupportCategory('troubleshooting')"
+          >
+            <span class="support-category-icon support-category-icon--blue">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                />
+              </svg>
+            </span>
+            <span class="support-category-label">Troubleshooting</span>
+            <span class="chevron-right">
+              <span class="chevron-right-icon"></span>
+            </span>
+          </button>
+
+          <button
+            class="support-category-item"
+            onclick="openSupportCategory('getting-started')"
+          >
+            <span class="support-category-icon support-category-icon--blue">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            </span>
+            <span class="support-category-label"
+              >Getting started, installation, and features set up</span
+            >
+            <span class="chevron-right">
+              <span class="chevron-right-icon"></span>
+            </span>
+          </button>
+
+          <button
+            class="support-category-item"
+            onclick="openSupportCategory('account')"
+          >
+            <span class="support-category-icon support-category-icon--blue">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </span>
+            <span class="support-category-label"
+              >Account management and logging in</span
+            >
+            <span class="chevron-right">
+              <span class="chevron-right-icon"></span>
+            </span>
+          </button>
+
+          <button
+            class="support-category-item"
+            onclick="openSupportCategory('billing-support')"
+          >
+            <span class="support-category-icon support-category-icon--blue">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                <line x1="1" y1="10" x2="23" y2="10" />
+              </svg>
+            </span>
+            <span class="support-category-label"
+              >Billing and subscriptions</span
+            >
+            <span class="chevron-right">
+              <span class="chevron-right-icon"></span>
+            </span>
+          </button>
+
+          <button
+            class="support-category-item"
+            onclick="openSupportCategory('other-products')"
+          >
+            <span class="support-category-icon support-category-icon--blue">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </span>
+            <span class="support-category-label"
+              >Explore other {appName} products</span
+            >
+            <span class="chevron-right">
+              <span class="chevron-right-icon"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Footer ── -->
+      <footer class="support-footer">
+        <div class="page-footer">
+          <div class="lang-select">
+            <div class="language-icon"></div>
+            <select id="languageSelect">
+              <option value="en">English</option>
+              <option value="id">Bahasa Indonesia</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+              <option value="zh">中文</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="ru">Русский</option>
+            </select>
+          </div>
+          <div class="footer-links">
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Support center</a
+            >
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Terms of service</a
+            >
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Privacy policy</a
+            >
+            <span style="padding: 4px 10px; border-radius: 6px"
+              >© 2026 {appName} security. All rights reserved.</span
+            >
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- /.support-root -->
+
+    <!-- ── Floating Chat Bubble ── -->
+    <div id="supportChatBubble">
+      <div class="chat-bubble-tooltip" id="chatBubbleTooltip">Need help?</div>
+      <div class="chat-bubble-popover">
+        <div class="chat-popover-header">
+          <div class="chat-popover-header-left">
+            <div class="fast-icon"></div>
+            <div class="chat-popover-header-text">
+              <span class="chat-popover-title" data-placeholder="app_name"
+                >{appName} Support</span
+              >
+              <span class="chat-popover-status">Active now</span>
+            </div>
+          </div>
+          <button
+            class="chat-popover-header-close"
+            onclick="toggleChatBubble()"
+            aria-label="Close chat"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="chat-popover-messages" id="chatMessages">
+          <div class="chat-msg-timestamp">APRIL 25 2026, 8:04 AM</div>
+
+          <div class="chat-msg-row agent">
+            <div class="brand-logo"></div>
+            <div>
+              <div class="chat-msg-bubble">
+                Hi there! 👋 How can I help you today?
+              </div>
+            </div>
+          </div>
+          <div class="chat-msg-time" style="margin-left: 33px">Just now</div>
+
+          <div class="chat-powered-by">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            Powered by HDPX
+          </div>
+        </div>
+
+        <div class="chat-popover-input-bar">
+          <button class="chat-popover-input-attach" aria-label="Attach file">
+            <span class="add-icon"></span>
+          </button>
+          <input
+            class="chat-popover-input"
+            type="text"
+            placeholder="Type a message..."
+            id="chatInput"
+            onkeydown="handleChatInput(event)"
+          />
+          <button
+            class="chat-popover-input-send"
+            aria-label="Send"
+            onclick="sendChatMsg()"
+          >
+            <span class="send-icon"></span>
+          </button>
+        </div>
+      </div>
+      <button
+        class="chat-bubble-btn"
+        aria-label="Open support chat"
+        onclick="toggleChatBubble()"
+      >
+        <svg
+          class="icon-chat"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+          />
+        </svg>
+        <svg
+          class="icon-close"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <script src="/scripts/utils/prefill_from_app.js"></script>
+    <script src="/scripts/utils/switcher.js"></script>
+    <script src="/scripts/utils/navigate.js"></script>
+    <script src="/scripts/pages/support.js"></script>
+  </body>
+</html>

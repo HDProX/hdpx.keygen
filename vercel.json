@@ -1,0 +1,35 @@
+{
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/login/popup-google-auth", "dest": "/api/login/popup-google-auth.js" },
+
+    { "src": "/login", "dest": "/scripts/templates/login.html" },
+    { "src": "/login/", "dest": "/scripts/templates/login.html" },
+    { "src": "/signup", "dest": "/scripts/templates/signup.html" },
+    { "src": "/signup/", "dest": "/scripts/templates/signup.html" },
+    { "src": "/signup/signup-verify", "dest": "/scripts/templates/signup.html" },
+    { "src": "/signup/signup-popup-success", "dest": "/scripts/templates/signup.html" },
+    { "src": "/password", "dest": "/scripts/templates/password.html" },
+    { "src": "/password/", "dest": "/scripts/templates/password.html" },
+    { "src": "/forgot-password", "dest": "/scripts/templates/forgot-password.html" },
+    { "src": "/forgot-password/", "dest": "/scripts/templates/forgot-password.html" },
+    { "src": "/change-password", "dest": "/scripts/templates/change-password.html" },
+    { "src": "/change-password/", "dest": "/scripts/templates/change-password.html" },
+
+    { "src": "/activate", "dest": "/scripts/templates/redeem.html" },
+    { "src": "/activate/", "dest": "/scripts/templates/redeem.html" },
+    { "src": "/support-center", "dest": "/scripts/templates/support.html" },
+    { "src": "/support-center/", "dest": "/scripts/templates/support.html" },
+    { "src": "/pricing", "dest": "/scripts/templates/pricing.html" },
+    { "src": "/pricing/", "dest": "/scripts/templates/pricing.html" },
+
+    { "handle": "filesystem" },
+
+    { "src": "/account-settings/:path*", "dest": "/index.html" },
+    { "src": "/billing/:path*", "dest": "/index.html" },
+    { "src": "/refer", "dest": "/index.html" },
+    { "src": "/refer/", "dest": "/index.html" },
+    { "src": "/account", "dest": "/index.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}

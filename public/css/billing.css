@@ -1,0 +1,552 @@
+.billing-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.billing-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.billing-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Subscription card ── */
+.sub-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 22px 24px 20px;
+  margin-bottom: 16px;
+}
+
+.sub-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.sub-included-label {
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.sub-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.sub-badge--active {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+}
+
+.dark .sub-badge--active {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+/* ── Product chips ── */
+.sub-products {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.sub-product-chip {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 7px;
+  min-height: 60px;
+  min-width: 270px;
+  padding: 10px 50px 10px 20px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-body);
+}
+
+.sub-product-chip--blue svg {
+  width: 30px;
+  height: 30px;
+  color: #dbb63b;
+}
+
+.sub-product-chip--teal svg {
+  width: 30px;
+  height: 30px;
+  color: #0f9d8c;
+}
+
+/* ── Subscription details rows ── */
+.sub-details {
+  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sub-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  gap: 12px;
+}
+
+.sub-detail-label {
+  color: var(--text-secondary);
+  min-width: 130px;
+}
+
+.sub-detail-value {
+  color: var(--text-primary);
+  font-weight: 500;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.info-icon {
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: help;
+}
+
+.info-icon svg {
+  width: 20px;
+  height: 20px;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+/* ── Blue link button ── */
+.btn-link-blue {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent-blue, #3b5bdb);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: gap 0.15s;
+}
+
+.btn-link-blue span {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-link-blue span::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-blue);
+  transition: width 0.3s ease;
+}
+
+.btn-link-blue:hover span::after {
+  width: 100%;
+}
+
+/* ── Upgrade banner ── */
+.sub-upgrade-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 18px 24px;
+  margin-top: 8px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sub-upgrade-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.sub-upgrade-left svg {
+  width: 28px;
+  height: 28px;
+}
+
+.btn-primary-blue {
+  background: #3b5bdb;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.18s;
+}
+
+.btn-primary-blue:hover {
+  background: #2f4dbf;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+/* ── Deals card ── */
+.billing-side-card--deals {
+  background: linear-gradient(135deg, #eef0fb 0%, #e8eaf6 100%);
+  border: 1px solid #d0d5f7;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+
+.dark .billing-side-card--deals {
+  background: linear-gradient(135deg, #1e2044 0%, #1a1c3a 100%);
+  border-color: #2d3270;
+}
+
+.deals-illustration {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.billing-side-deals-text {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.btn-outline-full {
+  width: 100%;
+  background: white;
+  border: 1.5px solid var(--border-light);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent-blue, #3b5bdb);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.dark .btn-outline-full {
+  background: var(--bg-card);
+  color: var(--accent-blue, #3b82f6);
+}
+
+.btn-outline-full:hover {
+  background: #f0f2ff;
+  border-color: var(--accent-blue, #3b5bdb);
+}
+
+/* ── FAQ section
+   Menggunakan global styles dari styling.css:
+   .section-label, .faq-list, .faq-item, .faq-question,
+   .faq-chevron, .faq-answer, .faq-item.open
+   — tidak perlu override apapun.
+   ── */
+
+/* ── Downloads center
+   Menggunakan global styles dari styling.css:
+   .home-side-card, .home-side-title, .home-side-desc, .home-side-link
+   — tidak perlu tambah apapun.
+   ── */
+
+/* ============================================================
+   BILLING HISTORY TABLE
+   ============================================================ */
+
+.billing-history-wrap {
+  margin-top: 8px;
+}
+
+.billing-history-table {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.bh-table-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.7fr 1fr;
+  gap: 12px;
+  align-items: center;
+  justify-items: start;
+  padding: 12px 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-light);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bh-table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.7fr 1fr;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+  align-items: center;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: background 0.12s;
+}
+
+.bh-table-row:last-child {
+  border-bottom: none;
+}
+
+.bh-table-row:hover {
+  background: var(--menu-hover);
+}
+
+.bh-date {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.bh-sub {
+  line-height: 1.5;
+}
+
+.bh-sub-link {
+  font-size: 12.5px;
+  color: var(--accent-blue, #3b5bdb);
+  text-decoration: underline;
+}
+
+.bh-cell--actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bh-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.bh-badge--paid {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+}
+
+.dark .bh-badge--paid {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+.bh-badge--failed {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.dark .bh-badge--failed {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+/* ── Mobile history cards (hidden on desktop) ── */
+.bh-mobile-cards {
+  display: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .billing-layout {
+    flex-direction: column;
+  }
+
+  .billing-sidebar {
+    width: 100%;
+  }
+
+  .billing-main {
+    width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .billing-history-table {
+    display: none;
+  }
+
+  .bh-mobile-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bh-mobile-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  /* Top strip — date + status */
+  .bh-mobile-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--bg-body);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .bh-mobile-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Body rows */
+  .bh-mobile-body {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bh-mobile-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-primary);
+  }
+
+  .bh-mobile-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+    min-width: 110px;
+  }
+
+  .bh-mobile-val {
+    text-align: right;
+    color: var(--text-primary);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .bh-mobile-amount {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  /* Footer strip — amount */
+  .bh-mobile-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: var(--bg-body);
+    border-top: 1px solid var(--border-light);
+  }
+
+  .sub-detail-value {
+    text-align: left;
+    justify-content: flex-start;
+  }
+}
+
+/* ============================================================
+   FADE-UP ENTRY ANIMATIONS — Billing panel
+   Sama seperti .plan-card di pricing
+   ============================================================ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page title ── */
+.page-title {
+  animation: fadeUp 0.35s ease-out both;
+}
+
+/* ── Tab buttons ── */
+.tab-bar {
+  animation: fadeUp 0.35s ease-out 0.04s both;
+}
+
+/* ── Subscription: sub-card & upgrade banner ── */
+.sub-card {
+  animation: fadeUp 0.4s ease-out 0.06s both;
+}
+.sub-upgrade-banner {
+  animation: fadeUp 0.4s ease-out 0.14s both;
+}
+
+/* ── Sidebar cards (staggered) ── */
+.billing-sidebar > *:nth-child(1) { animation: fadeUp 0.4s ease-out 0.08s both; }
+.billing-sidebar > *:nth-child(2) { animation: fadeUp 0.4s ease-out 0.15s both; }
+.billing-sidebar > *:nth-child(3) { animation: fadeUp 0.4s ease-out 0.22s both; }
+
+/* ── History: table dan mobile cards ── */
+.billing-history-table {
+  animation: fadeUp 0.4s ease-out 0.06s both;
+}
+
+.bh-table-row:nth-child(1) { animation: fadeUp 0.35s ease-out 0.08s both; }
+.bh-table-row:nth-child(2) { animation: fadeUp 0.35s ease-out 0.13s both; }
+.bh-table-row:nth-child(3) { animation: fadeUp 0.35s ease-out 0.18s both; }
+.bh-table-row:nth-child(4) { animation: fadeUp 0.35s ease-out 0.23s both; }
+.bh-table-row:nth-child(5) { animation: fadeUp 0.35s ease-out 0.28s both; }
+.bh-table-row:nth-child(6) { animation: fadeUp 0.35s ease-out 0.33s both; }
+
+.bh-mobile-card:nth-child(1) { animation: fadeUp 0.38s ease-out 0.05s both; }
+.bh-mobile-card:nth-child(2) { animation: fadeUp 0.38s ease-out 0.10s both; }
+.bh-mobile-card:nth-child(3) { animation: fadeUp 0.38s ease-out 0.15s both; }
+.bh-mobile-card:nth-child(4) { animation: fadeUp 0.38s ease-out 0.20s both; }
+.bh-mobile-card:nth-child(5) { animation: fadeUp 0.38s ease-out 0.25s both; }
+.bh-mobile-card:nth-child(6) { animation: fadeUp 0.38s ease-out 0.30s both; }

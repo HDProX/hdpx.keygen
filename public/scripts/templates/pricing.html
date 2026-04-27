@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Available Plans | {appName} Account</title>
+    <link rel="icon" href="/assets/images/Favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/styling.css" />
+    <link rel="stylesheet" href="/css/pricing.css" />
+  </head>
+  <body>
+    <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
+
+    <div class="pricing-root">
+      <!-- ── Topbar ── -->
+      <header class="pricing-topbar">
+        <div class="pricing-topbar-brand">
+          <div class="brand-logo"></div>
+          <span class="pricing-topbar-brand-name" data-placeholder="app_name"
+            >{appName}
+          </span>
+          <span class="pricing-topbar-brand-sub"> Account</span>
+        </div>
+        <div class="pricing-topbar-right">
+          <button
+            class="theme-toggle-btn"
+            id="darkModeToggle"
+            aria-label="Toggle theme"
+          >
+            <span id="themeIcon" class="darkmode-icon"></span>
+          </button>
+          <div class="user-chip-wrapper">
+            <div class="user-chip" id="userChip">
+              <div class="user-chip-avatar" id="chipAvatar">C</div>
+              <span id="chipEmail" style="font-size: 12.5px"
+                >{_USER_EMAIL}</span
+              >
+              <span class="user-chip-caret">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </div>
+            <div class="chip-popup" id="chipPopup">
+              <button class="chip-popup-item" id="chipLogoutBtn">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log out
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Main content ── -->
+      <main class="pricing-main">
+        <!-- Hero -->
+        <div class="pricing-hero">
+          <h1>Premium plans for you<br />and all your devices!</h1>
+          <p class="pricing-hero-sub">
+            All plans include <strong>free customer support</strong> and a
+            <strong>60-day money back guarantee.</strong>
+          </p>
+
+          <!-- Period dropdown -->
+          <div class="pricing-period-wrapper">
+            <button
+              class="pricing-period-btn"
+              id="pricingPeriodBtn"
+              onclick="pricingToggleDropdown()"
+            >
+              <span class="pricing-period-btn-label" id="pricingPeriodLabel"
+                >1-year plan</span
+              >
+              <svg
+                class="pricing-period-chevron"
+                id="pricingPeriodChevron"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div class="pricing-period-dropdown" id="pricingPeriodDropdown">
+              <div
+                class="pricing-period-option"
+                data-value="2year"
+                data-label="2-year plan"
+                onclick="pricingSelectOption(this)"
+              >
+                <div class="pricing-option-left">
+                  <span class="pricing-option-check" id="check-2year">
+                    <svg
+                      style="visibility: hidden"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  <span class="pricing-option-label">2-year plan</span>
+                </div>
+                <span class="pricing-option-save">Save 74%</span>
+              </div>
+
+              <div
+                class="pricing-period-option"
+                data-value="1year"
+                data-label="1-year plan"
+                onclick="pricingSelectOption(this)"
+              >
+                <div class="pricing-option-left">
+                  <span class="pricing-option-check" id="check-1year">
+                    <svg
+                      style="visibility: hidden"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  <span class="pricing-option-label">1-year plan</span>
+                </div>
+                <span class="pricing-option-save">Save 63%</span>
+              </div>
+
+              <div
+                class="pricing-period-option"
+                data-value="1month"
+                data-label="Monthly plan"
+                onclick="pricingSelectOption(this)"
+              >
+                <div class="pricing-option-left">
+                  <span class="pricing-option-check" id="check-1month">
+                    <svg
+                      style="visibility: hidden"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  <span class="pricing-option-label">Monthly plan</span>
+                </div>
+                <span class="pricing-option-save save-zero">Save 0%</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="pricing-hero-note" id="pricingHeroNote">
+            Current customer? <a href="/">Log into MyAccount</a> for your
+            personalized deals.
+          </p>
+        </div>
+
+        <!-- Plans grid (diisi oleh JS) -->
+        <div class="pricing-section">
+          <div class="plans-grid" id="plansGrid"></div>
+        </div>
+
+        <!-- Trust bar -->
+        <div class="trust-bar">
+          <div class="trust-bar-inner">
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                />
+              </svg>
+              60-day money back guarantee
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              Free 24/7 customer support
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg>
+              Secure checkout
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="pricing-footer">
+        <div class="page-footer">
+          <div class="lang-select">
+            <div class="language-icon"></div>
+            <select id="languageSelect">
+              <option value="en">English</option>
+              <option value="id">Bahasa Indonesia</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+              <option value="zh">中文</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="ru">Русский</option>
+            </select>
+          </div>
+          <div class="footer-links">
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Support center</a
+            >
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Terms of service</a
+            >
+            <a href="#" style="padding: 4px 10px; border-radius: 6px"
+              >Privacy policy</a
+            >
+            <span style="padding: 4px 10px; border-radius: 6px"
+              >© 2026 {appName} security. All rights reserved.</span
+            >
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="/scripts/utils/prefill_from_app.js"></script>
+    <script src="/scripts/utils/switcher.js"></script>
+    <script src="/scripts/utils/navigate.js"></script>
+    <script src="/scripts/pages/pricing.js"></script>
+  </body>
+</html>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Redeem Coupon | {appName} Account</title>
+    <link rel="icon" href="/assets/images/Favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/styling.css" />
+    <link rel="stylesheet" href="/css/redeem.css" />
+  </head>
+  <body>
+    <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
+
+    <div class="redeem-root">
+      <!-- Sidebar (desktop only) -->
+      <aside class="redeem-sidebar">
+        <div class="redeem-sidebar-brand">
+          <div class="brand-logo"></div>
+          <div>
+            <span class="sidebar-brand-name">{appName}</span>
+            <span class="sidebar-brand-sub"> Account</span>
+          </div>
+        </div>
+        <div class="redeem-sidebar-title">Activation steps</div>
+        <div class="redeem-steps">
+          <div class="redeem-step active">
+            <div class="redeem-step-indicator"></div>
+            <div class="redeem-step-label">Enter code</div>
+          </div>
+          <div class="redeem-step">
+            <div class="redeem-step-indicator"></div>
+            <div class="redeem-step-label">Enable auto-renewal</div>
+          </div>
+          <div class="redeem-step">
+            <div class="redeem-step-indicator"></div>
+            <div class="redeem-step-label">Download apps</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ── Topbar ── -->
+      <header class="redeem-topbar">
+        <span class="topbar-brand-mobile">
+          <div class="brand-logo"></div>
+          <div>
+            <span class="sidebar-brand-name">{appName}</span>
+            <span class="sidebar-brand-sub"> Account</span>
+          </div>
+        </span>
+        <span class="topbar-right">
+          <button
+            class="theme-toggle-btn"
+            id="darkModeToggle"
+            aria-label="Toggle theme"
+          >
+            <span id="themeIcon" class="darkmode-icon"></span>
+          </button>
+          <div class="user-chip-wrapper">
+            <div class="user-chip" id="userChip">
+              <div class="user-chip-avatar" id="chipAvatar">C</div>
+              <span id="chipEmail" style="font-size: 12.5px">{userEmail}</span>
+              <span class="user-chip-caret">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+            </div>
+
+            <div class="chip-popup" id="chipPopup">
+              <button class="chip-popup-item" id="chipLogoutBtn">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Log out
+              </button>
+            </div>
+          </div>
+        </span>
+      </header>
+
+      <!-- ── Hero banner ── -->
+      <div class="redeem-hero-banner">
+        <span style="font-size: 22px">🚀</span>
+        <span class="redeem-hero-banner-text"
+          >Hi there! Let's activate your
+          <span data-placeholder="app_name">{appName}</span> products</span
+        >
+      </div>
+
+      <!-- ── Mobile step progress (only visible ≤960px) ── -->
+      <div class="redeem-mobile-steps" id="mobileSteps">
+        <div class="redeem-mobile-progress">
+          <div class="redeem-mob-dot active" id="mobDot1"></div>
+          <div class="redeem-mob-line"></div>
+          <div class="redeem-mob-dot" id="mobDot2"></div>
+          <div class="redeem-mob-line"></div>
+          <div class="redeem-mob-dot" id="mobDot3"></div>
+        </div>
+        <div class="redeem-mobile-meta">
+          <span class="redeem-mobile-step-count">Step 1 of 3</span>
+          <span class="redeem-mobile-step-name">Enter code</span>
+          <span class="redeem-mobile-step-next">Next: Enable auto-renewal</span>
+        </div>
+      </div>
+
+      <!-- ── Main body ── -->
+      <div class="redeem-body">
+        <!-- Content -->
+        <main class="redeem-content">
+          <h1 class="redeem-content-title">Enter your code</h1>
+
+          <!-- Activation code input -->
+          <div class="redeem-form-group">
+            <label class="redeem-label" for="activationCode"
+              >Activation code</label
+            >
+            <input
+              type="text"
+              id="activationCode"
+              class="redeem-input"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder=""
+            />
+            <div class="error-row" id="codeErrorRow">
+              <svg width="15" height="15" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="var(--accent-red)" />
+                <line
+                  x1="12"
+                  y1="8"
+                  x2="12"
+                  y2="13"
+                  stroke="white"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                />
+                <circle cx="12" cy="17" r="1.2" fill="white" />
+              </svg>
+              <span id="codeErrorMsg">Invalid activation code</span>
+            </div>
+          </div>
+
+          <!-- Email readonly -->
+          <div class="redeem-form-group">
+            <label class="redeem-label" for="emailDisplay">Email</label>
+            <input
+              type="email"
+              id="emailDisplay"
+              class="redeem-input"
+              readonly
+              value=""
+            />
+          </div>
+
+          <a href="/login" class="different-account-link">
+            <span>Activate with a different account?</span>
+          </a>
+
+          <!-- Info notice -->
+          <div class="redeem-notice">
+            <span class="warning-icon redeem"></span>
+            <span class="redeem-notice-text">
+              You can only use your code once. To use it successfully, follow
+              through all the activation steps in one go.
+            </span>
+          </div>
+
+          <!-- Legal -->
+          <p class="redeem-legal">
+            By submitting this form you agree to our
+            <a href="#">Terms of service</a> and <a href="#">Privacy Policy</a>.
+          </p>
+          <p class="redeem-legal">
+            If you don't want to receive marketing emails about
+            <span data-placeholder="app_name">{appName}</span> services, you can
+            change your notification settings in your
+            <span data-placeholder="app_name">{appName}</span> Account.
+          </p>
+
+          <!-- Cloudflare Turnstile -->
+          <div class="redeem-turnstile" id="redeemTurnstile">
+            <label class="turnstile-check">
+              <input
+                type="checkbox"
+                id="turnstileCheckbox"
+                onchange="redeemCheckTurnstile()"
+              />
+              <span class="turnstile-box"></span>
+              <span class="turnstile-text">I am not a robot</span>
+            </label>
+            <div class="turnstile-logo">
+              <svg
+                viewBox="0 0 88 20"
+                xmlns="http://www.w3.org/2000/svg"
+                class="cf-logo"
+              >
+                <text
+                  x="0"
+                  y="15"
+                  font-family="sans-serif"
+                  font-size="13"
+                  font-weight="700"
+                  fill="#f38020"
+                >
+                  Cloudflare
+                </text>
+              </svg>
+              <div class="turnstile-links">
+                <a href="#" onclick="return false;">Privacy</a>
+                <span>·</span>
+                <a href="#" onclick="return false;">Terms</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Continue button -->
+          <button
+            class="btn-redeem"
+            id="btnContinueStep1"
+            onclick="redeemGoStep(2)"
+            disabled
+          >
+            Continue
+          </button>
+        </main>
+
+        <!-- Support sidebar (desktop only) -->
+        <aside class="redeem-support">
+          <div class="redeem-support-title">Support center</div>
+          <div>
+            <a href="#" class="redeem-support-link">
+              <span>How to apply your code</span>
+              <span class="arrow-right-icon"></span>
+            </a>
+          </div>
+          <div>
+            <a href="#" class="redeem-support-link">
+              <span>FAQ about activation codes</span>
+              <span class="arrow-right-icon"></span>
+            </a>
+          </div>
+        </aside>
+      </div>
+      <!-- /.redeem-body -->
+
+      <!-- Language footer -->
+      <div class="lang-select">
+        <div class="language-icon"></div>
+        <select id="languageSelect">
+          <option value="en">English</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="ru">Русский</option>
+        </select>
+      </div>
+    </div>
+
+    <script src="/scripts/utils/prefill_from_app.js"></script>
+    <script src="/scripts/utils/switcher.js"></script>
+    <script src="/scripts/utils/navigate.js"></script>
+    <script src="/scripts/pages/redeem.js"></script>
+  </body>
+</html>
