@@ -106,13 +106,12 @@ export function otpHtml(name, code) {
               <td
                 style="
                   background: #ffffff;
-                  padding: 50px 30px 0px 30px;
+                  padding: 30px 30px 10px 30px;
                   text-align: left;
                 "
               >
                 <h1
                   style="
-                    margin-bottom: 30px;
                     color: #2c7be5;
                     font-size: 30px;
                     font-weight: 700;
@@ -146,7 +145,7 @@ export function otpHtml(name, code) {
             </tr>
             <!-- Body -->
             <tr>
-              <td style="padding: 40px 60px 32px">
+              <td style="padding: 0 60px 20px">
                 <h2
                   style="
                     margin: 0 0 8px;
@@ -183,7 +182,7 @@ export function otpHtml(name, code) {
                 <div style="text-align: left; margin: 0 0 18px">
                   <div>
                     <span
-                      style="font-size: 20px; font-weight: 600; color: #1a1a2e"
+                      style="font-size: 15px; font-weight: 600; color: #1a1a2e"
                     >
                       ${code}
                     </span>
@@ -448,7 +447,7 @@ export function successHtml(name, email) {
             </tr>
             <!-- Footer -->
             <tr>
-              <td style="padding: 20px 40px; text-align: center">
+              <td style="padding: 0 40px 20px 40px; text-align: center">
                 <p style="margin: 0; color: #161616; font-size: 11px">
                   © 2026 ${app}. This email contains important information about
                   your ${app} account and is not for marketing purposes.
