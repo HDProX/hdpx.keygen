@@ -183,7 +183,7 @@ export function otpHtml(name, code) {
                 <div style="text-align: left; margin: 0 0 18px">
                   <div>
                     <span
-                      style="font-size: 25px; font-weight: 600; color: #1a1a2e"
+                      style="font-size: 20px; font-weight: 600; color: #1a1a2e"
                     >
                       ${code}
                     </span>
