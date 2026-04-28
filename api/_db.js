@@ -148,7 +148,7 @@ export function otpHtml(name, code) {
               <td style="padding: 0 60px 20px">
                 <h2
                   style="
-                    margin: 0 0 8px;
+                    margin: 15px 0 8px;
                     color: #1a1a2e;
                     font-size: 25px;
                     font-weight: 700;
@@ -158,7 +158,7 @@ export function otpHtml(name, code) {
                 </h2>
                 <p
                   style="
-                    margin: 0 0 8px;
+                    margin: 15px 0 8px;
                     color: #1a1a2e;
                     font-size: 18px;
                     font-weight: 500;
