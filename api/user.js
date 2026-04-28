@@ -358,34 +358,6 @@ async function handleResetPassword(req, res) {
   }
 }
 
-async function handleSendOtp(req, res) {
-  const { email: rawEmail = "" } = req.body ?? {};
-  const email = rawEmail.toLowerCase().trim();
-  if (!email) return jsonOut(res, false, "Email is required.", 400);
-
-  try {
-    const rows = await query(
-      "SELECT name FROM otp_pending WHERE email = ? LIMIT 1", [email]
-    );
-    if (!rows.length) return jsonOut(res, false, "No pending verification. Please sign up again.", 400);
-
-    const code    = randomOtp();
-    const expires = new Date(Date.now() + OTP_TTL * 1000).toISOString();
-
-    await query(
-      "UPDATE otp_pending SET code = ?, expires_at = ? WHERE email = ?",
-      [code, expires, email]
-    );
-
-    const appName = process.env.APP_NAME || "Keygen";
-    await sendEmail(email, rows[0].name, `${code} - Your ${appName} verification code`, otpHtml(rows[0].name, code));
-    return jsonOut(res, true, "Verification code resent.");
-  } catch (e) {
-    console.error("send-otp:", e.message);
-    return jsonOut(res, false, "Failed to resend code. Please try again.", 500);
-  }
-}
-
 // ─── Email template khusus reset password ────────────────────────────────────
 function resetOtpHtml(name, code, appName) {
   return `<!doctype html>
@@ -460,7 +432,6 @@ export default async function handler(req, res) {
     case "forgot-password":   return handleForgotPassword(req, res);
     case "verify-reset-code": return handleVerifyResetCode(req, res);
     case "reset-password":    return handleResetPassword(req, res);
-    case "send-otp": return handleSendOtp(req, res);
     default:
       return jsonOut(res, false, `Unknown action: "${action}"`, 400);
   }
