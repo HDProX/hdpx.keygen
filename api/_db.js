@@ -131,7 +131,7 @@ export function otpHtml(name, code) {
                     <defs>
                       <style>
                         .cls-1 {
-                          fill: currentColor;
+                          fill: #2c7be5;
                         }
                       </style>
                     </defs>
@@ -222,7 +222,7 @@ export function otpHtml(name, code) {
                 <div style="text-align: left; margin: 0 0 18px">
                   <div>
                     <span
-                      style="font-size: 30px; font-weight: 600; color: #1a1a2e"
+                      style="font-size: 25px; font-weight: 600; color: #1a1a2e"
                     >
                       ${code}
                     </span>
@@ -329,7 +329,7 @@ export function successHtml(name, email) {
                         <defs>
                           <style>
                             .cls-1 {
-                              fill: currentColor;
+                              fill: #2c7be5;
                             }
                           </style>
                         </defs>
