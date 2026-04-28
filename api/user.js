@@ -1,4 +1,4 @@
-import { query, hashPassword, randomSalt, randomOtp, sendEmail, otpHtml, successHtml, cors, jsonOut } from "./_db.js";
+import { query, hashPassword, randomSalt, randomOtp, sendEmail, otpHtml, resetOtpHtml, successHtml, cors, jsonOut } from "./_db.js";
 import crypto from "crypto";
 
 const OTP_TTL         = Number(process.env.OTP_TTL_SECONDS || 600);
@@ -358,62 +358,7 @@ async function handleResetPassword(req, res) {
   }
 }
 
-// ─── Email template khusus reset password ────────────────────────────────────
-function resetOtpHtml(name, code, appName) {
-  return `<!doctype html>
-<html>
-  <head><meta charset="utf-8" /></head>
-  <body style="margin:0;padding:0;background:#f4f4f4;font-family:&quot;Segoe UI&quot;,Arial,sans-serif;">
-    <table width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td align="center" style="padding:40px 20px">
-          <table width="520" cellpadding="0" cellspacing="0"
-            style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-            <tr>
-              <td style="background:#ffffff;padding:50px 30px 0px 30px;text-align:left;">
-                <h1 style="margin:0;color:#191919;font-size:30px;font-weight:700;letter-spacing:0.5px;">
-                  ${appName}
-                </h1>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:40px 60px 32px">
-                <h2 style="margin:0 0 8px;color:#1a1a2e;font-size:25px;font-weight:700;">
-                  Password reset code
-                </h2>
-                <p style="margin:0 0 8px;color:#1a1a2e;font-size:18px;font-weight:500;">
-                  Hi ${name},
-                </p>
-                <p style="margin:0 0 28px;color:#555;font-size:14px;line-height:1.6;">
-                  We received a request to reset your password. Enter the code below to continue.
-                  This code will expire within <strong>10 minutes</strong>.
-                </p>
-                <div style="text-align:center;margin:0 0 28px">
-                  <div style="display:inline-block;background:#fff4f0;border:2px dashed #e8623a;border-radius:12px;padding:10px 40px;">
-                    <span style="font-size:36px;font-weight:800;letter-spacing:10px;color:#e8623a;font-family:&quot;Courier New&quot;,monospace;">
-                      ${code}
-                    </span>
-                  </div>
-                </div>
-                <p style="margin:0;color:#888;font-size:12px;text-align:center;">
-                  If you didn't request a password reset, you can safely ignore this email.
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td style="background:#f8f8fc;padding:20px 40px;text-align:center;border-top:1px solid #eee;">
-                <p style="margin:0;color:#aaa;font-size:11px;">
-                  © ${appName}. This is an automated message, please do not reply.
-                </p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </body>
-</html>`;
-}
+
 
 // ─── Main router ──────────────────────────────────────────────────────────────
 export default async function handler(req, res) {

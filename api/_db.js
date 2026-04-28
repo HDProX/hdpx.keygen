@@ -72,8 +72,13 @@ export async function sendEmail(to, toName, subject, html) {
 }
 
 // ── OTP email template ────────────────────────────────────────
-export function otpHtml(name, code) {
+export function otpHtml(name, code, {
+  title = "Your one-time verification code!",
+  subtitle = "Please verify your email,",
+  bodyText = null,
+} = {}) {
   const app = process.env.APP_NAME || "Keygen";
+  const _defaultBody = `Finish signing up for a ${app} account using the verification code below. This code will expire within <strong>10 minutes</strong>.`;
   return `<!doctype html>
 <html>
   <head>
@@ -154,7 +159,7 @@ export function otpHtml(name, code) {
                     font-weight: 700;
                   "
                 >
-                  Your one-time verification code!
+                  ${title}
                 </h2>
                 <p
                   style="
@@ -164,7 +169,7 @@ export function otpHtml(name, code) {
                     font-weight: 500;
                   "
                 >
-                  Please verify your email,
+                  ${subtitle}
                 </p>
                 <p
                   style="
@@ -174,9 +179,7 @@ export function otpHtml(name, code) {
                     line-height: 1.6;
                   "
                 >
-                  Finish signing up for a ${app} account using the verification
-                  code below. This code will expire within
-                  <strong>10 minutes</strong>.
+                  ${bodyText ?? _defaultBody}
                 </p>
                 <!-- OTP Box -->
                 <div style="text-align: left; margin: 0 0 18px">
@@ -234,6 +237,16 @@ export function otpHtml(name, code) {
 }
 
 // ── Success email template ────────────────────────────────────
+
+// ── Password reset OTP email ──────────────────────────────────
+export function resetOtpHtml(name, code, appName) {
+  return otpHtml(name, code, {
+    title: "Password reset code",
+    subtitle: `Hi ${name},`,
+    bodyText: `We received a request to reset your password. Enter the code below to continue. This code will expire within <strong>10 minutes</strong>.`,
+  });
+}
+
 export function successHtml(name, email) {
   const app = process.env.APP_NAME || "Keygen";
   return `<!doctype html>
