@@ -84,8 +84,8 @@ export function otpHtml(name, code, {
   const _defaultBody = `Finish signing up for a ${app} account using the verification code below. This code will expire within <strong>10 minutes</strong>.`;
   const initial = (name || "?")[0].toUpperCase();
   const avatarHtml = avatarUrl
-    ? `<img src="${avatarUrl}" width="28" height="28" style="border-radius:50%;display:block;" alt="${initial}" />`
-    : `<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;line-height:28px;text-align:center;vertical-align:middle;">${initial}</span>`;
+    ? `<img src="${avatarUrl}" width="20" height="20" style="border-radius:50%;display:block;" alt="${initial}" />`
+    : `<span style="display:inline-block;width:20px;height:20px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:11px;font-weight:700;line-height:20px;text-align:center;vertical-align:middle;">${initial}</span>`;
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -189,8 +189,8 @@ export function passwordChangedHtml(name, email, { recoveryUrl, appName, avatarU
   const app = appName || process.env.APP_NAME || "Keygen";
   const initial = (email || name || "?")[0].toUpperCase();
   const avatarHtml = avatarUrl
-    ? `<img src="${avatarUrl}" width="28" height="28" style="border-radius:50%;display:block;" alt="${initial}" />`
-    : `<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;line-height:28px;text-align:center;vertical-align:middle;">${initial}</span>`;
+    ? `<img src="${avatarUrl}" width="20" height="20" style="border-radius:50%;display:block;" alt="${initial}" />`
+    : `<span style="display:inline-block;width:20px;height:20px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:11px;font-weight:700;line-height:20px;text-align:center;vertical-align:middle;">${initial}</span>`;
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -304,8 +304,8 @@ export function successHtml(name, email, { avatarUrl } = {}) {
   const app = process.env.APP_NAME || "Keygen";
   const initial = (email || name || "?")[0].toUpperCase();
   const avatarHtml = avatarUrl
-    ? `<img src="${avatarUrl}" width="28" height="28" style="border-radius:50%;display:block;" alt="${initial}" />`
-    : `<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;line-height:28px;text-align:center;vertical-align:middle;">${initial}</span>`;
+    ? `<img src="${avatarUrl}" width="20" height="20" style="border-radius:50%;display:block;" alt="${initial}" />`
+    : `<span style="display:inline-block;width:20px;height:20px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:11px;font-weight:700;line-height:20px;text-align:center;vertical-align:middle;">${initial}</span>`;
   return `<!doctype html>
 <html lang="en">
   <head>
