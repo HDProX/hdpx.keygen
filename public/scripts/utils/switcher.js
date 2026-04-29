@@ -3,10 +3,11 @@
 
   // ── Route map ─────────────────────────────────────────────────────────────
   const ROUTES = {
-    "/login":            "/scripts/templates/login.html",
-    "/password":         "/scripts/templates/password.html",
-    "/forgot-password":  "/scripts/templates/password.html",
-    "/change-password":  "/scripts/templates/password.html",
+    "/login":              "/scripts/templates/login.html",
+    "/log-in/password":    "/scripts/templates/password.html",
+    "/password":           "/scripts/templates/password.html",
+    "/forgot-password":    "/scripts/templates/password.html",
+    "/change-password":    "/scripts/templates/password.html",
   };
 
   // ── Deteksi environment ───────────────────────────────────────────────────
@@ -78,7 +79,7 @@
     const p = location.pathname;
     if (p.includes("forgot-password")) return "forgot-password";
     if (p.includes("change-password"))  return "change-password";
-    if (p.includes("login"))            return "login";
+    if (p.includes("login") || p.includes("log-in")) return "login";
     if (p.includes("password"))         return "password";
     return null;
   }
@@ -87,7 +88,7 @@
 
   /** Navigasi ke halaman enter-password (login/register). */
   function goPassword(params) {
-    go("/password", params);
+    go("/log-in/password", params);
   }
 
   /** Navigasi ke forgot-password flow. */

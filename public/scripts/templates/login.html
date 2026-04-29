@@ -556,9 +556,9 @@
             const isApp = new URLSearchParams(location.search).get("app") || "";
 
             if (data.exists) {
-              Switcher.go("/password", { email, ...(isApp && { app: isApp }) });
+              Switcher.goPassword({ email, ...(isApp && { app: isApp }) });
             } else {
-              Switcher.go("/password", {
+              Switcher.goPassword({
                 email,
                 isNew: "true",
                 ...(isApp && { app: isApp }),

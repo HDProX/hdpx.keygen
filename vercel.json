@@ -25,6 +25,14 @@
       "dest": "/scripts/templates/password.html"
     },
     {
+      "src": "/log-in/password",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/log-in/password/",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
       "src": "/forgot-password",
       "dest": "/scripts/templates/password.html"
     },
