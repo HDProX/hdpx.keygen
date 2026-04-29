@@ -1,5 +1,6 @@
 // api/_db.js  –  shared utilities (DB pool, password hash, email)
 import pg from "pg";
+import nodemailer from "nodemailer";
 import crypto from "crypto";
 
 const { Pool } = pg;
@@ -47,29 +48,29 @@ export function randomOtp(len = 6) {
   return out;
 }
 
-// ── Brevo Transactional Email API ────────────────────────────
-export async function sendEmail(to, toName, subject, html) {
-  const appName  = process.env.APP_NAME  || "Keygen";
-  const fromAddr = process.env.SMTP_FROM || "no-reply@accounts.hdpx-keygen.vercel.app";
-
-  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: {
-      "Content-Type":  "application/json",
-      "api-key":       process.env.BREVO_API_KEY,
+// ── Nodemailer SMTP ───────────────────────────────────────────
+function getTransport() {
+  return nodemailer.createTransport({
+    host:   process.env.SMTP_HOST,
+    port:   Number(process.env.SMTP_PORT || 465),
+    secure: Number(process.env.SMTP_PORT || 465) === 465,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
-    body: JSON.stringify({
-      sender:   { name: appName, email: fromAddr },
-      to:       [{ email: to, name: toName }],
-      subject,
-      htmlContent: html,
-    }),
   });
+}
 
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Brevo API error ${res.status}: ${err}`);
-  }
+export async function sendEmail(to, toName, subject, html) {
+  const transport = getTransport();
+  const appName   = process.env.APP_NAME  || "Keygen";
+  const fromAddr  = process.env.SMTP_FROM || `no-reply@${(process.env.APP_URL || "").replace(/^https?:\/\//, "") || "accounts.hdpx-keygen.vercel.app"}`;
+  await transport.sendMail({
+    from:    `"${appName}" <${fromAddr}>`,
+    to:      `"${toName}" <${to}>`,
+    subject,
+    html,
+  });
 }
 
 // ── OTP email template ────────────────────────────────────────
