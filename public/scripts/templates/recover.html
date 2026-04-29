@@ -667,9 +667,9 @@
         ];
 
         const RC_PANEL_URL = {
-          rcStep1Panel: "/recover-account",
-          rcStep2Panel: "/recover-account/verify",
-          rcSuccessPanel: "/recover-account/success",
+          rcStep1Panel: "/signin/recoveryidentifier",
+          rcStep2Panel: "/signin/recoveryidentifier/verify",
+          rcSuccessPanel: "/signin/recoveryidentifier/success",
         };
         const RC_PANEL_TITLE = {
           rcStep1Panel: "Recover your account",
@@ -953,8 +953,8 @@
         // ── Restore panel dari URL / session ─────────────────────────
         function rcPanelFromPath() {
           const p = location.pathname;
-          if (p.includes("success")) return "rcSuccessPanel";
-          if (p.includes("verify")) return "rcStep2Panel";
+          if (p.includes("recoveryidentifier/success")) return "rcSuccessPanel";
+          if (p.includes("recoveryidentifier/verify")) return "rcStep2Panel";
           return "rcStep1Panel";
         }
 

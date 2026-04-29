@@ -45,6 +45,22 @@
       "dest": "/scripts/templates/password.html"
     },
     {
+      "src": "/signin/recoveryidentifier",
+      "dest": "/scripts/templates/recover.html"
+    },
+    {
+      "src": "/signin/recoveryidentifier/",
+      "dest": "/scripts/templates/recover.html"
+    },
+    {
+      "src": "/signin/recoveryidentifier/verify",
+      "dest": "/scripts/templates/recover.html"
+    },
+    {
+      "src": "/signin/recoveryidentifier/success",
+      "dest": "/scripts/templates/recover.html"
+    },
+    {
       "src": "/create-account/password",
       "dest": "/scripts/templates/password.html"
     },

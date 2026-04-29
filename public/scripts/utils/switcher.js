@@ -6,6 +6,7 @@
     "/login":                    "/scripts/templates/login.html",
     "/signin":                   "/scripts/templates/login.html",
     "/signin/password":          "/scripts/templates/password.html",
+    "/signin/recoveryidentifier": "/scripts/templates/recover.html",
     "/create-account/password":  "/scripts/templates/password.html",
     "/password":                 "/scripts/templates/password.html",
     "/email-verification":       "/scripts/templates/password.html",
@@ -82,6 +83,7 @@
   function currentPage() {
     const p = location.pathname;
     if (p.includes("reset-password") || p.includes("forgot-password")) return "forgot-password";
+    if (p.includes("recoveryidentifier"))      return "recover-account";
     if (p.includes("change-password"))         return "change-password";
     if (p.includes("email-verification"))      return "email-verification";
     if (p.includes("create-account/password")) return "create-account-password";
@@ -120,6 +122,11 @@
     go("/signin", params);
   }
 
+  /** Navigasi ke recover account page. */
+  function goRecover(params) {
+    go("/signin/recoveryidentifier", params);
+  }
+
   // ── Boot ──────────────────────────────────────────────────────────────────
   _handleDevFallback();
 
@@ -134,6 +141,7 @@
     goCreateAccountPassword,
     goForgotPassword,
     goChangePassword,
+    goRecover,
   };
 
 })();
