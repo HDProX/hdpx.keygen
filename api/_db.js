@@ -172,8 +172,6 @@ export function otpHtml(name, code, {
 </html>`;
 }
 
-// ── Success email template ────────────────────────────────────
-
 // ── Password reset OTP email ──────────────────────────────────
 export function resetOtpHtml(name, code, { appName, avatarUrl } = {}) {
   return otpHtml(name, code, {
@@ -185,8 +183,12 @@ export function resetOtpHtml(name, code, { appName, avatarUrl } = {}) {
 }
 
 // ── Password changed confirmation email ───────────────────────
-export function passwordChangedHtml(name, email, { resetUrl, appName } = {}) {
+export function passwordChangedHtml(name, email, { resetUrl, appName, avatarUrl } = {}) {
   const app = appName || process.env.APP_NAME || "Keygen";
+  const initial = (email || name || "?")[0].toUpperCase();
+  const avatarHtml = avatarUrl
+    ? `<img src="${avatarUrl}" width="28" height="28" style="border-radius:50%;display:block;" alt="${initial}" />`
+    : `<span style="width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${initial}</span>`;
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -224,7 +226,7 @@ export function passwordChangedHtml(name, email, { resetUrl, appName } = {}) {
       body { background-color: var(--bg-outer); font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; padding: 40px 16px; color: var(--text-primary); }
       .email-wrapper { max-width: 600px; margin: 0 auto; }
       .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
-      .header { padding: 32px 40px 28px; text-align: center; }
+      .header { padding: 32px 40px 0px; text-align: center; }
       .brand { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
       .brand-name { font-size: 24px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; line-height: 1; }
       @media (prefers-color-scheme: dark) { .brand-logo path { fill: #2c7be5; } }
@@ -259,39 +261,35 @@ export function passwordChangedHtml(name, email, { resetUrl, appName } = {}) {
                 <path fill="#2c7be5" d="M20.6,7.8 C20.9,7.1 20.8,6.2 20.3,5.8 L12.1,8.8 3.8,5.7 C3.3,6.1 3.2,6.9 3.4,7.6 C2.7,8.9 2.3,10.4 2.3,12 C2.3,17.3 6.6,21.6 11.9,21.6 C17.2,21.6 21.5,17.3 21.5,12 C21.5,9.608 20.6,7.8 20.6,7.8 Z M16,16.2 C14.9,16.2 13.9,15.8 13.1,15.2 L12.1,17.4 11,15.2 C10.2,15.9 9.2,16.3 8.1,16.3 C5.6,16.3 3.5,14.3 3.5,11.7 C3.5,10.417 3.9,9.6 4.5,8.8 L7.4,9.7 C6.8,10 6.3,10.6 6.3,11.4 C6.3,12.2 7.1,13.3 8.2,13.3 C9.3,13.3 10.1,12.5 10.1,11.4 C10.1,10.986 10,10.7 9.8,10.4 L11.9,11 14.2,10.3 C14,10.6 13.9,10.9 13.9,11.2 C13.9,12.2 14.7,13.1 15.8,13.1 C16.9,13.1 17.7,12.3 17.7,11.2 C17.7,10.214 17.106,9.668 16.7,9.5 L19.4,8.7 C20.1,9.5 20.4,10.5 20.4,11.6 C20.4,14.1 18.4,16.2 15.8,16.2 Z"/>
               </g>
             </svg>
-            <span class="brand-name">\${app}</span>
+            <span class="brand-name">${app}</span>
           </div>
         </div>
         <!-- Body -->
         <div class="body">
           <p class="headline">Your password was changed</p>
           <div class="user-row">
-            <div class="avatar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="white">
-                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-              </svg>
-            </div>
-            <span class="user-email">\${email}</span>
+            ${avatarHtml}
+            <span class="user-email">${email}</span>
           </div>
           <div class="divider"></div>
           <div class="message">
             <p>
-              The password for your <strong>\${app}</strong> account
-              <a href="#">\${email}</a> was changed.
+              The password for your <strong>${app}</strong> account
+              <a href="#">${email}</a> was changed.
               If you didn't change it, you should
-              <a href="\${resetUrl || '#'}">recover your account</a>.
+              <a href="${resetUrl || '#'}">recover your account</a>.
             </p>
           </div>
           <div class="message-center">
             You can also see security activity at<br />
-            <a href="#">https://\${app}/account/notifications</a>
+            <a href="#">https://${app}/account/notifications</a>
           </div>
         </div>
         <!-- Footer -->
         <div class="footer">
           <p>
-            You received this email to let you know about important changes to your \${app} account and services.<br />
-            © 2026 \${app}. This email contains important information about your \${app} account and is not for marketing purposes. Marketing opt-out preferences do not apply to this email.
+            You received this email to let you know about important changes to your ${app} account and services.<br />
+            © 2026 ${app}. This email contains important information about your ${app} account and is not for marketing purposes. Marketing opt-out preferences do not apply to this email.
           </p>
         </div>
       </div>
@@ -300,8 +298,12 @@ export function passwordChangedHtml(name, email, { resetUrl, appName } = {}) {
 </html>`;
 }
 
-export function successHtml(name, email) {
+export function successHtml(name, email, { avatarUrl } = {}) {
   const app = process.env.APP_NAME || "Keygen";
+  const initial = (email || name || "?")[0].toUpperCase();
+  const avatarHtml = avatarUrl
+    ? `<img src="${avatarUrl}" width="28" height="28" style="border-radius:50%;display:block;" alt="${initial}" />`
+    : `<span style="width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${initial}</span>`;
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -317,7 +319,7 @@ export function successHtml(name, email) {
       body { background-color: var(--bg-outer); font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; padding: 40px 16px; color: var(--text-primary); }
       .email-wrapper { max-width: 600px; margin: 0 auto; }
       .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
-      .header { padding: 32px 40px 28px; text-align: center; }
+      .header { padding: 32px 40px 0px; text-align: center; }
       .brand { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
       .brand-name { font-size: 24px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; line-height: 1; }
       @media (prefers-color-scheme: dark) { .brand-logo path { fill: #2c7be5; } }
@@ -352,24 +354,20 @@ export function successHtml(name, email) {
                 <path fill="#2c7be5" d="M20.6,7.8 C20.9,7.1 20.8,6.2 20.3,5.8 L12.1,8.8 3.8,5.7 C3.3,6.1 3.2,6.9 3.4,7.6 C2.7,8.9 2.3,10.4 2.3,12 C2.3,17.3 6.6,21.6 11.9,21.6 C17.2,21.6 21.5,17.3 21.5,12 C21.5,9.608 20.6,7.8 20.6,7.8 Z M16,16.2 C14.9,16.2 13.9,15.8 13.1,15.2 L12.1,17.4 11,15.2 C10.2,15.9 9.2,16.3 8.1,16.3 C5.6,16.3 3.5,14.3 3.5,11.7 C3.5,10.417 3.9,9.6 4.5,8.8 L7.4,9.7 C6.8,10 6.3,10.6 6.3,11.4 C6.3,12.2 7.1,13.3 8.2,13.3 C9.3,13.3 10.1,12.5 10.1,11.4 C10.1,10.986 10,10.7 9.8,10.4 L11.9,11 14.2,10.3 C14,10.6 13.9,10.9 13.9,11.2 C13.9,12.2 14.7,13.1 15.8,13.1 C16.9,13.1 17.7,12.3 17.7,11.2 C17.7,10.214 17.106,9.668 16.7,9.5 L19.4,8.7 C20.1,9.5 20.4,10.5 20.4,11.6 C20.4,14.1 18.4,16.2 15.8,16.2 Z"/>
               </g>
             </svg>
-            <span class="brand-name">\${app}</span>
+            <span class="brand-name">${app}</span>
           </div>
         </div>
         <!-- Body -->
         <div class="body">
           <p class="headline">Account Created Successfully!</p>
           <div class="user-row">
-            <div class="avatar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="white">
-                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-              </svg>
-            </div>
-            <span class="user-email">\${email}</span>
+            ${avatarHtml}
+            <span class="user-email">${email}</span>
           </div>
           <div class="divider"></div>
           <div class="message">
             <p>
-              Welcome to <strong>\${app}</strong>, \${name}! Your account has been
+              Welcome to <strong>${app}</strong>, ${name}! Your account has been
               successfully created and verified.
             </p>
             <p>
@@ -380,14 +378,14 @@ export function successHtml(name, email) {
           </div>
           <div class="message-center">
             You can also see your account activity at<br />
-            <a href="#">https://\${app}/account/notifications</a>
+            <a href="#">https://${app}/account/notifications</a>
           </div>
         </div>
         <!-- Footer -->
         <div class="footer">
           <p>
-            You received this email to let you know about important changes to your \${app} account and services.<br />
-            © 2026 \${app}. This email contains important information about your \${app} account and is not for marketing purposes. Marketing opt-out preferences do not apply to this email.
+            You received this email to let you know about important changes to your ${app} account and services.<br />
+            © 2026 ${app}. This email contains important information about your ${app} account and is not for marketing purposes. Marketing opt-out preferences do not apply to this email.
           </p>
         </div>
       </div>
