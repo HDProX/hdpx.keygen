@@ -80,158 +80,94 @@ export function otpHtml(name, code, {
   const app = process.env.APP_NAME || "Keygen";
   const _defaultBody = `Finish signing up for a ${app} account using the verification code below. This code will expire within <strong>10 minutes</strong>.`;
   return `<!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <title>${title}</title>
+    <style>
+      :root { --bg-outer: #f1f3f4; --bg-card: #ffffff; --border-color: #dadce0; --divider-color: #e8eaed; --text-primary: #202124; --text-secondary: #5f6368; --text-footer: #70757a; --accent: #2c7be5; --link-color: #2c7be5; }
+      @media (prefers-color-scheme: dark) { :root { --bg-outer: #1a1a1a; --bg-card: #2a2a2a; --border-color: #3c3c3c; --divider-color: #3c3c3c; --text-primary: #e8eaed; --text-secondary: #9aa0a6; --text-footer: #9aa0a6; --accent: #2c7be5; --link-color: #6aadff; } }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background-color: var(--bg-outer); font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; padding: 40px 16px; color: var(--text-primary); }
+      .email-wrapper { max-width: 600px; margin: 0 auto; }
+      .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+      .header { padding: 32px 40px 28px; text-align: center; }
+      .brand { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+      .brand-name { font-size: 24px; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; line-height: 1; }
+      @media (prefers-color-scheme: dark) { .brand-logo path { fill: #2c7be5; } }
+      .divider { height: 1px; background-color: var(--divider-color); }
+      .body { padding: 10px 40px 32px; text-align: center; }
+      .headline { font-size: 20px; font-weight: 500; color: var(--text-primary); margin: 28px 0 16px; line-height: 1.4; }
+      .user-row { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px; padding: 6px 14px 6px 8px; border-radius: 100px; }
+      .avatar { width: 18px; height: 18px; border-radius: 50%; background-color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+      .user-email { font-size: 15px; color: var(--text-primary); font-weight: 400; }
+      .message { font-size: 14px; color: var(--text-primary); line-height: 1.7; text-align: left; margin-top: 24px; }
+      .message p { margin-bottom: 14px; }
+      .message p:last-child { margin-bottom: 0; }
+      .message a { color: var(--link-color); text-decoration: none; }
+      .message a:hover { text-decoration: underline; }
+      .otp-box { margin: 24px 0; padding: 16px 20px; background-color: var(--bg-outer); border: 1px solid var(--border-color); border-radius: 8px; text-align: left; }
+      .otp-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+      .otp-code { font-size: 28px; font-weight: 700; color: var(--accent); letter-spacing: 6px; }
+      .message-center { margin-top: 24px; font-size: 13px; color: var(--text-secondary); text-align: center; line-height: 1.6; }
+      .footer { padding: 20px 40px 28px; text-align: center; }
+      .footer p { font-size: 11px; color: var(--text-footer); line-height: 1.7; }
+      @media (max-width: 620px) { .header, .body, .footer { padding-left: 24px; padding-right: 24px; } }
+    </style>
   </head>
-  <body
-    style="
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      font-family: &quot;Segoe UI&quot;, Arial, sans-serif;
-    "
-  >
-    <table width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td align="center" style="padding: 40px 20px">
-          <table
-            width="600"
-            cellpadding="0"
-            cellspacing="0"
-            style="
-              background: #ffffff;
-              border-radius: 16px;
-              overflow: hidden;
-              box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-            "
-          >
-            <!-- Header -->
-            <tr>
-              <td
-                style="
-                  background: #ffffff;
-                  padding: 30px 30px 10px 30px;
-                  text-align: left;
-                "
-              >
-                <h1
-                  style="
-                    color: #2c7be5;
-                    font-size: 30px;
-                    font-weight: 700;
-                    letter-spacing: 0.5px;
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                  "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="34"
-                    height="34"
-                  >
-                    <g id="brand" data-name="brand">
-                      <path
-                        fill="#2c7be5"
-                        d="M19,5.4c-1.8-1.9-4.2-3-7-3s-5.2,1.1-6.9,2.9l7.1,2.6,6.8-2.5Z"
-                      />
-                      <path
-                        fill="#2c7be5"
-                        d="M20.6,7.8 C20.9,7.1 20.8,6.2 20.3,5.8 L12.1,8.8 3.8,5.7 C3.3,6.1 3.2,6.9 3.4,7.6 C2.7,8.9 2.3,10.4 2.3,12 C2.3,17.3 6.6,21.6 11.9,21.6 C17.2,21.6 21.5,17.3 21.5,12 C21.5,9.608 20.6,7.8 20.6,7.8 Z M16,16.2 C14.9,16.2 13.9,15.8 13.1,15.2 L12.1,17.4 11,15.2 C10.2,15.9 9.2,16.3 8.1,16.3 C5.6,16.3 3.5,14.3 3.5,11.7 C3.5,10.417 3.9,9.6 4.5,8.8 L7.4,9.7 C6.8,10 6.3,10.6 6.3,11.4 C6.3,12.2 7.1,13.3 8.2,13.3 C9.3,13.3 10.1,12.5 10.1,11.4 C10.1,10.986 10,10.7 9.8,10.4 L11.9,11 14.2,10.3 C14,10.6 13.9,10.9 13.9,11.2 C13.9,12.2 14.7,13.1 15.8,13.1 C16.9,13.1 17.7,12.3 17.7,11.2 C17.7,10.214 17.106,9.668 16.7,9.5 L19.4,8.7 C20.1,9.5 20.4,10.5 20.4,11.6 C20.4,14.1 18.4,16.2 15.8,16.2 Z"
-                      />
-                    </g>
-                  </svg>
-
-                  ${app}
-                </h1>
-              </td>
-            </tr>
-            <!-- Body -->
-            <tr>
-              <td style="padding: 0 60px 20px">
-                <h2
-                  style="
-                    margin: 15px 0 8px;
-                    color: #1a1a2e;
-                    font-size: 25px;
-                    font-weight: 700;
-                  "
-                >
-                  ${title}
-                </h2>
-                <p
-                  style="
-                    margin: 15px 0 8px;
-                    color: #1a1a2e;
-                    font-size: 18px;
-                    font-weight: 500;
-                  "
-                >
-                  ${subtitle}
-                </p>
-                <p
-                  style="
-                    margin: 0 0 18px;
-                    color: #161616;
-                    font-size: 14px;
-                    line-height: 1.6;
-                  "
-                >
-                  ${bodyText ?? _defaultBody}
-                </p>
-                <!-- OTP Box -->
-                <div style="text-align: left; margin: 0 0 18px">
-                  <div>
-                    <span
-                      style="font-size: 15px; font-weight: 600; color: #1a1a2e"
-                    >
-                      ${code}
-                    </span>
-                  </div>
-                </div>
-                <p
-                  style="
-                    margin-bottom: 30px;
-                    color: #161616;
-                    font-size: 14px;
-                    text-align: left;
-                  "
-                >
-                  If you didn't request this code, feel free to ignore this
-                  message.
-                </p>
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    font-size: 14px;
-                    color: #161616;
-                  "
-                >
-                  <p style="margin: 0">
-                    Privacy Policy | Terms of Service | <br />
-                    Update your Preferences
-                  </p>
-                </div>
-              </td>
-            </tr>
-            <!-- Footer -->
-            <tr>
-              <td style="padding: 20px 40px; text-align: center">
-                <p style="margin: 0; color: #161616; font-size: 12px">
-                  © 2026 ${app}. This email contains important information about
-                  your ${app} account and is not for marketing purposes.
-                  Marketing opt-out preferences do not apply to this email.
-                </p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+  <body>
+    <div class="email-wrapper">
+      <div class="card">
+        <!-- Header -->
+        <div class="header">
+          <div class="brand">
+            <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
+              <g id="brand" data-name="brand">
+                <path fill="#2c7be5" d="M19,5.4c-1.8-1.9-4.2-3-7-3s-5.2,1.1-6.9,2.9l7.1,2.6,6.8-2.5Z"/>
+                <path fill="#2c7be5" d="M20.6,7.8 C20.9,7.1 20.8,6.2 20.3,5.8 L12.1,8.8 3.8,5.7 C3.3,6.1 3.2,6.9 3.4,7.6 C2.7,8.9 2.3,10.4 2.3,12 C2.3,17.3 6.6,21.6 11.9,21.6 C17.2,21.6 21.5,17.3 21.5,12 C21.5,9.608 20.6,7.8 20.6,7.8 Z M16,16.2 C14.9,16.2 13.9,15.8 13.1,15.2 L12.1,17.4 11,15.2 C10.2,15.9 9.2,16.3 8.1,16.3 C5.6,16.3 3.5,14.3 3.5,11.7 C3.5,10.417 3.9,9.6 4.5,8.8 L7.4,9.7 C6.8,10 6.3,10.6 6.3,11.4 C6.3,12.2 7.1,13.3 8.2,13.3 C9.3,13.3 10.1,12.5 10.1,11.4 C10.1,10.986 10,10.7 9.8,10.4 L11.9,11 14.2,10.3 C14,10.6 13.9,10.9 13.9,11.2 C13.9,12.2 14.7,13.1 15.8,13.1 C16.9,13.1 17.7,12.3 17.7,11.2 C17.7,10.214 17.106,9.668 16.7,9.5 L19.4,8.7 C20.1,9.5 20.4,10.5 20.4,11.6 C20.4,14.1 18.4,16.2 15.8,16.2 Z"/>
+              </g>
+            </svg>
+            <span class="brand-name">\${app}</span>
+          </div>
+        </div>
+        <!-- Body -->
+        <div class="body">
+          <p class="headline">${title}</p>
+          <div class="user-row">
+            <div class="avatar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="white">
+                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+              </svg>
+            </div>
+            <span class="user-email">${name}</span>
+          </div>
+          <div class="divider"></div>
+          <div class="message">
+            <p>${subtitle}</p>
+            <p>${bodyText ?? _defaultBody}</p>
+            <!-- OTP Box -->
+            <div class="otp-box">
+              <div class="otp-label">Verification Code</div>
+              <div class="otp-code">${code}</div>
+            </div>
+            <p>If you didn't request this code, feel free to ignore this message.</p>
+          </div>
+          <div class="message-center">
+            Privacy Policy | Terms of Service | Update your Preferences
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer">
+          <p>
+            You received this email to let you know about important changes to your \${app} account and services.<br />
+            © 2026 \${app}. This email contains important information about your \${app} account and is not for marketing purposes. Marketing opt-out preferences do not apply to this email.
+          </p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>`;
 }
