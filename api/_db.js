@@ -63,8 +63,10 @@ function getTransport() {
 
 export async function sendEmail(to, toName, subject, html) {
   const transport = getTransport();
+  const appName   = process.env.APP_NAME  || "Keygen";
+  const fromAddr  = process.env.SMTP_FROM || `no-reply@${(process.env.APP_URL || "").replace(/^https?:\/\//, "") || "accounts.hdpx-keygen.vercel.app"}`;
   await transport.sendMail({
-    from:    `"${process.env.APP_NAME || "Keygen"}" <${process.env.SMTP_FROM}>`,
+    from:    `"${appName}" <${fromAddr}>`,
     to:      `"${toName}" <${to}>`,
     subject,
     html,
@@ -83,7 +85,7 @@ export function otpHtml(name, code, {
   const initial = (name || "?")[0].toUpperCase();
   const avatarHtml = avatarUrl
     ? `<img src="${avatarUrl}" width="28" height="28" style="border-radius:50%;display:block;" alt="${initial}" />`
-    : `<span style="width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${initial}</span>`;
+    : `<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;line-height:28px;text-align:center;vertical-align:middle;">${initial}</span>`;
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -188,7 +190,7 @@ export function passwordChangedHtml(name, email, { recoveryUrl, appName, avatarU
   const initial = (email || name || "?")[0].toUpperCase();
   const avatarHtml = avatarUrl
     ? `<img src="${avatarUrl}" width="28" height="28" style="border-radius:50%;display:block;" alt="${initial}" />`
-    : `<span style="width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${initial}</span>`;
+    : `<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;line-height:28px;text-align:center;vertical-align:middle;">${initial}</span>`;
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -303,7 +305,7 @@ export function successHtml(name, email, { avatarUrl } = {}) {
   const initial = (email || name || "?")[0].toUpperCase();
   const avatarHtml = avatarUrl
     ? `<img src="${avatarUrl}" width="28" height="28" style="border-radius:50%;display:block;" alt="${initial}" />`
-    : `<span style="width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${initial}</span>`;
+    : `<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background-color:#2c7be5;color:#fff;font-size:13px;font-weight:700;line-height:28px;text-align:center;vertical-align:middle;">${initial}</span>`;
   return `<!doctype html>
 <html lang="en">
   <head>
