@@ -319,7 +319,7 @@ export function passwordChangedHtml(name, { time, device, location, resetUrl, ap
                     <td style="border-radius:30px;background:#e53e3e;">
                       <a href="${resetUrl || "#"}"
                         style="display:inline-block;padding:12px 28px;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;border-radius:30px;">
-                        Reset password
+                        Change password
                       </a>
                     </td>
                   </tr>

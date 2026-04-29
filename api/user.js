@@ -383,7 +383,7 @@ async function handleResetPassword(req, res) {
         } catch { /* abaikan jika geo gagal */ }
       }
 
-      const resetUrl = `${appOrigin}/reset-password`;
+      const resetUrl = `${appOrigin}/change-password?email=${encodeURIComponent(email)}`;
 
       await sendEmail(
         email,
