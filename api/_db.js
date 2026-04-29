@@ -183,7 +183,7 @@ export function resetOtpHtml(name, code, { appName, avatarUrl } = {}) {
 }
 
 // ── Password changed confirmation email ───────────────────────
-export function passwordChangedHtml(name, email, { resetUrl, appName, avatarUrl } = {}) {
+export function passwordChangedHtml(name, email, { recoveryUrl, appName, avatarUrl } = {}) {
   const app = appName || process.env.APP_NAME || "Keygen";
   const initial = (email || name || "?")[0].toUpperCase();
   const avatarHtml = avatarUrl
@@ -277,7 +277,7 @@ export function passwordChangedHtml(name, email, { resetUrl, appName, avatarUrl 
               The password for your <strong>${app}</strong> account
               <a href="#">${email}</a> was changed.
               If you didn't change it, you should
-              <a href="${resetUrl || '#'}">recover your account</a>.
+              <a href="${recoveryUrl || 'https://hdpx-keygen.vercel.app/signin/recoveryidentifier'}">recover your account</a>.
             </p>
           </div>
           <div class="message-center">

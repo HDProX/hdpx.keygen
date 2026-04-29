@@ -358,13 +358,13 @@ async function handleResetPassword(req, res) {
       const avatarUrl = userRows[0]?.avatar_url || null;
       const appName   = process.env.APP_NAME    || "Keygen";
       const appOrigin = process.env.APP_URL     || "https://hdpx-keygen.vercel.app";
-      const resetUrl  = `${appOrigin}/reset-password`;
+      const recoveryUrl = `${appOrigin}/signin/recoveryidentifier`;
 
       await sendEmail(
         email,
         userName,
         `Your ${appName} password was changed`,
-        passwordChangedHtml(userName, email, { resetUrl, appName, avatarUrl })
+        passwordChangedHtml(userName, email, { recoveryUrl, appName, avatarUrl })
       );
     } catch (mailErr) {
       console.error("password-changed email error:", mailErr.message);
