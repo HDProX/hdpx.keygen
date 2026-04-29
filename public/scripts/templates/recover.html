@@ -327,6 +327,7 @@
         <div class="step-indicator">
           <div class="step-dot active"></div>
           <div class="step-dot"></div>
+          <div class="step-dot"></div>
         </div>
         <div class="card-content">
           <div class="float-field">
@@ -431,6 +432,7 @@
         <div class="step-indicator">
           <div class="step-dot done"></div>
           <div class="step-dot active"></div>
+          <div class="step-dot"></div>
         </div>
         <div class="card-content">
           <div class="float-field">
@@ -506,6 +508,98 @@
     </div>
 
     <!-- ══════════════════════════════════════════════
+         STEP 3: Set new password
+    ══════════════════════════════════════════════ -->
+    <div class="container" id="rcStep3Panel" style="display: none">
+      <div class="signup-card">
+        <div class="brand-mobile">
+          <div class="brand-logo"></div>
+          <span class="brand-top-name" data-placeholder="app_name"
+            >Loading...</span
+          >
+        </div>
+        <div class="card-header">
+          <h1>Set new password</h1>
+          <p>Choose a strong password for your account.</p>
+        </div>
+        <div class="step-indicator">
+          <div class="step-dot done"></div>
+          <div class="step-dot done"></div>
+          <div class="step-dot active"></div>
+        </div>
+        <div class="card-content">
+          <div class="float-field" style="position: relative">
+            <input
+              type="password"
+              id="rcNewPasswordInput"
+              autocomplete="new-password"
+              placeholder="New password"
+              minlength="8"
+            />
+            <label for="rcNewPasswordInput">New password</label>
+            <span
+              class="material-symbols-outlined"
+              id="rcToggleNewPwd"
+              style="
+                position: absolute;
+                right: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                font-size: 20px;
+                color: var(--text-muted);
+                user-select: none;
+              "
+              >visibility_off</span
+            >
+          </div>
+          <div
+            class="error-row"
+            id="rcNewPasswordError"
+            style="margin: -8px 0 8px 6px"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" fill="var(--accent-red)" />
+              <line
+                x1="12"
+                y1="8"
+                x2="12"
+                y2="13"
+                stroke="white"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              />
+              <circle cx="12" cy="17" r="1.2" fill="white" />
+            </svg>
+            <span id="rcNewPasswordErrorMsg"></span>
+          </div>
+          <button class="btn-default" id="rcSetPasswordBtn">
+            Reset password
+          </button>
+          <div style="text-align: center; margin-top: 16px">
+            <a class="home-side-link pass" href="#" id="rcBackToStep2Btn">
+              <svg width="16" height="16" viewBox="0 0 512 512">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M244 400L100 256l144-144M120 256h292"
+                />
+              </svg>
+              Back
+            </a>
+          </div>
+          <div class="navbar-links">
+            <a href="#">Terms of Service</a><span>|</span
+            ><a href="#">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
          SUCCESS PANEL
     ══════════════════════════════════════════════ -->
     <div
@@ -518,15 +612,17 @@
             <span class="app-name" data-placeholder="app_name">Loading...</span>
           </div>
         </div>
-        <h1 class="success-title">Your account has been verified!</h1>
+        <h1 class="success-title">Recovery Complete!</h1>
         <p class="success-body">
-          Your account access has been confirmed.<br />
-          You can now continue signing in to your account.
+          Your password has been reset successfully.<br />
+          A confirmation has been sent to your email.
         </p>
         <button class="btn-default" id="rcGoToLoginBtn" style="margin-top: 8px">
           Continue to sign in
         </button>
-        <p class="rc-success-sub">You can now close this window.</p>
+        <p class="rc-success-sub">
+          You can now sign in with your new password.
+        </p>
       </div>
     </div>
 
@@ -624,6 +720,7 @@
           "";
         let _rcResendTimer = null;
         let _rcResendCount = 0;
+        let _rcResetToken = "";
 
         const RC_SESSION = "rc_state";
 
@@ -648,17 +745,20 @@
         const ALL_RC_PANELS = [
           "rcStep1Panel",
           "rcStep2Panel",
+          "rcStep3Panel",
           "rcSuccessPanel",
         ];
 
         const RC_PANEL_URL = {
           rcStep1Panel: "/signin/recoveryidentifier",
           rcStep2Panel: "/signin/recoveryidentifier/verify",
+          rcStep3Panel: "/signin/recoveryidentifier/new-password",
           rcSuccessPanel: "/signin/recoveryidentifier/success",
         };
         const RC_PANEL_TITLE = {
           rcStep1Panel: "Recover your account",
           rcStep2Panel: "Check your inbox",
+          rcStep3Panel: "Set new password",
           rcSuccessPanel: null,
         };
 
@@ -839,8 +939,13 @@
             btn.innerHTML = "Verify";
             btn.disabled = false;
             if (data.success) {
+              _rcResetToken = data.token || "";
               rcClearResendTimer();
-              rcShowPanel("rcSuccessPanel");
+              rcShowPanel("rcStep3Panel");
+              setTimeout(
+                () => document.getElementById("rcNewPasswordInput").focus(),
+                100,
+              );
             } else {
               const msg =
                 data.message || "Invalid or expired code. Please try again.";
@@ -869,6 +974,101 @@
             rcClearResendTimer();
             rcShowPanel("rcStep1Panel");
           });
+
+        // ── Step 3: Set new password ──────────────────────────────
+        const rcNewPasswordInput =
+          document.getElementById("rcNewPasswordInput");
+
+        // Toggle password visibility
+        document
+          .getElementById("rcToggleNewPwd")
+          .addEventListener("click", function () {
+            const isHidden = rcNewPasswordInput.type === "password";
+            rcNewPasswordInput.type = isHidden ? "text" : "password";
+            this.textContent = isHidden ? "visibility" : "visibility_off";
+          });
+
+        rcNewPasswordInput.addEventListener("input", function () {
+          document
+            .getElementById("rcNewPasswordError")
+            .classList.remove("show");
+          this.classList.remove("error");
+          this.classList.toggle("has-value", this.value.length > 0);
+        });
+        rcNewPasswordInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter")
+            document.getElementById("rcSetPasswordBtn").click();
+        });
+
+        document
+          .getElementById("rcBackToStep2Btn")
+          .addEventListener("click", (e) => {
+            e.preventDefault();
+            rcShowPanel("rcStep2Panel");
+          });
+
+        async function rcSetPassword() {
+          const password = rcNewPasswordInput.value;
+          const showPwdError = (msg) => {
+            document.getElementById("rcNewPasswordErrorMsg").textContent = msg;
+            document.getElementById("rcNewPasswordError").classList.add("show");
+            rcNewPasswordInput.classList.add("error");
+            rcShakeField(rcNewPasswordInput.closest(".float-field"));
+          };
+
+          if (!password) {
+            showPwdError("Please enter a new password.");
+            rcNewPasswordInput.focus();
+            return;
+          }
+          if (password.length < 8) {
+            showPwdError("Password must be at least 8 characters long.");
+            rcNewPasswordInput.focus();
+            return;
+          }
+          if (!_rcResetToken) {
+            showToast("Session expired. Please start over.", true);
+            rcShowPanel("rcStep1Panel");
+            return;
+          }
+
+          const btn = document.getElementById("rcSetPasswordBtn");
+          btn.innerHTML = '<span class="btn-spinner"></span> Resetting…';
+          btn.disabled = true;
+
+          try {
+            const res = await fetch("/api/user?action=reset-password", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: _rcEmail,
+                token: _rcResetToken,
+                password,
+              }),
+            });
+            const data = await res.json();
+            btn.innerHTML = "Reset password";
+            btn.disabled = false;
+
+            if (data.success) {
+              _rcResetToken = ""; // single-use — hapus setelah dipakai
+              rcClearSession();
+              rcShowPanel("rcSuccessPanel");
+            } else {
+              showPwdError(
+                data.message || "Failed to reset password. Please try again.",
+              );
+            }
+          } catch {
+            btn.innerHTML = "Reset password";
+            btn.disabled = false;
+            showToast("Connection error. Please try again.", true);
+          }
+        }
+
+        document
+          .getElementById("rcSetPasswordBtn")
+          .addEventListener("click", rcSetPassword);
 
         // Resend timer
         function rcStartResendTimer() {
@@ -939,6 +1139,8 @@
         function rcPanelFromPath() {
           const p = location.pathname;
           if (p.includes("recoveryidentifier/success")) return "rcSuccessPanel";
+          if (p.includes("recoveryidentifier/new-password"))
+            return "rcStep3Panel";
           if (p.includes("recoveryidentifier/verify")) return "rcStep2Panel";
           return "rcStep1Panel";
         }
@@ -959,6 +1161,11 @@
           }
 
           if (panelFromPath === "rcStep2Panel") {
+            rcShowPanel("rcStep2Panel", false);
+            document.getElementById("rcResendTimer").style.display = "none";
+            document.getElementById("rcResendLink").style.display = "";
+          } else if (panelFromPath === "rcStep3Panel") {
+            // Token tidak tersimpan di session (sengaja, security) → redirect ke step2
             rcShowPanel("rcStep2Panel", false);
             document.getElementById("rcResendTimer").style.display = "none";
             document.getElementById("rcResendLink").style.display = "";

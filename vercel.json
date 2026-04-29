@@ -57,6 +57,10 @@
       "dest": "/scripts/templates/recover.html"
     },
     {
+      "src": "/signin/recoveryidentifier/new-password",
+      "dest": "/scripts/templates/recover.html"
+    },
+    {
       "src": "/signin/recoveryidentifier/success",
       "dest": "/scripts/templates/recover.html"
     },
