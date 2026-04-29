@@ -9,11 +9,23 @@
       "dest": "/api/login/popup-google-auth.js"
     },
     {
+      "src": "/log-in/popup-google-auth",
+      "dest": "/api/login/popup-google-auth.js"
+    },
+    {
       "src": "/login",
       "dest": "/scripts/templates/login.html"
     },
     {
       "src": "/login/",
+      "dest": "/scripts/templates/login.html"
+    },
+    {
+      "src": "/log-in",
+      "dest": "/scripts/templates/login.html"
+    },
+    {
+      "src": "/log-in/",
       "dest": "/scripts/templates/login.html"
     },
     {
@@ -30,6 +42,22 @@
     },
     {
       "src": "/log-in/password/",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/create-account/password",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/create-account/password/",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/email-verification",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/email-verification/",
       "dest": "/scripts/templates/password.html"
     },
     {
@@ -50,6 +78,26 @@
     },
     {
       "src": "/forgot-password/success",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/reset-password",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/reset-password/",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/reset-password/verify",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/reset-password/new-password",
+      "dest": "/scripts/templates/password.html"
+    },
+    {
+      "src": "/reset-password/success",
       "dest": "/scripts/templates/password.html"
     },
     {

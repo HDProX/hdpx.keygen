@@ -3,11 +3,15 @@
 
   // ── Route map ─────────────────────────────────────────────────────────────
   const ROUTES = {
-    "/login":              "/scripts/templates/login.html",
-    "/log-in/password":    "/scripts/templates/password.html",
-    "/password":           "/scripts/templates/password.html",
-    "/forgot-password":    "/scripts/templates/password.html",
-    "/change-password":    "/scripts/templates/password.html",
+    "/login":                    "/scripts/templates/login.html",
+    "/log-in":                   "/scripts/templates/login.html",
+    "/log-in/password":          "/scripts/templates/password.html",
+    "/create-account/password":  "/scripts/templates/password.html",
+    "/password":                 "/scripts/templates/password.html",
+    "/email-verification":       "/scripts/templates/password.html",
+    "/forgot-password":          "/scripts/templates/password.html",
+    "/reset-password":           "/scripts/templates/password.html",
+    "/change-password":          "/scripts/templates/password.html",
   };
 
   // ── Deteksi environment ───────────────────────────────────────────────────
@@ -77,28 +81,43 @@
    */
   function currentPage() {
     const p = location.pathname;
-    if (p.includes("forgot-password")) return "forgot-password";
-    if (p.includes("change-password"))  return "change-password";
-    if (p.includes("login") || p.includes("log-in")) return "login";
-    if (p.includes("password"))         return "password";
+    if (p.includes("reset-password") || p.includes("forgot-password")) return "forgot-password";
+    if (p.includes("change-password"))         return "change-password";
+    if (p.includes("email-verification"))      return "email-verification";
+    if (p.includes("create-account/password")) return "create-account-password";
+    if (p.includes("log-in/password"))         return "password";
+    if (p.includes("log-in") || p.includes("login")) return "login";
+    if (p.includes("password"))                return "password";
     return null;
   }
 
   // ── Shorthand navigators ──────────────────────────────────────────────────
 
-  /** Navigasi ke halaman enter-password (login/register). */
+  /** Navigasi ke halaman enter-password (existing user login). */
   function goPassword(params) {
     go("/log-in/password", params);
   }
 
-  /** Navigasi ke forgot-password flow. */
+  /** Navigasi ke halaman create-account password (new user register). */
+  function goCreateAccountPassword(params) {
+    // Strip isNew dari params karena path sudah mewakili state new user
+    const { isNew, ...rest } = params || {};
+    go("/create-account/password", rest);
+  }
+
+  /** Navigasi ke forgot/reset-password flow. */
   function goForgotPassword(params) {
-    go("/forgot-password", params);
+    go("/reset-password", params);
   }
 
   /** Navigasi ke change-password flow (user sudah login). */
   function goChangePassword(params) {
     go("/change-password", params);
+  }
+
+  /** Navigasi ke login page. */
+  function goLogin(params) {
+    go("/log-in", params);
   }
 
   // ── Boot ──────────────────────────────────────────────────────────────────
@@ -110,7 +129,9 @@
     getEmail,
     clearSession,
     currentPage,
+    goLogin,
     goPassword,
+    goCreateAccountPassword,
     goForgotPassword,
     goChangePassword,
   };

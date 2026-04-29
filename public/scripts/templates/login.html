@@ -399,8 +399,18 @@
     <script src="/scripts/utils/app_settings.js"></script>
     <script src="/scripts/utils/switcher.js"></script>
     <script src="/scripts/utils/prefill_from_app.js"></script>
-
     <script>
+      // ── Canonical redirect: /login → /log-in ───────────────────────────────
+      (function () {
+        const p = location.pathname.replace(/\/$/, "");
+        if (p === "/login") {
+          history.replaceState(
+            null,
+            "",
+            "/log-in" + location.search + location.hash,
+          );
+        }
+      })();
       // ── Theme ──────────────────────────────────────────────────────────────
       let currentTheme = "system";
       function getSystemTheme() {
@@ -558,9 +568,8 @@
             if (data.exists) {
               Switcher.goPassword({ email, ...(isApp && { app: isApp }) });
             } else {
-              Switcher.goPassword({
+              Switcher.goCreateAccountPassword({
                 email,
-                isNew: "true",
                 ...(isApp && { app: isApp }),
               });
             }
