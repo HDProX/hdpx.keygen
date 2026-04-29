@@ -247,6 +247,109 @@ export function resetOtpHtml(name, code, appName) {
   });
 }
 
+// ── Password changed confirmation email ───────────────────────
+export function passwordChangedHtml(name, { time, device, location, resetUrl, appName } = {}) {
+  const app = appName || process.env.APP_NAME || "Keygen";
+  return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body style="margin:0;padding:0;background:#f4f4f4;font-family:'Segoe UI',Arial,sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" style="padding:40px 20px;">
+          <table width="600" cellpadding="0" cellspacing="0"
+            style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+            <!-- Header -->
+            <tr>
+              <td style="background:#ffffff;padding:30px 30px 10px 30px;">
+                <h1 style="color:#2c7be5;font-size:30px;font-weight:700;letter-spacing:0.5px;margin:0;display:flex;align-items:center;gap:8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="34" height="34">
+                    <g id="brand">
+                      <path fill="#2c7be5" d="M19,5.4c-1.8-1.9-4.2-3-7-3s-5.2,1.1-6.9,2.9l7.1,2.6,6.8-2.5Z"/>
+                      <path fill="#2c7be5" d="M20.6,7.8C20.9,7.1 20.8,6.2 20.3,5.8L12.1,8.8 3.8,5.7C3.3,6.1 3.2,6.9 3.4,7.6C2.7,8.9 2.3,10.4 2.3,12C2.3,17.3 6.6,21.6 11.9,21.6C17.2,21.6 21.5,17.3 21.5,12C21.5,9.608 20.6,7.8 20.6,7.8ZM16,16.2C14.9,16.2 13.9,15.8 13.1,15.2L12.1,17.4 11,15.2C10.2,15.9 9.2,16.3 8.1,16.3C5.6,16.3 3.5,14.3 3.5,11.7C3.5,10.417 3.9,9.6 4.5,8.8L7.4,9.7C6.8,10 6.3,10.6 6.3,11.4C6.3,12.2 7.1,13.3 8.2,13.3C9.3,13.3 10.1,12.5 10.1,11.4C10.1,10.986 10,10.7 9.8,10.4L11.9,11 14.2,10.3C14,10.6 13.9,10.9 13.9,11.2C13.9,12.2 14.7,13.1 15.8,13.1C16.9,13.1 17.7,12.3 17.7,11.2C17.7,10.214 17.106,9.668 16.7,9.5L19.4,8.7C20.1,9.5 20.4,10.5 20.4,11.6C20.4,14.1 18.4,16.2 15.8,16.2Z"/>
+                    </g>
+                  </svg>
+                  ${app}
+                </h1>
+              </td>
+            </tr>
+            <!-- Body -->
+            <tr>
+              <td style="padding:10px 40px 32px;">
+                <h2 style="margin:15px 0 8px;color:#1a1a2e;font-size:22px;font-weight:700;">
+                  Password changed for your account
+                </h2>
+                <p style="margin:10px 0 20px;color:#444;font-size:15px;line-height:1.6;">
+                  Hi ${name},<br/><br/>
+                  This is a confirmation that the password for your <strong>${app}</strong> account was changed.
+                </p>
+                <!-- Details table -->
+                <table width="100%" cellpadding="0" cellspacing="0"
+                  style="background:#f8f8fc;border-radius:10px;overflow:hidden;margin-bottom:20px;">
+                  <tr>
+                    <td style="padding:12px 20px;border-bottom:1px solid #eee;">
+                      <span style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Time</span><br/>
+                      <span style="color:#1a1a2e;font-size:14px;font-weight:600;">${time || "—"}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:12px 20px;border-bottom:1px solid #eee;">
+                      <span style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Device</span><br/>
+                      <span style="color:#1a1a2e;font-size:14px;font-weight:600;">${device || "Unknown device"}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:12px 20px;">
+                      <span style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Location</span><br/>
+                      <span style="color:#1a1a2e;font-size:14px;font-weight:600;">${location || "Unknown location"}</span>
+                    </td>
+                  </tr>
+                </table>
+                <p style="margin:0 0 8px;color:#444;font-size:14px;line-height:1.6;">
+                  If this was you, you're all set.
+                </p>
+                <p style="margin:0 0 24px;color:#444;font-size:14px;line-height:1.6;">
+                  If you didn't change your password, please reset your password immediately and review your account activity.
+                </p>
+                <!-- Reset button -->
+                <table cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="border-radius:30px;background:#e53e3e;">
+                      <a href="${resetUrl || "#"}"
+                        style="display:inline-block;padding:12px 28px;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;border-radius:30px;">
+                        Reset password
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <!-- Footer -->
+            <tr>
+              <td style="padding:0 40px 28px;text-align:left;">
+                <p style="margin:0;color:#888;font-size:13px;">
+                  Thanks,<br/>
+                  <strong>${app} Security Team</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 40px 20px;text-align:center;">
+                <p style="margin:0;color:#bbb;font-size:11px;">
+                  © 2026 ${app}. This is a security notification for your ${app} account.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
 export function successHtml(name, email) {
   const app = process.env.APP_NAME || "Keygen";
   return `<!doctype html>

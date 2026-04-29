@@ -1,4 +1,4 @@
-import { query, hashPassword, randomSalt, randomOtp, sendEmail, otpHtml, resetOtpHtml, successHtml, cors, jsonOut } from "./_db.js";
+import { query, hashPassword, randomSalt, randomOtp, sendEmail, otpHtml, resetOtpHtml, successHtml, passwordChangedHtml, cors, jsonOut } from "./_db.js";
 import crypto from "crypto";
 
 const OTP_TTL         = Number(process.env.OTP_TTL_SECONDS || 600);
@@ -351,13 +351,56 @@ async function handleResetPassword(req, res) {
     // Hapus row agar token tidak bisa dipakai lagi (single-use)
     await query("DELETE FROM password_resets WHERE email = ?", [email]);
 
+    // Kirim email konfirmasi password berhasil diubah
+    try {
+      const userRows = await query("SELECT name FROM users WHERE email = ? LIMIT 1", [email]);
+      const userName  = userRows[0]?.name || email;
+      const appName   = process.env.APP_NAME || "Keygen";
+      const appOrigin = process.env.APP_URL  || "https://hdpx-keygen.vercel.app";
+
+      // Waktu UTC
+      const now  = new Date();
+      const time = now.toUTCString();
+
+      // User-Agent → nama device ringkas
+      const ua     = req.headers["user-agent"] || "";
+      let device = "Unknown device";
+      if (/mobile|android|iphone|ipad/i.test(ua))      device = "Mobile device";
+      else if (/windows/i.test(ua))                     device = "Windows PC";
+      else if (/macintosh|mac os x/i.test(ua))          device = "Mac";
+      else if (/linux/i.test(ua))                       device = "Linux PC";
+
+      // IP → lokasi (gunakan ip-api.com gratis, tanpa API key)
+      const ip  = (req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "").split(",")[0].trim();
+      let location = "Unknown location";
+      if (ip && ip !== "::1" && ip !== "127.0.0.1") {
+        try {
+          const geo = await fetch(`http://ip-api.com/json/${ip}?fields=city,country`);
+          const geoData = await geo.json();
+          if (geoData.city || geoData.country) {
+            location = [geoData.city, geoData.country].filter(Boolean).join(", ");
+          }
+        } catch { /* abaikan jika geo gagal */ }
+      }
+
+      const resetUrl = `${appOrigin}/reset-password`;
+
+      await sendEmail(
+        email,
+        userName,
+        `Password changed for your account`,
+        passwordChangedHtml(userName, { time, device, location, resetUrl, appName })
+      );
+    } catch (mailErr) {
+      console.error("password-changed email error:", mailErr.message);
+    }
+
     return jsonOut(res, true, "Password has been reset successfully.");
   } catch (e) {
     console.error("reset-password:", e.message);
     return jsonOut(res, false, "An error occurred. Please try again.", 500);
   }
 }
-
 
 
 // ─── Main router ──────────────────────────────────────────────────────────────
