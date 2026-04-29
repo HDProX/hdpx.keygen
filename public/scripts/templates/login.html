@@ -400,14 +400,14 @@
     <script src="/scripts/utils/switcher.js"></script>
     <script src="/scripts/utils/prefill_from_app.js"></script>
     <script>
-      // ── Canonical redirect: /login → /log-in ───────────────────────────────
+      // ── Canonical redirect: /login → /signin ───────────────────────────────
       (function () {
         const p = location.pathname.replace(/\/$/, "");
         if (p === "/login") {
           history.replaceState(
             null,
             "",
-            "/log-in" + location.search + location.hash,
+            "/signin" + location.search + location.hash,
           );
         }
       })();

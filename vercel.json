@@ -9,7 +9,7 @@
       "dest": "/api/login/popup-google-auth.js"
     },
     {
-      "src": "/log-in/popup-google-auth",
+      "src": "/signin/popup-google-auth",
       "dest": "/api/login/popup-google-auth.js"
     },
     {
@@ -21,11 +21,11 @@
       "dest": "/scripts/templates/login.html"
     },
     {
-      "src": "/log-in",
+      "src": "/signin",
       "dest": "/scripts/templates/login.html"
     },
     {
-      "src": "/log-in/",
+      "src": "/signin/",
       "dest": "/scripts/templates/login.html"
     },
     {
@@ -37,11 +37,11 @@
       "dest": "/scripts/templates/password.html"
     },
     {
-      "src": "/log-in/password",
+      "src": "/signin/password",
       "dest": "/scripts/templates/password.html"
     },
     {
-      "src": "/log-in/password/",
+      "src": "/signin/password/",
       "dest": "/scripts/templates/password.html"
     },
     {

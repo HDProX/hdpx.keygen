@@ -282,7 +282,7 @@ export function passwordChangedHtml(name, email, { resetUrl, appName, avatarUrl 
           </div>
           <div class="message-center">
             You can also see security activity at<br />
-            <a href="#">https://${app}/account/notifications</a>
+            <a href="#">https://hdpx-keygen.vercel.app/account-settings/account-management</a>
           </div>
         </div>
         <!-- Footer -->
@@ -378,7 +378,7 @@ export function successHtml(name, email, { avatarUrl } = {}) {
           </div>
           <div class="message-center">
             You can also see your account activity at<br />
-            <a href="#">https://${app}/account/notifications</a>
+            <a href="#">https://hdpx-keygen.vercel.app/account-settings/account-management</a>
           </div>
         </div>
         <!-- Footer -->

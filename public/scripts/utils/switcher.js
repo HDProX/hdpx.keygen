@@ -4,8 +4,8 @@
   // ── Route map ─────────────────────────────────────────────────────────────
   const ROUTES = {
     "/login":                    "/scripts/templates/login.html",
-    "/log-in":                   "/scripts/templates/login.html",
-    "/log-in/password":          "/scripts/templates/password.html",
+    "/signin":                   "/scripts/templates/login.html",
+    "/signin/password":          "/scripts/templates/password.html",
     "/create-account/password":  "/scripts/templates/password.html",
     "/password":                 "/scripts/templates/password.html",
     "/email-verification":       "/scripts/templates/password.html",
@@ -85,8 +85,8 @@
     if (p.includes("change-password"))         return "change-password";
     if (p.includes("email-verification"))      return "email-verification";
     if (p.includes("create-account/password")) return "create-account-password";
-    if (p.includes("log-in/password"))         return "password";
-    if (p.includes("log-in") || p.includes("login")) return "login";
+    if (p.includes("signin/password"))         return "password";
+    if (p.includes("signin") || p.includes("login")) return "login";
     if (p.includes("password"))                return "password";
     return null;
   }
@@ -95,7 +95,7 @@
 
   /** Navigasi ke halaman enter-password (existing user login). */
   function goPassword(params) {
-    go("/log-in/password", params);
+    go("/signin/password", params);
   }
 
   /** Navigasi ke halaman create-account password (new user register). */
@@ -117,7 +117,7 @@
 
   /** Navigasi ke login page. */
   function goLogin(params) {
-    go("/log-in", params);
+    go("/signin", params);
   }
 
   // ── Boot ──────────────────────────────────────────────────────────────────

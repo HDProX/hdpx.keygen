@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Recover your account | {appName}</title>
+    <link rel="icon" href="/assets/images/Favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/styling.css" />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: var(--bg-body);
+      }
+
+      .container {
+        width: 100%;
+        max-width: 550px;
+      }
+
+      .signup-card {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 20px;
+        overflow: hidden;
+        animation: fadeInUp 0.5s ease-out;
+        transition: background 0.3s ease;
+        margin: 0 auto;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card-header {
+        padding: 10px 30px 20px;
+        text-align: center;
+        color: var(--text-primary);
+      }
+      .card-header h1 {
+        font-size: 30px;
+        font-weight: 600;
+      }
+      .card-header p {
+        font-size: 15px;
+        opacity: 0.9;
+        color: var(--text-secondary);
+      }
+
+      .card-content {
+        padding: 10px 10px 20px;
+      }
+
+      .email-field {
+        display: block;
+        padding: 6px 14px 10px 18px;
+        border: 1px solid var(--border-input);
+        border-radius: 30px;
+        margin-bottom: 16px;
+      }
+      .email-field legend {
+        font-size: 12px;
+        color: var(--text-muted);
+        padding: 0 4px;
+        line-height: 1;
+      }
+      .email-field-body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0 4px 0;
+      }
+      .email-field-value {
+        font-size: 14px;
+        color: var(--text-primary);
+        font-weight: 500;
+        padding-left: 4px;
+      }
+
+      /* Recover info box */
+      .recover-info {
+        background: rgba(44, 123, 229, 0.07);
+        border: 1px solid rgba(44, 123, 229, 0.2);
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 18px;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        font-size: 13px;
+        color: var(--text-secondary);
+        line-height: 1.5;
+      }
+      .recover-info svg {
+        flex-shrink: 0;
+        margin-top: 1px;
+        color: var(--accent-blue);
+      }
+
+      .success-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 12px;
+      }
+      .success-body {
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+      .success-sub {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      /* Success panel */
+      .success-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin: 0 auto 24px;
+        width: auto;
+        background: none;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+      .success-logo::before {
+        content: "";
+        display: block;
+        width: 42px;
+        height: 42px;
+        background-color: var(--accent-blue);
+        -webkit-mask-image: url("/assets/images/brand.svg");
+        mask-image: url("/assets/images/brand.svg");
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        flex-shrink: 0;
+      }
+      .app-name {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .brand-mobile {
+        display: none;
+      }
+
+      .home-side-link.pass {
+        margin-bottom: 16px;
+      }
+      .home-side-link.pass::after {
+        display: none;
+      }
+      .home-side-link.pass svg {
+        transition: transform 0.3s ease;
+      }
+      .home-side-link.pass:hover svg {
+        transform: translateX(-5px);
+      }
+
+      /* Step indicator */
+      .step-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 20px;
+      }
+      .step-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--border-input);
+        transition:
+          background 0.3s,
+          transform 0.3s,
+          width 0.3s;
+      }
+      .step-dot.active {
+        background: var(--accent-blue);
+        transform: scale(1.25);
+        width: 20px;
+        border-radius: 4px;
+      }
+      .step-dot.done {
+        background: var(--accent-blue);
+        opacity: 0.35;
+      }
+
+      /* Resend row */
+      .resend-row {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 14px;
+        color: var(--text-muted);
+      }
+
+      /* Success icon */
+      .rc-success-icon {
+        width: 64px;
+        height: 64px;
+        background: rgba(44, 123, 229, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+      }
+      .rc-success-icon svg {
+        stroke: var(--accent-blue);
+      }
+      .rc-success-sub {
+        margin-top: 20px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      .float-field input.error {
+        border-color: var(--accent-red) !important;
+        box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.12) !important;
+      }
+      .float-field input.error ~ label {
+        color: var(--accent-red);
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        75% {
+          transform: translateX(5px);
+        }
+      }
+      .shake {
+        animation: shake 0.3s ease;
+      }
+
+      .navbar-links.pass {
+        margin-top: 60px;
+      }
+
+      @media screen and (max-width: 767px) {
+        html body .brand-top#brandTop {
+          display: none !important;
+          visibility: hidden !important;
+        }
+        .brand-mobile {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin-bottom: 16px;
+        }
+        .signup-card {
+          padding: 30px 20px;
+        }
+        .card-header {
+          padding: 10px 0 16px;
+        }
+        .card-header h1 {
+          font-size: 24px;
+        }
+        .card-header p {
+          font-size: 13px;
+        }
+        .card-content {
+          padding: 10px 0 20px;
+        }
+        .theme-toggle {
+          top: 10px;
+          right: 10px;
+          width: 34px;
+          height: 34px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <span id="themeIcon" class="darkmode-icon"></span>
+    </button>
+
+    <div class="brand-top" id="brandTop">
+      <div class="brand-logo"></div>
+      <span class="brand-top-name" data-placeholder="app_name">Loading...</span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         STEP 1: Email input & send OTP
+    ══════════════════════════════════════════════ -->
+    <div class="container" id="rcStep1Panel" style="display: none">
+      <div class="signup-card">
+        <div class="brand-mobile">
+          <div class="brand-logo"></div>
+          <span class="brand-top-name" data-placeholder="app_name"
+            >Loading...</span
+          >
+        </div>
+        <div class="card-header">
+          <h1>Recover your account</h1>
+          <p>Enter your email address and we'll send you a recovery code.</p>
+        </div>
+        <div class="step-indicator">
+          <div class="step-dot active"></div>
+          <div class="step-dot"></div>
+        </div>
+        <div class="card-content">
+          <div class="float-field">
+            <input
+              type="email"
+              id="rcStep1EmailInput"
+              autocomplete="email"
+              placeholder="Email address"
+            />
+            <label for="rcStep1EmailInput">Email address</label>
+          </div>
+          <div
+            class="error-row"
+            id="rcStep1EmailError"
+            style="margin: -8px 0 8px 6px"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" fill="var(--accent-red)" />
+              <line
+                x1="12"
+                y1="8"
+                x2="12"
+                y2="13"
+                stroke="white"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              />
+              <circle cx="12" cy="17" r="1.2" fill="white" />
+            </svg>
+            <span id="rcStep1EmailErrorMsg"></span>
+          </div>
+          <div class="recover-info">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <span>
+              Use this if you've lost access to your account or need to verify
+              your identity. A one-time code will be sent to your email.
+            </span>
+          </div>
+          <button
+            class="btn-default"
+            id="rcStep1Btn"
+            style="margin-bottom: 10px"
+          >
+            Send recovery code
+          </button>
+          <div style="text-align: center; margin-top: 18px">
+            <a class="home-side-link pass" href="#" id="rcBackToLoginBtn">
+              <svg width="16" height="16" viewBox="0 0 512 512">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M244 400L100 256l144-144M120 256h292"
+                />
+              </svg>
+              Back to sign in
+            </a>
+          </div>
+          <div class="navbar-links pass">
+            <a href="#">Terms of Service</a><span>|</span
+            ><a href="#">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         STEP 2: OTP verification
+    ══════════════════════════════════════════════ -->
+    <div class="container" id="rcStep2Panel" style="display: none">
+      <div class="signup-card">
+        <div class="brand-mobile">
+          <div class="brand-logo"></div>
+          <span class="brand-top-name" data-placeholder="app_name"
+            >Loading...</span
+          >
+        </div>
+        <div class="card-header">
+          <h1>Check your inbox</h1>
+          <p>
+            Enter the recovery code we sent to<br /><strong
+              id="rcOtpEmailDisplay"
+            ></strong>
+          </p>
+        </div>
+        <div class="step-indicator">
+          <div class="step-dot done"></div>
+          <div class="step-dot active"></div>
+        </div>
+        <div class="card-content">
+          <div class="float-field">
+            <input
+              type="text"
+              id="rcOtpInput"
+              maxlength="6"
+              autocomplete="one-time-code"
+              placeholder="Code"
+              oninput="
+                this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')
+              "
+            />
+            <label for="rcOtpInput">Code</label>
+          </div>
+          <div class="error-row" id="rcOtpError" style="margin: -8px 0 8px 6px">
+            <svg width="13" height="13" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" fill="var(--accent-red)" />
+              <line
+                x1="12"
+                y1="8"
+                x2="12"
+                y2="13"
+                stroke="white"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              />
+              <circle cx="12" cy="17" r="1.2" fill="white" />
+            </svg>
+            <span id="rcOtpErrorMsg"></span>
+          </div>
+          <button class="btn-default" id="rcOtpVerifyBtn">Verify</button>
+          <div
+            style="
+              text-align: center;
+              margin-top: 16px;
+              font-size: 14px;
+              color: var(--text-muted);
+            "
+          >
+            <span id="rcResendTimer"
+              >Resend code in <strong id="rcTimerCount">60</strong>s</span
+            >
+            <a
+              class="home-side-link"
+              href="#"
+              id="rcResendLink"
+              style="display: none"
+              >Resend code</a
+            >
+          </div>
+        </div>
+        <div style="text-align: center">
+          <a class="home-side-link pass" href="#" id="rcBackToStep1Btn">
+            <svg width="16" height="16" viewBox="0 0 512 512">
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="48"
+                d="M244 400L100 256l144-144M120 256h292"
+              />
+            </svg>
+            Back
+          </a>
+        </div>
+        <div class="navbar-links">
+          <a href="#">Terms of Service</a><span>|</span
+          ><a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         SUCCESS PANEL
+    ══════════════════════════════════════════════ -->
+    <div
+      id="rcSuccessPanel"
+      style="display: none; width: 100%; max-width: 550px; text-align: center"
+    >
+      <div class="signup-card" style="padding: 48px 32px">
+        <div style="margin-bottom: 24px">
+          <div class="success-logo">
+            <span class="app-name" data-placeholder="app_name">Loading...</span>
+          </div>
+        </div>
+        <div class="rc-success-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+        </div>
+        <h1 class="success-title">Identity Verified!</h1>
+        <p class="success-body">
+          Your account access has been confirmed.<br />
+          You can now continue signing in to your account.
+        </p>
+        <button class="btn-default" id="rcGoToLoginBtn" style="margin-top: 8px">
+          Continue to sign in
+        </button>
+        <p class="rc-success-sub">You can now close this window.</p>
+      </div>
+    </div>
+
+    <script src="/scripts/utils/app_settings.js"></script>
+    <script src="/scripts/utils/switcher.js"></script>
+    <script src="/scripts/utils/prefill_from_app.js"></script>
+    <script>
+      // ============================================================
+      // THEME MANAGEMENT
+      // ============================================================
+      let currentTheme = "system";
+
+      function getSystemTheme() {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+
+      function updateAutofill(isDark) {
+        let el = document.getElementById("autofillStyle");
+        if (!el) {
+          el = document.createElement("style");
+          el.id = "autofillStyle";
+          document.head.appendChild(el);
+        }
+        const bg = isDark ? "#1e293b" : "#ffffff";
+        const text = isDark ? "#f1f5f9" : "#1a2c3e";
+        el.textContent = `input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px ${bg} inset!important;-webkit-text-fill-color:${text}!important;}`;
+      }
+
+      function setTheme(theme) {
+        const applyDark = () => {
+          document.body.classList.add("dark");
+          updateAutofill(true);
+        };
+        const applyLight = () => {
+          document.body.classList.remove("dark");
+          updateAutofill(false);
+        };
+
+        if (theme === "dark") {
+          currentTheme = "dark";
+          applyDark();
+        } else if (theme === "light") {
+          currentTheme = "light";
+          applyLight();
+        } else {
+          currentTheme = "system";
+          getSystemTheme() === "dark" ? applyDark() : applyLight();
+        }
+      }
+
+      setTheme("system");
+
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        const eff = currentTheme === "system" ? getSystemTheme() : currentTheme;
+        setTheme(eff === "dark" ? "light" : "dark");
+      });
+
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", () => {
+          if (currentTheme === "system") setTheme("system");
+        });
+
+      // ============================================================
+      // TOAST NOTIFICATION
+      // ============================================================
+      let toastTimer;
+
+      function showToast(message, isError = false) {
+        const toast = document.getElementById("toastMsg");
+        if (!toast) {
+          console.log("Toast:", message);
+          return;
+        }
+        toast.textContent = message;
+        toast.style.background = isError
+          ? "var(--accent-red)"
+          : "var(--bg-card)";
+        toast.style.color = isError ? "white" : "var(--text-primary)";
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+
+      // ============================================================
+      // RECOVER FLOW
+      // ============================================================
+      (function initRecoverFlow() {
+        let _rcEmail = "";
+        let _rcApp =
+          new URLSearchParams(location.search).get("app") ||
+          sessionStorage.getItem("fp_app_param") ||
+          "";
+        let _rcResendTimer = null;
+        let _rcResendCount = 0;
+
+        const RC_SESSION = "rc_state";
+
+        function rcSaveSession(panel) {
+          sessionStorage.setItem(
+            RC_SESSION,
+            JSON.stringify({ panel, email: _rcEmail, app: _rcApp }),
+          );
+        }
+        function rcClearSession() {
+          sessionStorage.removeItem(RC_SESSION);
+        }
+        function rcLoadSession() {
+          try {
+            const r = sessionStorage.getItem(RC_SESSION);
+            return r ? JSON.parse(r) : null;
+          } catch {
+            return null;
+          }
+        }
+
+        const ALL_RC_PANELS = [
+          "rcStep1Panel",
+          "rcStep2Panel",
+          "rcSuccessPanel",
+        ];
+
+        const RC_PANEL_URL = {
+          rcStep1Panel: "/recover-account",
+          rcStep2Panel: "/recover-account/verify",
+          rcSuccessPanel: "/recover-account/success",
+        };
+        const RC_PANEL_TITLE = {
+          rcStep1Panel: "Recover your account",
+          rcStep2Panel: "Check your inbox",
+          rcSuccessPanel: null,
+        };
+
+        function rcShowPanel(id, pushHistory = true) {
+          ALL_RC_PANELS.forEach((p) => {
+            document.getElementById(p).style.display = p === id ? "" : "none";
+          });
+          window.scrollTo(0, 0);
+
+          const url = RC_PANEL_URL[id] || "/recover-account";
+          const qs = location.search;
+          if (pushHistory) {
+            history.pushState({ rcPanel: id }, "", url + qs);
+          } else {
+            history.replaceState({ rcPanel: id }, "", url + qs);
+          }
+
+          const _app =
+            window.AppPrefill?.appName ||
+            sessionStorage.getItem("app_name") ||
+            null;
+          const titleBase = RC_PANEL_TITLE[id];
+          if (titleBase === null) {
+            document.title = _app || "Account Recovered";
+          } else {
+            document.title = _app ? titleBase + " | " + _app : titleBase;
+          }
+
+          if (id !== "rcStep1Panel") rcSaveSession(id);
+          else rcClearSession();
+        }
+
+        window.addEventListener("popstate", (e) => {
+          const panel = e.state?.rcPanel;
+          if (panel && ALL_RC_PANELS.includes(panel)) {
+            rcShowPanel(panel, false);
+          }
+        });
+
+        function rcShakeField(el) {
+          if (!el) return;
+          el.classList.remove("shake");
+          void el.offsetWidth;
+          el.classList.add("shake");
+          setTimeout(() => el.classList.remove("shake"), 350);
+        }
+
+        // ── Step 1: Email input & send OTP ────────────────────────
+        if (_rcApp) sessionStorage.setItem("fp_app_param", _rcApp);
+
+        // Pre-fill email input if email is available from URL/session
+        const emailFromUrl = Switcher.getEmail();
+        const step1EmailInput = document.getElementById("rcStep1EmailInput");
+        if (emailFromUrl && step1EmailInput) {
+          step1EmailInput.value = emailFromUrl;
+          step1EmailInput.classList.add("has-value");
+        }
+
+        // Clear error on input
+        step1EmailInput.addEventListener("input", function () {
+          document.getElementById("rcStep1EmailError").classList.remove("show");
+          this.classList.remove("error");
+          this.classList.toggle("has-value", this.value.length > 0);
+        });
+
+        // Allow Enter key to submit
+        step1EmailInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") document.getElementById("rcStep1Btn").click();
+        });
+
+        function rcShowStep1EmailError(msg) {
+          document.getElementById("rcStep1EmailErrorMsg").textContent = msg;
+          document.getElementById("rcStep1EmailError").classList.add("show");
+          step1EmailInput.classList.add("error");
+          rcShakeField(step1EmailInput.closest(".float-field"));
+        }
+
+        document
+          .getElementById("rcStep1Btn")
+          .addEventListener("click", async () => {
+            const inputEmail = step1EmailInput
+              ? step1EmailInput.value.trim()
+              : "";
+            if (!inputEmail) {
+              rcShowStep1EmailError("Please enter your email address.");
+              step1EmailInput.focus();
+              return;
+            }
+            // Basic email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(inputEmail)) {
+              rcShowStep1EmailError("Please enter a valid email address.");
+              step1EmailInput.focus();
+              return;
+            }
+            _rcEmail = inputEmail;
+
+            const btn = document.getElementById("rcStep1Btn");
+            btn.innerHTML = '<span class="btn-spinner"></span> Sending…';
+            btn.disabled = true;
+            try {
+              const res = await fetch("/api/user?action=forgot-password", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: _rcEmail }),
+              });
+              const data = await res.json();
+              btn.innerHTML = "Send recovery code";
+              btn.disabled = false;
+              if (data.success) {
+                document.getElementById("rcOtpEmailDisplay").textContent =
+                  _rcEmail;
+                rcShowPanel("rcStep2Panel");
+                rcStartResendTimer();
+                setTimeout(
+                  () => document.getElementById("rcOtpInput").focus(),
+                  100,
+                );
+              } else {
+                showToast(
+                  data.message ||
+                    "Could not send recovery code. Please try again.",
+                  true,
+                );
+              }
+            } catch {
+              btn.innerHTML = "Send recovery code";
+              btn.disabled = false;
+              showToast("Connection error. Please try again.", true);
+            }
+          });
+
+        document
+          .getElementById("rcBackToLoginBtn")
+          .addEventListener("click", (e) => {
+            e.preventDefault();
+            rcClearSession();
+            Switcher.goLogin({ ...(_rcApp && { app: _rcApp }) });
+          });
+
+        // ── Step 2: Verify OTP ────────────────────────────────────
+        document
+          .getElementById("rcOtpInput")
+          .addEventListener("keydown", (e) => {
+            if (e.key === "Enter") rcVerifyOtp();
+          });
+        document
+          .getElementById("rcOtpInput")
+          .addEventListener("input", function () {
+            document.getElementById("rcOtpError").classList.remove("show");
+            this.classList.remove("error");
+            this.classList.toggle("has-value", this.value.length > 0);
+          });
+
+        async function rcVerifyOtp() {
+          const code = document.getElementById("rcOtpInput").value.trim();
+          if (code.length !== 6) {
+            document.getElementById("rcOtpErrorMsg").textContent =
+              "Please enter the complete 6-character code.";
+            document.getElementById("rcOtpError").classList.add("show");
+            document.getElementById("rcOtpInput").classList.add("error");
+            rcShakeField(
+              document.getElementById("rcOtpInput").closest(".float-field"),
+            );
+            return;
+          }
+          const btn = document.getElementById("rcOtpVerifyBtn");
+          btn.innerHTML = '<span class="btn-spinner"></span> Verifying…';
+          btn.disabled = true;
+          document.getElementById("rcOtpError").classList.remove("show");
+          try {
+            const res = await fetch("/api/user?action=verify-reset-code", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email: _rcEmail, code }),
+            });
+            const data = await res.json();
+            btn.innerHTML = "Verify";
+            btn.disabled = false;
+            if (data.success) {
+              rcClearResendTimer();
+              rcShowPanel("rcSuccessPanel");
+            } else {
+              const msg =
+                data.message || "Invalid or expired code. Please try again.";
+              document.getElementById("rcOtpErrorMsg").textContent = msg;
+              document.getElementById("rcOtpError").classList.add("show");
+              document.getElementById("rcOtpInput").classList.add("error");
+              rcShakeField(
+                document.getElementById("rcOtpInput").closest(".float-field"),
+              );
+            }
+          } catch {
+            btn.innerHTML = "Verify";
+            btn.disabled = false;
+            showToast("Connection error. Please try again.", true);
+          }
+        }
+
+        document
+          .getElementById("rcOtpVerifyBtn")
+          .addEventListener("click", rcVerifyOtp);
+
+        document
+          .getElementById("rcBackToStep1Btn")
+          .addEventListener("click", (e) => {
+            e.preventDefault();
+            rcClearResendTimer();
+            rcShowPanel("rcStep1Panel");
+          });
+
+        // Resend timer
+        function rcStartResendTimer() {
+          rcClearResendTimer();
+          _rcResendCount++;
+          const waitSec = Math.min(60 * _rcResendCount, 300);
+          let remaining = waitSec;
+          document.getElementById("rcResendTimer").style.display = "";
+          document.getElementById("rcResendLink").style.display = "none";
+          document.getElementById("rcTimerCount").textContent = remaining;
+
+          _rcResendTimer = setInterval(() => {
+            remaining--;
+            document.getElementById("rcTimerCount").textContent = remaining;
+            if (remaining <= 0) {
+              rcClearResendTimer();
+              document.getElementById("rcResendTimer").style.display = "none";
+              document.getElementById("rcResendLink").style.display = "";
+            }
+          }, 1000);
+        }
+        function rcClearResendTimer() {
+          if (_rcResendTimer) {
+            clearInterval(_rcResendTimer);
+            _rcResendTimer = null;
+          }
+        }
+
+        document
+          .getElementById("rcResendLink")
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            const link = document.getElementById("rcResendLink");
+            link.textContent = "Sending…";
+            try {
+              const res = await fetch("/api/user?action=forgot-password", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: _rcEmail }),
+              });
+              const data = await res.json();
+              if (data.success) {
+                document.getElementById("rcOtpInput").value = "";
+                rcStartResendTimer();
+              } else {
+                link.textContent = "Resend code";
+                showToast(data.message || "Failed to resend. Try again.", true);
+              }
+            } catch {
+              link.textContent = "Resend code";
+              showToast("Connection error. Please try again.", true);
+            }
+          });
+
+        // ── Success ─────────────────────────────────────────────────
+        document
+          .getElementById("rcGoToLoginBtn")
+          .addEventListener("click", () => {
+            rcClearSession();
+            if (_rcApp) sessionStorage.setItem("fp_app_param", _rcApp);
+            Switcher.goLogin({
+              email: _rcEmail,
+              ...(_rcApp && { app: _rcApp }),
+            });
+          });
+
+        // ── Restore panel dari URL / session ─────────────────────────
+        function rcPanelFromPath() {
+          const p = location.pathname;
+          if (p.includes("success")) return "rcSuccessPanel";
+          if (p.includes("verify")) return "rcStep2Panel";
+          return "rcStep1Panel";
+        }
+
+        const saved = rcLoadSession();
+        const panelFromPath = rcPanelFromPath();
+
+        if (panelFromPath !== "rcStep1Panel" && saved && saved.email) {
+          _rcEmail = saved.email;
+          if (saved.app) {
+            _rcApp = saved.app;
+            sessionStorage.setItem("fp_app_param", _rcApp);
+          }
+          document.getElementById("rcOtpEmailDisplay").textContent = _rcEmail;
+          if (step1EmailInput) {
+            step1EmailInput.value = _rcEmail;
+            step1EmailInput.classList.add("has-value");
+          }
+
+          if (panelFromPath === "rcStep2Panel") {
+            rcShowPanel("rcStep2Panel", false);
+            document.getElementById("rcResendTimer").style.display = "none";
+            document.getElementById("rcResendLink").style.display = "";
+          } else if (panelFromPath === "rcSuccessPanel") {
+            rcShowPanel("rcSuccessPanel", false);
+          }
+        } else {
+          rcShowPanel("rcStep1Panel", false);
+        }
+      })();
+    </script>
+  </body>
+</html>
