@@ -63,19 +63,13 @@ function getTransport() {
 
 export async function sendEmail(to, toName, subject, html) {
   const transport = getTransport();
-  const appName = process.env.APP_NAME || "Keygen";
-  const fromAddr = process.env.SMTP_FROM || `no-reply@${process.env.APP_URL?.replace(/^https?:\/\//, "") || "hdpx-keygen.vercel.app"}`;
-  
+  const appName   = process.env.APP_NAME  || "Keygen";
+  const fromAddr  = process.env.SMTP_FROM || `no-reply@${(process.env.APP_URL || "").replace(/^https?:\/\//, "") || "accounts.hdpx-keygen.vercel.app"}`;
   await transport.sendMail({
-    from: `"${appName}" <${process.env.SMTP_USER}>`, // Tetap pakai email asli di SMTP
-    to: `"${toName}" <${to}>`,
-    subject: subject,
-    html: html,
-    headers: {
-      'Reply-To': fromAddr,  // User akan reply ke no-reply
-      'X-Email-Source': fromAddr,
-      'Sender': fromAddr,
-    }
+    from:    `"${appName}" <${fromAddr}>`,
+    to:      `"${toName}" <${to}>`,
+    subject,
+    html,
   });
 }
 
