@@ -8,8 +8,16 @@
   const ROUTES = {
     "/login":    "/scripts/templates/login.html",
     "/password": "/scripts/templates/password.html",
-    // /forgot-password dan /change-password tidak lagi diperlukan sebagai
-    // route terpisah — keduanya ditangani oleh password.html via ?mode=
+    // Legacy routes — redirect ke password.html dengan ?mode= yang sesuai
+    // (hanya aktif di dev/local; di Vercel tidak diperlukan karena tidak ada rewrite-nya)
+  };
+
+  // ── Dev fallback khusus untuk legacy paths ────────────────────────────────
+  // Di local, jika ada yang masih navigate ke /forgot-password atau /change-password
+  // (mis. bookmark lama), redirect ke password.html?mode= yang benar.
+  const LEGACY_REDIRECTS = {
+    "/forgot-password":  "/scripts/templates/password.html?mode=forgot",
+    "/change-password":  "/scripts/templates/password.html?mode=change",
   };
 
   // ── Deteksi environment ───────────────────────────────────────────────────
@@ -27,7 +35,15 @@
     if (!IS_LOCAL) return;
     const clean = location.pathname.replace(/\/$/, "") || "/";
     const target = ROUTES[clean];
-    if (target) location.replace(target + location.search);
+    if (target) { location.replace(target + location.search); return; }
+    const legacyTarget = LEGACY_REDIRECTS[clean];
+    if (legacyTarget) {
+      // Gabungkan query string yang sudah ada (mis. ?email=...) dengan mode param
+      const existing = new URLSearchParams(location.search);
+      const base     = new URL(legacyTarget, location.origin);
+      existing.forEach((v, k) => { if (k !== "mode") base.searchParams.set(k, v); });
+      location.replace(base.pathname + "?" + base.searchParams.toString());
+    }
   }
 
   // ── Internal helpers ──────────────────────────────────────────────────────

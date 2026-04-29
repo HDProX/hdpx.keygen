@@ -5,16 +5,8 @@
 
     { "src": "/login", "dest": "/scripts/templates/login.html" },
     { "src": "/login/", "dest": "/scripts/templates/login.html" },
-    { "src": "/signup", "dest": "/scripts/templates/signup.html" },
-    { "src": "/signup/", "dest": "/scripts/templates/signup.html" },
-    { "src": "/signup/signup-verify", "dest": "/scripts/templates/signup.html" },
-    { "src": "/signup/signup-popup-success", "dest": "/scripts/templates/signup.html" },
     { "src": "/password", "dest": "/scripts/templates/password.html" },
     { "src": "/password/", "dest": "/scripts/templates/password.html" },
-    { "src": "/forgot-password", "dest": "/scripts/templates/forgot-password.html" },
-    { "src": "/forgot-password/", "dest": "/scripts/templates/forgot-password.html" },
-    { "src": "/change-password", "dest": "/scripts/templates/change-password.html" },
-    { "src": "/change-password/", "dest": "/scripts/templates/change-password.html" },
 
     { "src": "/activate", "dest": "/scripts/templates/redeem.html" },
     { "src": "/activate/", "dest": "/scripts/templates/redeem.html" },
