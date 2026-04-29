@@ -7,6 +7,8 @@
     { "src": "/login/", "dest": "/scripts/templates/login.html" },
     { "src": "/password", "dest": "/scripts/templates/password.html" },
     { "src": "/password/", "dest": "/scripts/templates/password.html" },
+    { "src": "/forgot-password", "dest": "/scripts/templates/password.html" },
+    { "src": "/forgot-password/", "dest": "/scripts/templates/password.html" },
 
     { "src": "/activate", "dest": "/scripts/templates/redeem.html" },
     { "src": "/activate/", "dest": "/scripts/templates/redeem.html" },

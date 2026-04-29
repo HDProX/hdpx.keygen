@@ -2,22 +2,11 @@
   "use strict";
 
   // ── Route map ─────────────────────────────────────────────────────────────
-  // Semua route password sekarang mengarah ke satu file: password.html
-  // Mode dikontrol via ?mode= query param.
-  // Di Vercel production, vercel.json hanya perlu 1 rewrite untuk /password.
   const ROUTES = {
-    "/login":    "/scripts/templates/login.html",
-    "/password": "/scripts/templates/password.html",
-    // Legacy routes — redirect ke password.html dengan ?mode= yang sesuai
-    // (hanya aktif di dev/local; di Vercel tidak diperlukan karena tidak ada rewrite-nya)
-  };
-
-  // ── Dev fallback khusus untuk legacy paths ────────────────────────────────
-  // Di local, jika ada yang masih navigate ke /forgot-password atau /change-password
-  // (mis. bookmark lama), redirect ke password.html?mode= yang benar.
-  const LEGACY_REDIRECTS = {
-    "/forgot-password":  "/scripts/templates/password.html?mode=forgot",
-    "/change-password":  "/scripts/templates/password.html?mode=change",
+    "/login":            "/scripts/templates/login.html",
+    "/password":         "/scripts/templates/password.html",
+    "/forgot-password":  "/scripts/templates/password.html",
+    "/change-password":  "/scripts/templates/password.html",
   };
 
   // ── Deteksi environment ───────────────────────────────────────────────────
@@ -28,22 +17,14 @@
   );
 
   // ── Dev fallback ──────────────────────────────────────────────────────────
-  // Saat buka /login atau /password di Live Server → tidak ada rewrite server-side
-  // → switcher redirect ke file HTML langsung.
+  // Saat buka /login, /password, /forgot-password di Live Server → tidak ada
+  // rewrite server-side → switcher redirect ke file HTML langsung.
   // Di Vercel: tidak pernah masuk sini karena rewrite sudah di server.
   function _handleDevFallback() {
     if (!IS_LOCAL) return;
     const clean = location.pathname.replace(/\/$/, "") || "/";
     const target = ROUTES[clean];
-    if (target) { location.replace(target + location.search); return; }
-    const legacyTarget = LEGACY_REDIRECTS[clean];
-    if (legacyTarget) {
-      // Gabungkan query string yang sudah ada (mis. ?email=...) dengan mode param
-      const existing = new URLSearchParams(location.search);
-      const base     = new URL(legacyTarget, location.origin);
-      existing.forEach((v, k) => { if (k !== "mode") base.searchParams.set(k, v); });
-      location.replace(base.pathname + "?" + base.searchParams.toString());
-    }
+    if (target) location.replace(target + location.search);
   }
 
   // ── Internal helpers ──────────────────────────────────────────────────────
@@ -91,24 +72,18 @@
   }
 
   /**
-   * Nama halaman / mode saat ini berdasarkan pathname + query param.
-   * Berguna untuk highlight nav atau logika kondisional di luar password.html.
+   * Nama halaman saat ini berdasarkan pathname.
    */
   function currentPage() {
-    const p    = location.pathname;
-    const mode = new URLSearchParams(location.search).get("mode") || "";
-
-    if (p.includes("login"))    return "login";
-    if (p.includes("password")) {
-      if (mode === "forgot") return "forgot-password";
-      if (mode === "change") return "change-password";
-      return "password";
-    }
+    const p = location.pathname;
+    if (p.includes("forgot-password")) return "forgot-password";
+    if (p.includes("change-password"))  return "change-password";
+    if (p.includes("login"))            return "login";
+    if (p.includes("password"))         return "password";
     return null;
   }
 
   // ── Shorthand navigators ──────────────────────────────────────────────────
-  // Gunakan helper ini agar kode di luar switcher tidak perlu tau soal ?mode=
 
   /** Navigasi ke halaman enter-password (login/register). */
   function goPassword(params) {
@@ -117,12 +92,12 @@
 
   /** Navigasi ke forgot-password flow. */
   function goForgotPassword(params) {
-    go("/password", { mode: "forgot", ...params });
+    go("/forgot-password", params);
   }
 
   /** Navigasi ke change-password flow (user sudah login). */
   function goChangePassword(params) {
-    go("/password", { mode: "change", ...params });
+    go("/change-password", params);
   }
 
   // ── Boot ──────────────────────────────────────────────────────────────────
@@ -134,7 +109,6 @@
     getEmail,
     clearSession,
     currentPage,
-    // shorthand navigators
     goPassword,
     goForgotPassword,
     goChangePassword,
