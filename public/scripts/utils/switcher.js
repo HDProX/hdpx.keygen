@@ -2,13 +2,14 @@
   "use strict";
 
   // ── Route map ─────────────────────────────────────────────────────────────
-  // Hanya dipakai saat dev lokal (Live Server, dll).
-  // Di Vercel production, vercel.json yang handle rewrite ini server-side.
+  // Semua route password sekarang mengarah ke satu file: password.html
+  // Mode dikontrol via ?mode= query param.
+  // Di Vercel production, vercel.json hanya perlu 1 rewrite untuk /password.
   const ROUTES = {
-    "/login":           "/scripts/templates/login.html",
-    "/password":        "/scripts/templates/password.html",
-    "/forgot-password": "/scripts/templates/forgot-password.html",
-    "/change-password": "/scripts/templates/change-password.html",
+    "/login":    "/scripts/templates/login.html",
+    "/password": "/scripts/templates/password.html",
+    // /forgot-password dan /change-password tidak lagi diperlukan sebagai
+    // route terpisah — keduanya ditangani oleh password.html via ?mode=
   };
 
   // ── Deteksi environment ───────────────────────────────────────────────────
@@ -19,7 +20,7 @@
   );
 
   // ── Dev fallback ──────────────────────────────────────────────────────────
-  // Saat buka /signup di Live Server → tidak ada rewrite server-side
+  // Saat buka /login atau /password di Live Server → tidak ada rewrite server-side
   // → switcher redirect ke file HTML langsung.
   // Di Vercel: tidak pernah masuk sini karena rewrite sudah di server.
   function _handleDevFallback() {
@@ -73,19 +74,54 @@
     } catch (_) {}
   }
 
-  /** Nama halaman saat ini berdasarkan pathname. */
+  /**
+   * Nama halaman / mode saat ini berdasarkan pathname + query param.
+   * Berguna untuk highlight nav atau logika kondisional di luar password.html.
+   */
   function currentPage() {
-    const p = location.pathname;
+    const p    = location.pathname;
+    const mode = new URLSearchParams(location.search).get("mode") || "";
+
     if (p.includes("login"))    return "login";
-    if (p.includes("password")) return "password";
-    if (p.includes("forgot"))   return "forgot-password";
-    if (p.includes("change"))   return "change-password";
+    if (p.includes("password")) {
+      if (mode === "forgot") return "forgot-password";
+      if (mode === "change") return "change-password";
+      return "password";
+    }
     return null;
+  }
+
+  // ── Shorthand navigators ──────────────────────────────────────────────────
+  // Gunakan helper ini agar kode di luar switcher tidak perlu tau soal ?mode=
+
+  /** Navigasi ke halaman enter-password (login/register). */
+  function goPassword(params) {
+    go("/password", params);
+  }
+
+  /** Navigasi ke forgot-password flow. */
+  function goForgotPassword(params) {
+    go("/password", { mode: "forgot", ...params });
+  }
+
+  /** Navigasi ke change-password flow (user sudah login). */
+  function goChangePassword(params) {
+    go("/password", { mode: "change", ...params });
   }
 
   // ── Boot ──────────────────────────────────────────────────────────────────
   _handleDevFallback();
 
-  window.Switcher = { go, redirect, getEmail, clearSession, currentPage };
+  window.Switcher = {
+    go,
+    redirect,
+    getEmail,
+    clearSession,
+    currentPage,
+    // shorthand navigators
+    goPassword,
+    goForgotPassword,
+    goChangePassword,
+  };
 
 })();
