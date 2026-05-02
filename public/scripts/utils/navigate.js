@@ -191,17 +191,9 @@
     if (!email) {
       // ── BELUM LOGIN ──
       if (chipPopup) chipPopup.style.display = "none";
-      if (chipEmail) chipEmail.textContent = "Login";
+      if (chipEmail) chipEmail.textContent = "Sign in";
       if (chipCaret) chipCaret.style.display = "none";
-      if (chipAvatar) {
-        chipAvatar.innerHTML =
-          '<svg viewBox="0 0 24 24" width="16" height="16" fill="none"' +
-          ' stroke="currentColor" stroke-width="3">' +
-          '<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>' +
-          '<polyline points="10 17 15 12 10 7"/>' +
-          '<line x1="15" y1="12" x2="3" y2="12"/>' +
-          "</svg>";
-      }
+      if (chipAvatar) chipAvatar.style.display = "none";
       if (userChip) {
         userChip.style.cursor = "pointer";
         userChip.addEventListener("click", function (e) {
