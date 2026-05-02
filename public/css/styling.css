@@ -315,7 +315,7 @@ html, body {
 
 /* User Chip */
 .user-chip {
-  height: 36px;
+  height: 40px;
   width: fit-content;
   display: flex;
   align-items: center;
