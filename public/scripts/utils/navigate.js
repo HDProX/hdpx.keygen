@@ -427,6 +427,7 @@
       var page = item.dataset.page;
       if (!page) return;
       var newItem = item.cloneNode(true);
+      newItem.removeAttribute("onclick"); // ← hapus onclick attribute dari HTML
       item.parentNode.replaceChild(newItem, item);
       newItem.addEventListener("click", function () {
         if (ROUTABLE_PAGES.indexOf(page) !== -1) {
@@ -456,6 +457,7 @@
       var action = item.dataset.action;
       if (!action) return;
       var newItem = item.cloneNode(true);
+      newItem.removeAttribute("onclick"); // ← hapus onclick attribute dari HTML
       item.parentNode.replaceChild(newItem, item);
       newItem.addEventListener("click", function () {
         var page = ACTION_TO_PAGE[action];
