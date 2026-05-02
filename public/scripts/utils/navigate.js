@@ -200,7 +200,10 @@
     if (!email) {
       // ── BELUM LOGIN ──
       if (chipPopup) chipPopup.style.display = "none";
-      if (chipEmail) chipEmail.textContent = "Sign in";
+      if (chipEmail) {
+        chipEmail.textContent = "Sign in";
+        chipEmail.style.padding = "0 10px";
+      }
       if (chipCaret) chipCaret.style.display = "none";
       if (chipAvatar) chipAvatar.style.display = "none";
       if (userChip) {

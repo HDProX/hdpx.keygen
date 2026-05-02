@@ -321,7 +321,7 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 25px;
+  padding: 10px 10px;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: 40px;
