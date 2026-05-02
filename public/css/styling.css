@@ -945,18 +945,18 @@ body.dark .btn-delete:active { background: var(--accent-red); color: var(--bg-ca
 .close-menu-btn:hover { background: var(--menu-hover); color: var(--text-primary); }
 .close-menu-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; }
 
-.user-row { display: flex; align-items: center; gap: 14px; padding: 24px 10px 0px 24px; }
+.user-row { display: flex; align-items: center; gap: 14px; padding: 24px 10px 20px 24px; }
 .user-avatar {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  border : solid 3px var(--avatar-bg);
+  background: var(--avatar-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 17px;
-  font-weight: 700;
-  color: var(--avatar-bg);
+  font-weight: 500;
+  color: var(--text-primary);
   flex-shrink: 0;
 }
 .user-avatar svg { 

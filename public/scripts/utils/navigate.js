@@ -521,7 +521,21 @@
         if (menuEmail)  menuEmail.textContent  = email;
         if (menuAvatar) {
           menuAvatar.style.display = "";
-          menuAvatar.textContent   = email.charAt(0).toUpperCase();
+          var avatarUrl = getAvatar();
+          if (avatarUrl) {
+            var img = document.createElement("img");
+            img.src = avatarUrl;
+            img.alt = "";
+            img.style.cssText = "width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;";
+            img.onerror = function () {
+              menuAvatar.innerHTML = "";
+              menuAvatar.textContent = email.charAt(0).toUpperCase();
+            };
+            menuAvatar.innerHTML = "";
+            menuAvatar.appendChild(img);
+          } else {
+            menuAvatar.textContent = email.charAt(0).toUpperCase();
+          }
         }
         if (accountBtn) accountBtn.style.display = "";
         if (logoutBtn)  logoutBtn.style.display  = "";
