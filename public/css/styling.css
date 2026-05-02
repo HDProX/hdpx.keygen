@@ -346,7 +346,6 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--avatar-bg);
 }
 .user-chip-caret svg { width: 14px; height: 14px; stroke: var(--text-muted); stroke-width: 2; fill: none; }
 .user-chip-wrapper { position: relative; }
