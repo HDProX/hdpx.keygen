@@ -1,6 +1,6 @@
 // api/_db.js  –  shared utilities (DB pool, password hash, email)
 import pg from "pg";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import crypto from "crypto";
 
 const { Pool } = pg;
@@ -48,29 +48,20 @@ export function randomOtp(len = 6) {
   return out;
 }
 
-// ── Nodemailer SMTP ───────────────────────────────────────────
-function getTransport() {
-  return nodemailer.createTransport({
-    host:   process.env.SMTP_HOST,
-    port:   Number(process.env.SMTP_PORT || 465),
-    secure: Number(process.env.SMTP_PORT || 465) === 465,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-}
-
+// ── Resend email ──────────────────────────────────────────────
 export async function sendEmail(to, toName, subject, html) {
-  const transport = getTransport();
-  const appName   = process.env.APP_NAME  || "Keygen";
-  const fromAddr  = process.env.SMTP_FROM || `no-reply@${(process.env.APP_URL || "").replace(/^https?:\/\//, "") || "accounts.keygen.qzz.io"}`;
-  await transport.sendMail({
-    from:    `"${appName}" <${fromAddr}>`,
-    to:      `"${toName}" <${to}>`,
+  const resend   = new Resend(process.env.RESEND_API_KEY);
+  const appName  = process.env.APP_NAME  || "Keygen";
+  const fromAddr = process.env.SMTP_FROM || "no-reply@keygen.qzz.io";
+
+  const { error } = await resend.emails.send({
+    from:    `${appName} <${fromAddr}>`,
+    to:      [`${toName} <${to}>`],
     subject,
     html,
   });
+
+  if (error) throw new Error(`Resend error: ${error.message}`);
 }
 
 // ── OTP email template ────────────────────────────────────────
@@ -279,12 +270,12 @@ export function passwordChangedHtml(name, email, { recoveryUrl, appName, avatarU
               The password for your <strong>${app}</strong> account
               <a href="#">${email}</a> was changed.
               If you didn't change it, you should
-              <a href="${recoveryUrl || 'https://keygen.qzz.io/signin/recoveryidentifier'}">recover your account</a>.
+              <a href="${recoveryUrl || 'https://hdpx-keygen.vercel.app/signin/recoveryidentifier'}">recover your account</a>.
             </p>
           </div>
           <div class="message-center">
             You can also see security activity at<br />
-            <a href="#">https://https://keygen.qzz.io//account-settings/account-management</a>
+            <a href="#">https://hdpx-keygen.vercel.app/account-settings/account-management</a>
           </div>
         </div>
         <!-- Footer -->
@@ -380,7 +371,7 @@ export function successHtml(name, email, { avatarUrl } = {}) {
           </div>
           <div class="message-center">
             You can also see your account activity at<br />
-            <a href="#">https://keygen.qzz.io/account-settings/account-management</a>
+            <a href="#">https://hdpx-keygen.vercel.app/account-settings/account-management</a>
           </div>
         </div>
         <!-- Footer -->
