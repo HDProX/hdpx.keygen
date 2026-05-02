@@ -237,7 +237,7 @@ function pricingHandleBuy(plan, e) {
   e.preventDefault();
   const email  = Navigate.getEmail();
   const appVer = Navigate.getAppVer();
-  const base   = "https://hdpx-keygen.vercel.app//checkout";
+  const base   = "https://keygen.qzz.io//checkout";
   const qs     = new URLSearchParams({
     plan,
     period: _pricingCurrentPeriod,

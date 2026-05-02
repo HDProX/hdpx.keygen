@@ -64,7 +64,7 @@ function getTransport() {
 export async function sendEmail(to, toName, subject, html) {
   const transport = getTransport();
   const appName   = process.env.APP_NAME  || "Keygen";
-  const fromAddr  = process.env.SMTP_FROM || `no-reply@${(process.env.APP_URL || "").replace(/^https?:\/\//, "") || "accounts.hdpx-keygen.vercel.app/"}`;
+  const fromAddr  = process.env.SMTP_FROM || `no-reply@${(process.env.APP_URL || "").replace(/^https?:\/\//, "") || "accounts.keygen.qzz.io"}`;
   await transport.sendMail({
     from:    `"${appName}" <${fromAddr}>`,
     to:      `"${toName}" <${to}>`,
@@ -279,12 +279,12 @@ export function passwordChangedHtml(name, email, { recoveryUrl, appName, avatarU
               The password for your <strong>${app}</strong> account
               <a href="#">${email}</a> was changed.
               If you didn't change it, you should
-              <a href="${recoveryUrl || 'https://hdpx-keygen.vercel.app//signin/recoveryidentifier'}">recover your account</a>.
+              <a href="${recoveryUrl || 'https://keygen.qzz.io/signin/recoveryidentifier'}">recover your account</a>.
             </p>
           </div>
           <div class="message-center">
             You can also see security activity at<br />
-            <a href="#">https://hdpx-keygen.vercel.app//account-settings/account-management</a>
+            <a href="#">https://https://keygen.qzz.io//account-settings/account-management</a>
           </div>
         </div>
         <!-- Footer -->
@@ -380,7 +380,7 @@ export function successHtml(name, email, { avatarUrl } = {}) {
           </div>
           <div class="message-center">
             You can also see your account activity at<br />
-            <a href="#">https://hdpx-keygen.vercel.app//account-settings/account-management</a>
+            <a href="#">https://keygen.qzz.io/account-settings/account-management</a>
           </div>
         </div>
         <!-- Footer -->

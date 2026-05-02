@@ -357,7 +357,7 @@ async function handleResetPassword(req, res) {
       const userName  = userRows[0]?.name       || email;
       const avatarUrl = userRows[0]?.avatar_url || null;
       const appName   = process.env.APP_NAME    || "Keygen";
-      const appOrigin = process.env.APP_URL     || "https://hdpx-keygen.vercel.app/";
+      const appOrigin = process.env.APP_URL     || "https://keygen.qzz.io/";
       const recoveryUrl = `${appOrigin}/signin/recoveryidentifier`;
 
       await sendEmail(
