@@ -300,6 +300,7 @@ function sendPage(res, { email = "", name = "", avatar = "", error = "", state =
           if (!error && email) {
             sessionStorage.setItem("app_email",     email);
             sessionStorage.setItem("app_name_user", name);
+            sessionStorage.setItem("app_avatar",    avatar);
             sessionStorage.setItem("app_email_exp", Date.now() + 30 * 60 * 1000);
             window.location.replace("/");
           }

@@ -12,6 +12,7 @@
     sessionStorage.removeItem("app_email");
     sessionStorage.removeItem("app_email_exp");
     sessionStorage.removeItem("app_name_user");
+    sessionStorage.removeItem("app_avatar");
     sessionStorage.removeItem("is_google");
   }
 
@@ -24,6 +25,14 @@
     return (
       (global.AppPrefill && global.AppPrefill.email) ||
       sessionStorage.getItem("app_email") ||
+      ""
+    );
+  }
+
+  function getAvatar() {
+    return (
+      (global.AppPrefill && global.AppPrefill.avatar) ||
+      sessionStorage.getItem("app_avatar") ||
       ""
     );
   }
@@ -208,7 +217,29 @@
     } else {
       // ── SUDAH LOGIN ──
       if (chipEmail) chipEmail.textContent = email;
-      if (chipAvatar) chipAvatar.textContent = email.charAt(0).toUpperCase();
+
+      var avatarUrl = getAvatar();
+      if (chipAvatar) {
+        if (avatarUrl) {
+          var img = document.createElement("img");
+          img.src = avatarUrl;
+          img.alt = "";
+          img.style.cssText = "width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;";
+          img.onerror = function () {
+            chipAvatar.innerHTML = "";
+            chipAvatar.textContent = email.charAt(0).toUpperCase();
+            chipAvatar.style.background = "var(--avatar-bg)";
+            chipAvatar.style.color = "#ffffff";
+          };
+          chipAvatar.innerHTML = "";
+          chipAvatar.appendChild(img);
+          chipAvatar.style.background = "transparent";
+        } else {
+          chipAvatar.textContent = email.charAt(0).toUpperCase();
+          chipAvatar.style.background = "var(--avatar-bg)";
+          chipAvatar.style.color = "#ffffff";
+        }
+      }
 
       // Toggle popup
       if (userChip && chipPopup) {
