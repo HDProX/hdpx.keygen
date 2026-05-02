@@ -60,7 +60,8 @@
 
     ["chipAvatar", "menuAvatar"].forEach(id => {
       const el = document.getElementById(id);
-      if (el && initial) el.textContent = initial;
+      // Jangan overwrite jika sudah ada <img> (foto profil dari Google)
+      if (el && initial && !el.querySelector("img")) el.textContent = initial;
     });
 
     ["chipEmail", "menuEmail"].forEach(id => {

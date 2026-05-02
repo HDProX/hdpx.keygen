@@ -218,28 +218,33 @@
       // ── SUDAH LOGIN ──
       if (chipEmail) chipEmail.textContent = email;
 
-      var avatarUrl = getAvatar();
-      if (chipAvatar) {
-        if (avatarUrl) {
-          var img = document.createElement("img");
-          img.src = avatarUrl;
-          img.alt = "";
-          img.style.cssText = "width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;";
-          img.onerror = function () {
-            chipAvatar.innerHTML = "";
-            chipAvatar.textContent = email.charAt(0).toUpperCase();
-            chipAvatar.style.background = "var(--avatar-bg)";
-            chipAvatar.style.color = "#ffffff";
-          };
-          chipAvatar.innerHTML = "";
-          chipAvatar.appendChild(img);
-          chipAvatar.style.background = "transparent";
-        } else {
-          chipAvatar.textContent = email.charAt(0).toUpperCase();
-          chipAvatar.style.background = "var(--avatar-bg)";
-          chipAvatar.style.color = "#ffffff";
+      // setTimeout agar jalan setelah prefill_from_app.js selesai overwrite textContent
+      setTimeout(function () {
+        var avatarUrl = getAvatar();
+        var av = document.getElementById("chipAvatar");
+        if (av) {
+          if (avatarUrl) {
+            var img = document.createElement("img");
+            img.src = avatarUrl;
+            img.alt = "";
+            img.style.cssText = "width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;";
+            img.onerror = function () {
+              av.innerHTML = "";
+              av.textContent = email.charAt(0).toUpperCase();
+              av.style.background = "var(--avatar-bg)";
+              av.style.color = "#ffffff";
+            };
+            av.innerHTML = "";
+            av.appendChild(img);
+            av.style.background = "transparent";
+            av.style.color = "";
+          } else {
+            av.textContent = email.charAt(0).toUpperCase();
+            av.style.background = "var(--avatar-bg)";
+            av.style.color = "#ffffff";
+          }
         }
-      }
+      }, 0);
 
       // Toggle popup
       if (userChip && chipPopup) {
