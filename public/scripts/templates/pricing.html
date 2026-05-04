@@ -18,7 +18,10 @@
       <!-- ── Topbar ── -->
       <header class="pricing-topbar">
         <div class="pricing-topbar-brand">
-          <div class="brand-logo"></div>
+          <span
+            class="icon brand-logo"
+            style="--icon-size: 28px; --icon-color: var(--accent-blue)"
+          ></span>
           <span class="pricing-topbar-brand-name" data-placeholder="app_name"
             >{appName}
           </span>
@@ -30,7 +33,11 @@
             id="darkModeToggle"
             aria-label="Toggle theme"
           >
-            <span id="themeIcon" class="darkmode-icon"></span>
+            <span
+              id="themeIcon"
+              class="icon icon-theme"
+              style="--icon-size: 18px"
+            ></span>
           </button>
           <div class="user-chip-wrapper">
             <div class="user-chip" id="userChip">
@@ -211,7 +218,7 @@
       <footer class="pricing-footer">
         <div class="page-footer">
           <div class="lang-select">
-            <div class="language-icon"></div>
+            <div class="icon icon-lang" style="--icon-size: 24px"></div>
             <select id="languageSelect">
               <option value="en">English</option>
               <option value="id">Bahasa Indonesia</option>

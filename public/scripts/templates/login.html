@@ -68,71 +68,6 @@
         padding: 10px 10px 10px;
       }
 
-      /* Floating label */
-      .float-field {
-        position: relative;
-        margin-bottom: 16px;
-      }
-
-      .float-field input {
-        width: 100%;
-        height: 54px;
-        padding: 0 44px 0 23px;
-        background: transparent;
-        border: 1px solid var(--border-input);
-        border-radius: 30px;
-        font-size: 15px;
-        color: var(--text-primary);
-        outline: none;
-        transition:
-          border-color 0.25s,
-          box-shadow 0.25s;
-        font-family: inherit;
-        box-sizing: border-box;
-      }
-      .float-field input::placeholder {
-        color: transparent;
-      }
-      .float-field input:focus {
-        border-color: var(--accent-blue);
-        box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.12);
-      }
-      .float-field input.error {
-        border-color: var(--accent-red);
-        box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.12);
-      }
-
-      /* Label: default di tengah */
-      .float-field label {
-        position: absolute;
-        left: 23px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 15px;
-        color: var(--text-muted);
-        pointer-events: none;
-        background: transparent;
-        padding: 0 4px;
-        border-radius: 3px;
-        transition: all 0.18s ease;
-        white-space: nowrap;
-      }
-
-      /* Label naik saat fokus atau ada isi */
-      .float-field input:focus ~ label,
-      .float-field input:not(:placeholder-shown) ~ label {
-        top: 0;
-        transform: translateY(-50%);
-        font-size: 12px;
-        background: var(--bg-body);
-      }
-      .float-field input:focus ~ label {
-        color: var(--accent-blue);
-      }
-      .float-field input.error ~ label {
-        color: var(--accent-red);
-      }
-
       /* Divider */
       .divider {
         display: flex;
@@ -284,11 +219,18 @@
   <body>
     <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-      <span id="themeIcon" class="darkmode-icon"></span>
+      <span
+        id="themeIcon"
+        class="icon icon-theme"
+        style="--icon-size: 18px"
+      ></span>
     </button>
 
     <div class="brand-top" id="brandTop">
-      <div class="brand-logo"></div>
+      <div
+        class="icon brand-logo"
+        style="--icon-size: 28px; --icon-color: var(--accent-blue)"
+      ></div>
       <span class="brand-top-name" data-placeholder="app_name">Loading...</span>
     </div>
 
@@ -296,7 +238,10 @@
       <div class="signup-card">
         <!-- ── BRAND MOBILE ── -->
         <div class="brand-mobile">
-          <div class="brand-logo"></div>
+          <div
+            class="icon brand-logo"
+            style="--icon-size: 28px; --icon-color: var(--accent-blue)"
+          ></div>
           <span class="brand-top-name" data-placeholder="app_name"
             >Loading...</span
           >
@@ -438,21 +383,27 @@
           getSystemTheme() === "dark" ? applyDark() : applyLight();
         }
       }
-      function updateAutofill(isDark) {
+
+      function updateAutofill() {
+        const style = getComputedStyle(document.body);
+        const bg = style.getPropertyValue("--bg-body").trim();
+        const text = style.getPropertyValue("--text-primary").trim();
+
         let el = document.getElementById("autofillStyle");
         if (!el) {
           el = document.createElement("style");
           el.id = "autofillStyle";
           document.head.appendChild(el);
         }
-        const bg = isDark ? "#1e293b" : "#ffffff";
-        const text = isDark ? "#f1f5f9" : "#1a2c3e";
+
         el.textContent = `input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px ${bg} inset!important;-webkit-text-fill-color:${text}!important;}`;
       }
+
       document.getElementById("themeToggle").addEventListener("click", () => {
         const eff = currentTheme === "system" ? getSystemTheme() : currentTheme;
         setTheme(eff === "dark" ? "light" : "dark");
       });
+
       window
         .matchMedia("(prefers-color-scheme: dark)")
         .addEventListener("change", () => {

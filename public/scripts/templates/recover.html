@@ -168,16 +168,16 @@
         display: none;
       }
 
-      .home-side-link.pass {
+      .navigate-link.pass {
         margin-bottom: 16px;
       }
-      .home-side-link.pass::after {
+      .navigate-link.pass::after {
         display: none;
       }
-      .home-side-link.pass svg {
+      .navigate-link.pass svg {
         transition: transform 0.3s ease;
       }
-      .home-side-link.pass:hover svg {
+      .navigate-link.pass:hover svg {
         transform: translateX(-5px);
       }
 
@@ -305,11 +305,18 @@
   <body>
     <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-      <span id="themeIcon" class="darkmode-icon"></span>
+      <span
+        id="themeIcon"
+        class="icon icon-theme"
+        style="--icon-size: 18px"
+      ></span>
     </button>
 
     <div class="brand-top" id="brandTop">
-      <div class="brand-logo"></div>
+      <div
+        class="icon brand-logo"
+        style="--icon-size: 28px; --icon-color: var(--accent-blue)"
+      ></div>
       <span class="brand-top-name" data-placeholder="app_name">Loading...</span>
     </div>
 
@@ -319,7 +326,10 @@
     <div class="container" id="rcStep1Panel" style="display: none">
       <div class="signup-card">
         <div class="brand-mobile">
-          <div class="brand-logo"></div>
+          <div
+            class="icon brand-logo"
+            style="--icon-size: 28px; --icon-color: var(--accent-blue)"
+          ></div>
           <span class="brand-top-name" data-placeholder="app_name"
             >Loading...</span
           >
@@ -392,7 +402,7 @@
             Send recovery code
           </button>
           <div style="text-align: center; margin-top: 18px">
-            <a class="home-side-link pass" href="#" id="rcBackToLoginBtn">
+            <a class="navigate-link pass" href="#" id="rcBackToLoginBtn">
               <svg width="16" height="16" viewBox="0 0 512 512">
                 <path
                   fill="none"
@@ -481,7 +491,7 @@
               >Resend code in <strong id="rcTimerCount">60</strong>s</span
             >
             <a
-              class="home-side-link"
+              class="navigate-link"
               href="#"
               id="rcResendLink"
               style="display: none"
@@ -490,7 +500,7 @@
           </div>
         </div>
         <div style="text-align: center">
-          <a class="home-side-link pass" href="#" id="rcBackToStep1Btn">
+          <a class="navigate-link pass" href="#" id="rcBackToStep1Btn">
             <svg width="16" height="16" viewBox="0 0 512 512">
               <path
                 fill="none"
@@ -581,7 +591,7 @@
             Reset password
           </button>
           <div style="text-align: center; margin-top: 16px">
-            <a class="home-side-link pass" href="#" id="rcBackToStep2Btn">
+            <a class="navigate-link pass" href="#" id="rcBackToStep2Btn">
               <svg width="16" height="16" viewBox="0 0 512 512">
                 <path
                   fill="none"
@@ -645,15 +655,18 @@
           : "light";
       }
 
-      function updateAutofill(isDark) {
+      function updateAutofill() {
+        const style = getComputedStyle(document.body);
+        const bg = style.getPropertyValue("--bg-body").trim();
+        const text = style.getPropertyValue("--text-primary").trim();
+
         let el = document.getElementById("autofillStyle");
         if (!el) {
           el = document.createElement("style");
           el.id = "autofillStyle";
           document.head.appendChild(el);
         }
-        const bg = isDark ? "#1e293b" : "#ffffff";
-        const text = isDark ? "#f1f5f9" : "#1a2c3e";
+
         el.textContent = `input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0 1000px ${bg} inset!important;-webkit-text-fill-color:${text}!important;}`;
       }
 

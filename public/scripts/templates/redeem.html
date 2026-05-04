@@ -18,7 +18,10 @@
       <!-- Sidebar (desktop only) -->
       <aside class="redeem-sidebar">
         <div class="redeem-sidebar-brand">
-          <div class="brand-logo"></div>
+          <div
+            class="icon brand-logo"
+            style="--icon-size: 28px; --icon-color: var(--accent-blue)"
+          ></div>
           <div>
             <span class="sidebar-brand-name">{appName}</span>
             <span class="sidebar-brand-sub"> Account</span>
@@ -44,7 +47,10 @@
       <!-- ── Topbar ── -->
       <header class="redeem-topbar">
         <span class="topbar-brand-mobile">
-          <div class="brand-logo"></div>
+          <div
+            class="icon brand-logo"
+            style="--icon-size: 28px; --icon-color: var(--accent-blue)"
+          ></div>
           <div>
             <span class="sidebar-brand-name">{appName}</span>
             <span class="sidebar-brand-sub"> Account</span>
@@ -56,7 +62,11 @@
             id="darkModeToggle"
             aria-label="Toggle theme"
           >
-            <span id="themeIcon" class="darkmode-icon"></span>
+            <span
+              id="themeIcon"
+              class="icon icon-theme"
+              style="--icon-size: 18px"
+            ></span>
           </button>
           <div class="user-chip-wrapper">
             <div class="user-chip" id="userChip">
@@ -115,18 +125,18 @@
           <h1 class="redeem-content-title">Enter your code</h1>
 
           <!-- Activation code input -->
-          <div class="redeem-form-group">
-            <label class="redeem-label" for="activationCode"
-              >Activation code</label
-            >
+          <div class="float-field" style="order: 1">
             <input
               type="text"
               id="activationCode"
               class="redeem-input"
               autocomplete="off"
               spellcheck="false"
-              placeholder=""
+              placeholder=" "
             />
+            <label class="redeem-label" for="activationCode"
+              >Activation code</label
+            >
             <div class="error-row" id="codeErrorRow">
               <svg width="15" height="15" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" fill="var(--accent-red)" />
@@ -146,8 +156,7 @@
           </div>
 
           <!-- Email readonly -->
-          <div class="redeem-form-group">
-            <label class="redeem-label" for="emailDisplay">Email</label>
+          <div class="float-field" style="order: 2">
             <input
               type="email"
               id="emailDisplay"
@@ -155,9 +164,10 @@
               readonly
               value=""
             />
+            <label class="redeem-label" for="emailDisplay">Email</label>
           </div>
 
-          <a href="/login" class="different-account-link">
+          <a href="/login" class="navigate-link">
             <span>Activate with a different account?</span>
           </a>
 
@@ -233,13 +243,13 @@
         <aside class="redeem-support">
           <div class="redeem-support-title">Support center</div>
           <div>
-            <a href="#" class="redeem-support-link">
+            <a href="#" class="navigate-link">
               <span>How to apply your code</span>
               <span class="arrow-right-icon"></span>
             </a>
           </div>
           <div>
-            <a href="#" class="redeem-support-link">
+            <a href="#" class="navigate-link">
               <span>FAQ about activation codes</span>
               <span class="arrow-right-icon"></span>
             </a>
@@ -250,7 +260,7 @@
 
       <!-- Language footer -->
       <div class="lang-select">
-        <div class="language-icon"></div>
+        <div class="icon icon-lang" style="--icon-size: 24px"></div>
         <select id="languageSelect">
           <option value="en">English</option>
           <option value="id">Bahasa Indonesia</option>

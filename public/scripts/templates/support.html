@@ -18,7 +18,10 @@
       <!-- ── Topbar ── -->
       <header class="support-topbar">
         <div class="support-topbar-brand">
-          <div class="brand-logo"></div>
+          <div
+            class="icon brand-logo"
+            style="--icon-size: 28px; --icon-color: var(--accent-blue)"
+          ></div>
           <span class="support-topbar-brand-name">{appName}</span>
           <span class="support-topbar-brand-sub">Support center</span>
         </div>
@@ -28,7 +31,11 @@
             id="darkModeToggle"
             aria-label="Toggle theme"
           >
-            <span id="themeIcon" class="darkmode-icon"></span>
+            <span
+              id="themeIcon"
+              class="icon icon-theme"
+              style="--icon-size: 18px"
+            ></span>
           </button>
           <div class="user-chip-wrapper">
             <div class="user-chip" id="userChip">
@@ -209,7 +216,7 @@
       <footer class="support-footer">
         <div class="page-footer">
           <div class="lang-select">
-            <div class="language-icon"></div>
+            <div class="icon icon-lang" style="--icon-size: 28px"></div>
             <select id="languageSelect">
               <option value="en">English</option>
               <option value="id">Bahasa Indonesia</option>

@@ -270,19 +270,6 @@
   border-color: var(--accent-blue, #3b5bdb);
 }
 
-/* ── FAQ section
-   Menggunakan global styles dari styling.css:
-   .section-label, .faq-list, .faq-item, .faq-question,
-   .faq-chevron, .faq-answer, .faq-item.open
-   — tidak perlu override apapun.
-   ── */
-
-/* ── Downloads center
-   Menggunakan global styles dari styling.css:
-   .home-side-card, .home-side-title, .home-side-desc, .home-side-link
-   — tidak perlu tambah apapun.
-   ── */
-
 /* ============================================================
    BILLING HISTORY TABLE
    ============================================================ */

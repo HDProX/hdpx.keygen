@@ -68,14 +68,9 @@
     if (theme === "dark") {
       document.body.classList.add("dark");
       localStorage.setItem("keygen-theme", "dark");
-      // account-settings punya themeText
-      const themeText = document.getElementById("themeText");
-      if (themeText) themeText.textContent = "Light mode";
     } else {
       document.body.classList.remove("dark");
       localStorage.setItem("keygen-theme", "light");
-      const themeText = document.getElementById("themeText");
-      if (themeText) themeText.textContent = "Dark mode";
     }
   }
 

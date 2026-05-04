@@ -108,7 +108,7 @@ const BILLING_TEMPLATE_HTML = `
       <div class="home-side-card">
         <h3 class="home-side-title">Downloads center</h3>
         <p class="home-side-desc">Get the tools you need to protect your files, passwords, and privacy.</p>
-        <a href="#" class="home-side-link" onclick="showToast('Downloads coming soon'); return false;"> <span>Download apps</span> <span class="arrow-right-icon"></span></a>
+        <a href="#" class="navigate-link" onclick="showToast('Downloads coming soon'); return false;"> <span>Download apps</span> <span class="arrow-right-icon"></span></a>
       </div>
     </div>
   </div>
@@ -305,8 +305,16 @@ function initBillingTab(activeTab) {
 
 function toggleBillingFaq(element) {
   const faqItem = element.closest(".faq-item");
-  if (faqItem) faqItem.classList.toggle("open");
+  if (!faqItem) return;
+  const isOpen = faqItem.classList.contains("open");
+
+  // Tutup semua dulu
+  faqItem.closest(".faq-list")?.querySelectorAll(".faq-item.open").forEach(i => i.classList.remove("open"));
+
+  // Kalau sebelumnya tertutup, buka sekarang
+  if (!isOpen) faqItem.classList.add("open");
 }
+
 window.toggleBillingFaq = toggleBillingFaq;
 
 // ============================================================

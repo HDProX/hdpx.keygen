@@ -16,7 +16,7 @@
     <div class="app-layout">
       <aside class="sidebar">
         <div class="sidebar-brand">
-          <div class="brand-logo"></div>
+          <span class="icon brand-logo"></span>
           <div>
             <span class="sidebar-brand-name">{appName}</span>
             <span class="sidebar-brand-sub"> Account</span>
@@ -29,21 +29,14 @@
             onclick="navigateTo('home')"
             data-page="home"
           >
-            <svg viewBox="0 0 24 24">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
+            <span class="icon icon-home"></span>
             Home
           </div>
 
           <div class="sidebar-divider"></div>
 
           <div class="sidebar-nav-item" onclick="showToast('Downloads')">
-            <svg viewBox="0 0 24 24">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
+            <span class="icon icon-download"></span>
             Downloads
           </div>
           <div
@@ -51,11 +44,7 @@
             onclick="navigateTo('pricing')"
             data-page="pricing"
           >
-            <svg viewBox="0 0 24 24">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
+            <span class="icon icon-pricing"></span>
             Available plans
           </div>
           <div
@@ -63,10 +52,7 @@
             onclick="navigateTo('billing')"
             data-page="billing"
           >
-            <svg viewBox="0 0 24 24">
-              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-              <line x1="1" y1="10" x2="23" y2="10" />
-            </svg>
+            <span class="icon icon-billing"></span>
             Billing
           </div>
           <div
@@ -74,11 +60,7 @@
             onclick="navigateTo('redeem')"
             data-page="redeem"
           >
-            <svg viewBox="0 0 24 24">
-              <polyline points="21 8 21 21 3 21 3 8" />
-              <rect x="1" y="3" width="22" height="5" />
-              <line x1="10" y1="12" x2="14" y2="12" />
-            </svg>
+            <span class="icon icon-redeem"></span>
             Redeem
           </div>
           <div
@@ -86,13 +68,7 @@
             data-page="refer"
             onclick="navigateTo('refer')"
           >
-            <svg viewBox="0 0 24 24">
-              <polyline points="20 12 20 22 4 22 4 12" />
-              <rect x="2" y="7" width="20" height="5" />
-              <path d="M12 22V7" />
-              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
-              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
-            </svg>
+            <span class="icon icon-gift"></span>
             Refer a friend
           </div>
         </nav>
@@ -107,8 +83,11 @@
             id="darkModeToggle"
             aria-label="Toggle theme"
           >
-            <span id="themeIcon" class="darkmode-icon"></span>
-            <span id="themeText">Dark mode</span>
+            <span
+              id="themeIcon"
+              class="icon icon-theme"
+              style="--icon-size: 18px"
+            ></span>
           </button>
           <a
             class="support-link"
@@ -118,7 +97,10 @@
               return false;
             "
           >
-            <span class="support-link-icon"></span>
+            <span
+              class="icon icon-support"
+              style="--icon-size: 18px; --icon-color: var(--text-muted)"
+            ></span>
             <span>Support center</span>
           </a>
           <div class="user-chip-wrapper">
@@ -165,7 +147,7 @@
       <!-- MOBILE TOPBAR -->
       <header class="mobile-topbar">
         <div class="mobile-brand">
-          <span class="brand-logo"></span>
+          <span class="icon brand-logo"></span>
           <span class="mobile-brand-name">{appName}</span>
           <span class="mobile-brand-sub">Account</span>
         </div>
@@ -175,7 +157,11 @@
             id="mobileThemeToggle"
             aria-label="Toggle theme"
           >
-            <span id="mobileThemeIcon" class="darkmode-icon"></span>
+            <span
+              id="mobileThemeIcon"
+              class="icon icon-theme"
+              style="--icon-size: 18px"
+            ></span>
           </button>
           <button class="mobile-burger" id="burgerMenuBtn" aria-label="Menu">
             <svg viewBox="0 0 24 24">
@@ -199,7 +185,7 @@
           <!-- Panel top bar -->
           <div class="menu-topbar">
             <div class="menu-brand">
-              <div class="brand-logo"></div>
+              <div class="icon brand-logo"></div>
               <span class="menu-brand-name">{appName}</span>
               <span class="menu-brand-sub">Account</span>
             </div>
@@ -240,146 +226,85 @@
 
           <!-- Login shortcut (shown when no email) -->
           <button class="settings-btn" id="menuLoginBtn" style="display: none">
-            <svg
-              viewBox="0 0 24 24"
-              width="16"
-              height="16"
-              style="flex-shrink: 0"
-            >
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-              <polyline points="10 17 15 12 10 7" />
-              <line x1="15" y1="12" x2="3" y2="12" />
-            </svg>
+            <span class="icon icon-login"></span>
             Login
           </button>
 
           <!-- Account settings shortcut (hidden when no email) -->
           <button class="settings-btn" id="menuAccountSettingsBtn">
-            <span class="settings-btn-icon"></span>
+            <span class="icon icon-settings"></span>
             Account settings
           </button>
+
+          <div class="menu-nav-divider"></div>
 
           <!-- Nav items -->
           <nav class="menu-nav" aria-label="Main navigation">
             <div class="nav-item" data-action="Home" role="button" tabindex="0">
-              <span class="nav-icon"
-                ><svg viewBox="0 0 24 24">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" /></svg
-              ></span>
+              <span class="icon icon-home"></span>
               <span class="nav-label">Home</span>
               <span class="chevron-right-icon nav"></span>
             </div>
-            <div class="menu-divider"></div>
             <div
               class="nav-item"
               data-action="Downloads"
               role="button"
               tabindex="0"
             >
-              <span class="nav-icon"
-                ><svg viewBox="0 0 24 24">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" /></svg
-              ></span>
+              <span class="icon icon-download"></span>
               <span class="nav-label">Downloads</span>
               <span class="chevron-right-icon nav"></span>
             </div>
-            <div class="menu-divider"></div>
             <div
               class="nav-item"
               data-action="Available plans"
               role="button"
               tabindex="0"
             >
-              <span class="nav-icon"
-                ><svg viewBox="0 0 24 24">
-                  <path
-                    d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
-                  />
-                  <line x1="3" y1="6" x2="21" y2="6" />
-                  <path d="M16 10a4 4 0 0 1-8 0" /></svg
-              ></span>
+              <span class="icon icon-pricing"></span>
               <span class="nav-label">Available plans</span>
               <span class="chevron-right-icon nav"></span>
             </div>
-            <div class="menu-divider"></div>
             <div
               class="nav-item"
               data-action="Billing"
               role="button"
               tabindex="0"
             >
-              <span class="nav-icon"
-                ><svg viewBox="0 0 24 24">
-                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                  <line x1="1" y1="10" x2="23" y2="10" /></svg
-              ></span>
+              <span class="icon icon-billing"></span>
               <span class="nav-label">Billing</span>
               <span class="chevron-right-icon nav"></span>
             </div>
-            <div class="menu-divider"></div>
             <div
               class="nav-item"
               data-action="Redeem"
               role="button"
               tabindex="0"
             >
-              <span class="nav-icon"
-                ><svg viewBox="0 0 24 24">
-                  <polyline points="21 8 21 21 3 21 3 8" />
-                  <rect x="1" y="3" width="22" height="5" />
-                  <line x1="10" y1="12" x2="14" y2="12" /></svg
-              ></span>
+              <span class="icon icon-redeem"></span>
               <span class="nav-label">Redeem</span>
               <span class="chevron-right-icon nav"></span>
             </div>
-            <div class="menu-divider"></div>
             <div
               class="nav-item"
               data-action="Refer a friend"
               role="button"
               tabindex="0"
             >
-              <span class="nav-icon"
-                ><svg viewBox="0 0 24 24">
-                  <polyline points="20 12 20 22 4 22 4 12" />
-                  <rect x="2" y="7" width="20" height="5" />
-                  <path d="M12 22V7" />
-                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
-                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" /></svg
-              ></span>
+              <span class="icon icon-gift"></span>
               <span class="nav-label">Refer a friend</span>
               <span class="chevron-right-icon nav"></span>
             </div>
-            <div class="menu-divider"></div>
             <div
               class="nav-item"
               data-action="Support"
               role="button"
               tabindex="0"
             >
-              <span class="nav-icon">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                  <circle cx="12" cy="17" r="0.5" fill="currentColor" />
-                </svg>
-              </span>
+              <span class="icon icon-support"></span>
               <span class="nav-label">Support center</span>
               <span class="chevron-right-icon nav"></span>
             </div>
-            <div class="menu-divider"></div>
           </nav>
 
           <!-- Logout -->
@@ -616,7 +541,7 @@
                   Get the tools you need to protect your files, passwords, and
                   privacy.
                 </p>
-                <a href="#" class="home-side-link">
+                <a href="#" class="navigate-link">
                   <span>Download apps</span>
                   <span class="arrow-right-icon"></span>
                 </a>
@@ -632,16 +557,19 @@
                     navigateTo('account-settings');
                     return false;
                   "
-                  class="home-side-link"
+                  class="navigate-link"
                 >
                   <span>Manage account</span>
-                  <span class="arrow-right-icon"></span
-                ></a>
+                  <span class="arrow-right-icon"></span>
+                </a>
               </div>
               <div class="home-side-card">
                 <h3 class="home-side-title">
                   Your deals
-                  <span class="deals-icon"></span>
+                  <span
+                    class="icon icon-deals"
+                    style="--icon-size: 20px; --icon-color: #ff8a3d"
+                  ></span>
                 </h3>
                 <p class="home-side-desc">
                   Explore special offers and save on services that enhance your
@@ -653,7 +581,7 @@
                     navigateTo('pricing');
                     return false;
                   "
-                  class="home-side-link"
+                  class="navigate-link"
                 >
                   <span>View your deals</span>
                   <span class="arrow-right-icon"></span
@@ -675,7 +603,7 @@
         <!-- Footer -->
         <div class="page-footer">
           <div class="lang-select">
-            <div class="language-icon"></div>
+            <div class="icon icon-lang" style="--icon-size: 24px"></div>
             <select id="languageSelect">
               <option value="en">English</option>
               <option value="id">Bahasa Indonesia</option>
