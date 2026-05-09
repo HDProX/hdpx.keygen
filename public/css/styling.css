@@ -1455,6 +1455,7 @@ body {
 
 	.menu-panel {
 		width: 100%;
+		border-left: none;
 	}
 
 	.home-welcome-title {
