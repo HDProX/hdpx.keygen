@@ -620,7 +620,7 @@ body {
 .main-content {
 	margin-left: var(--sidebar-width);
 	margin-top: var(--topbar-height);
-	padding: 20px 20px 20px 30px;
+	padding: 20px 30px 20px 30px;
 	flex: 1;
 	min-width: 0;
 	width: calc(100% - var(--sidebar-width));
@@ -1449,6 +1449,10 @@ body {
 }
 
 @media (max-width: 640px) {
+	.main-content {
+		padding: 20px 30px;
+	}
+
 	.menu-panel {
 		width: 100%;
 	}
