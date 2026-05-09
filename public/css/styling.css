@@ -1450,7 +1450,7 @@ body {
 
 @media (max-width: 640px) {
 	.main-content {
-		padding: 0;
+		padding: 15px 200px;
 	}
 
 	.menu-panel {
