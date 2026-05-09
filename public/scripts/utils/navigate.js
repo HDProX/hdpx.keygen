@@ -85,7 +85,6 @@
   }
 
   function initThemeToggle() {
-    // Dukung semua id toggle yang ada di berbagai halaman
     ["darkModeToggle", "mobileThemeToggle"].forEach(function (id) {
       const btn = document.getElementById(id);
       if (btn) {
@@ -98,7 +97,6 @@
     });
   }
 
-  // Jalankan initTheme segera (sebelum DOM paint) agar tidak flash
   initTheme();
 
   // ──────────────────────────────────────────────
@@ -205,12 +203,17 @@
         userChip.style.cursor = "pointer";
         userChip.addEventListener("click", function (e) {
           e.stopPropagation();
-          if (global.Switcher) {
-            global.Switcher.redirect("/login");
-          } else {
-            location.href = "/login";
-          }
+          setTimeout(function () {
+            if (global.Switcher) {
+              global.Switcher.redirect("/login");
+            } else {
+              location.href = "/login";
+            }
+          }, 400);
         });
+      }
+      if (typeof attachRipples === "function") {
+        attachRipples("#userChip");
       }
     } else {
       // ── SUDAH LOGIN ──
@@ -229,7 +232,6 @@
             img.onerror = function () {
               av.innerHTML = "";
               av.textContent = email.charAt(0).toUpperCase();
-              av.style.background = "var(--avatar-bg)";
               av.style.color = "#ffffff";
             };
             av.innerHTML = "";
@@ -238,7 +240,6 @@
             av.style.color = "";
           } else {
             av.textContent = email.charAt(0).toUpperCase();
-            av.style.background = "var(--avatar-bg)";
             av.style.color = "#ffffff";
           }
         }
@@ -257,7 +258,7 @@
         if (
           chipPopup &&
           !chipPopup.contains(e.target) &&
-          e.target !== userChip
+          !userChip.contains(e.target)
         ) {
           closeChipPopup();
         }
@@ -371,7 +372,7 @@
 
   function updateActiveMenu(currentPage) {
     // Sidebar
-    document.querySelectorAll(".sidebar-nav-item").forEach(function (item) {
+    document.querySelectorAll(".sidebar-nav .nav-item").forEach(function (item) {
       item.classList.toggle("active", item.dataset.page === currentPage);
     });
     // Burger menu nav items
@@ -754,7 +755,6 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initNavigate);
   } else {
-    // DOMContentLoaded sudah lewat (script di-load defer/async)
     initNavigate();
   }
 

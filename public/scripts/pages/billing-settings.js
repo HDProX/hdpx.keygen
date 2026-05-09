@@ -78,28 +78,28 @@ const BILLING_TEMPLATE_HTML = `
           <div class="faq-item">
             <div class="faq-question" onclick="toggleBillingFaq(this)">
               <span>What happens if I enable auto-renewal?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor" d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/></svg>
+              <span class="icon icon-chevron faq-chevron"></span>
             </div>
             <div class="faq-answer">Your subscription will automatically renew at the end of the current period. You won't lose access to your services.</div>
           </div>
           <div class="faq-item">
             <div class="faq-question" onclick="toggleBillingFaq(this)">
               <span>When will I be charged for auto-renewal?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor" d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/></svg>
+              <span class="icon icon-chevron faq-chevron"></span>
             </div>
             <div class="faq-answer">You'll be charged on the "Next charge" date shown in your subscription details, which is typically a few days before the renewal date.</div>
           </div>
           <div class="faq-item">
             <div class="faq-question" onclick="toggleBillingFaq(this)">
               <span>What happens if my auto-renewal is off?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor" d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/></svg>
+              <span class="icon icon-chevron faq-chevron"></span>
             </div>
             <div class="faq-answer">Your subscription will expire at the end of the current billing period and will not be renewed automatically. You can re-enable it at any time.</div>
           </div>
           <div class="faq-item">
             <div class="faq-question" onclick="toggleBillingFaq(this)">
               <span>What if I buy a new plan before my current one ends?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor" d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/></svg>
+              <span class="icon icon-chevron faq-chevron"></span>
             </div>
             <div class="faq-answer">The new plan will start immediately and your remaining days from the current plan may be added as a credit to your account.</div>
           </div>
@@ -108,7 +108,7 @@ const BILLING_TEMPLATE_HTML = `
       <div class="home-side-card">
         <h3 class="home-side-title">Downloads center</h3>
         <p class="home-side-desc">Get the tools you need to protect your files, passwords, and privacy.</p>
-        <a href="#" class="navigate-link" onclick="showToast('Downloads coming soon'); return false;"> <span>Download apps</span> <span class="arrow-right-icon"></span></a>
+        <a href="#" class="navigate-link" onclick="showToast('Downloads coming soon'); return false;"> <span>Download apps</span> <span class="icon icon-arrow-right"></span></a>
       </div>
     </div>
   </div>

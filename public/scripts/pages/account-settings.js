@@ -1,78 +1,119 @@
-// --- ACCOUNT STATE ---
-let isGoogleConnected = false, googleEmail = "";
-let isFacebookConnected = false, facebookEmail = "";
-let currentEmail = "";
+// =============================================================================
+// ACCOUNT SETTINGS
+// Handles account state, UI updates, event binding, tab switching, and FAQ.
+// Dependencies: button.js (createRipple), navigate.js (Navigate), ChangePassword
+// =============================================================================
 
+
+// -----------------------------------------------------------------------------
+// State
+// -----------------------------------------------------------------------------
+
+let isGoogleConnected   = false;
+let googleEmail         = "";
+let isFacebookConnected = false;
+let facebookEmail       = "";
+let currentEmail        = "";
+
+
+// -----------------------------------------------------------------------------
+// Email & Avatar Sync
+// -----------------------------------------------------------------------------
+
+/**
+ * Syncs a new email address across all UI elements (display, chip, menu, avatars).
+ * Also refreshes the Google connection UI. Skips unresolved template placeholders.
+ *
+ * @param {string} email - The email address to apply.
+ */
 function updateEmailFromData(email) {
-  if (email && email !== '{userEmail}') {
-    currentEmail = email;
-    googleEmail = email;
+  if (!email || email === "{userEmail}") return;
 
-    const displayEmail = document.getElementById("displayEmail");
-    if (displayEmail) displayEmail.textContent = currentEmail;
+  currentEmail = email;
+  googleEmail  = email;
 
-    const menuEmail = document.getElementById("menuEmail");
-    if (menuEmail) menuEmail.textContent = currentEmail;
+  _setTextContent("displayEmail", email);
+  _setTextContent("menuEmail",    email);
+  _setTextContent("chipEmail",    email);
 
-    const chipEmail = document.getElementById("chipEmail");
-    if (chipEmail) chipEmail.textContent = currentEmail;
+  const initial = email.charAt(0).toUpperCase();
+  _setTextContent("menuAvatar", initial);
+  _setTextContent("chipAvatar", initial);
 
-    const initial = currentEmail.charAt(0).toUpperCase();
-    const menuAvatar = document.getElementById("menuAvatar");
-    if (menuAvatar) menuAvatar.textContent = initial;
+  updateGoogleUI();
 
-    const chipAvatar = document.getElementById("chipAvatar");
-    if (chipAvatar) chipAvatar.textContent = initial;
-
-    updateGoogleUI();
-
-    console.log('Email synced from backend:', currentEmail);
-  }
+  console.log("[account-settings] Email synced:", email);
 }
 
+/**
+ * Applies new email state to all relevant DOM elements after an in-page change.
+ * Mirrors updateEmailFromData but does not re-assign googleEmail.
+ *
+ * @param {string} email - The updated email address.
+ */
+function _applyEmailToDOM(email) {
+  _setTextContent("displayEmail", email);
+  _setTextContent("menuEmail",    email);
+  _setTextContent("chipEmail",    email);
+
+  const initial = email.charAt(0).toUpperCase();
+  _setTextContent("menuAvatar", initial);
+  _setTextContent("chipAvatar", initial);
+}
+
+
+// -----------------------------------------------------------------------------
+// Provider UI Updates
+// -----------------------------------------------------------------------------
+
+/** Refreshes the Google connection button and status label. */
 function updateGoogleUI() {
-  const btn = document.getElementById("disconnectGoogleBtn");
+  const btn    = document.getElementById("disconnectGoogleBtn");
   const status = document.getElementById("googleStatus");
+
   if (isGoogleConnected) {
-    if (status) status.textContent = "Connected to " + googleEmail;
-    if (btn) {
-      btn.innerHTML = "<span>Disconnect</span>";
-      btn.className = "btn-disconnect";
-    }
+    _setTextContent(status,  `Connected to ${googleEmail}`);
+    _setHTML(btn, "<span>Disconnect</span>");
+    _setClass(btn, "btn-disconnect");
   } else {
-    if (status) status.textContent = "Not connected";
-    if (btn) {
-      btn.textContent = "+ Connect";
-      btn.className = "btn-connect";
-    }
+    _setTextContent(status, "Not connected");
+    _setHTML(btn, "+ Connect");
+    _setClass(btn, "btn-connect");
   }
 }
 
+/** Refreshes the Facebook connection button and status label. */
 function updateFacebookUI() {
-  const btn = document.getElementById("connectFacebookBtn");
+  const btn    = document.getElementById("connectFacebookBtn");
   const status = document.getElementById("facebookStatus");
+
   if (isFacebookConnected) {
-    if (status) status.textContent = "Connected to " + (facebookEmail || "facebook@example.com");
-    if (btn) {
-      btn.innerHTML = "<span>Disconnect</span>";
-      btn.className = "btn-disconnect";
-    }
+    _setTextContent(status, `Connected to ${facebookEmail || "facebook@example.com"}`);
+    _setHTML(btn, "<span>Disconnect</span>");
+    _setClass(btn, "btn-disconnect");
   } else {
-    if (status) status.textContent = "Not connected";
-    if (btn) {
-      btn.textContent = "+ Connect";
-      btn.className = "btn-connect";
-    }
+    _setTextContent(status, "Not connected");
+    _setHTML(btn, "+ Connect");
+    _setClass(btn, "btn-connect");
   }
 }
+
+
+// -----------------------------------------------------------------------------
+// HTML Template
+// -----------------------------------------------------------------------------
 
 const ACCOUNT_SETTINGS_HTML = `
 <h1 class="page-title" id="pageTitle">Account Management</h1>
+
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('account')">Account details</button>
-  <button class="tab-btn" onclick="switchTab('mfa')">Multi-factor authentication (MFA)</button>
+  <button class="tab-btn"        onclick="switchTab('mfa')">Multi-factor authentication (MFA)</button>
 </div>
+
+<!-- Account Tab -->
 <div id="tab-account">
+
   <div class="card">
     <div class="detail-row">
       <div class="detail-left">
@@ -89,7 +130,9 @@ const ACCOUNT_SETTINGS_HTML = `
       <button class="btn-outline" id="changePasswordBtn">Change password</button>
     </div>
   </div>
+
   <p class="section-label">Connected accounts</p>
+
   <div class="card">
     <div class="connected-item">
       <div class="provider-row">
@@ -108,272 +151,303 @@ const ACCOUNT_SETTINGS_HTML = `
       <button class="btn-connect" id="connectFacebookBtn">+ Connect</button>
     </div>
   </div>
+
   <p class="section-label">Account deletion</p>
+
   <div class="card">
     <div class="delete-row">
       <div class="detail-left">
         <div class="detail-label">Delete your account</div>
-        <div class="detail-hint">Before deleting your account, you will need to verify your email address and agree to the account termination.</div>
+        <div class="detail-hint">
+          Before deleting your account, you will need to verify your email address
+          and agree to the account termination.
+        </div>
       </div>
       <button class="btn-delete" id="deleteAccountBtn">Delete account</button>
     </div>
   </div>
+
 </div>
-<div id="tab-mfa" style="display: none">
+
+<!-- MFA Tab -->
+<div id="tab-mfa" style="display:none">
+
   <div class="mfa-warning">
-    <div class="warning-icon">
-    </div>
+    <div class="icon icon-warning"></div>
     <span>Multi-factor authentication (MFA) is not enabled. Enable it now to protect your account.</span>
   </div>
+
   <div class="mfa-layout">
+
     <div class="mfa-main">
       <div class="card">
         <div class="detail-row">
           <div class="detail-left">
             <div class="detail-label">Multi-factor authentication (MFA)</div>
             <div class="mfa-status-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
+              <span class="icon icon-close"></span>
               OFF
             </div>
           </div>
-          <button class="btn-outline" onclick="showToast('Manage MFA')">Manage MFA</button>
+          <button class="btn-outline" id="manageMfaBtn">Manage MFA</button>
         </div>
       </div>
     </div>
+
     <div class="mfa-faq-sidebar">
       <p class="section-label">FAQ</p>
-        <div class="faq-list">
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <span>What is multi-factor authentication (MFA)?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor"
-                  d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/>
-              </svg>
-            </div>
-            <div class="faq-answer">
-              MFA adds an extra layer of security. In addition to your password, you'll provide a one-time code from an authenticator app each time you sign in.
-            </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What is multi-factor authentication (MFA)?</span>
+            <span class="icon icon-chevron faq-chevron"></span>
           </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <span>What apps can I use for multi-factor authentication (MFA)?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor"
-                  d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/>
-              </svg>
-            </div>
-            <div class="faq-answer">
-              Any TOTP-compatible app works: Google Authenticator, Microsoft Authenticator, Authy, or 1Password — available on iOS and Android.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <span>How do I disable MFA?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor"
-                  d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/>
-              </svg>
-            </div>
-            <div class="faq-answer">
-              Click "Manage MFA" and follow the steps to remove your authenticator. You'll be asked to verify your identity first.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <span>What if I lose my MFA device?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor"
-                  d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/>
-              </svg>
-            </div>
-            <div class="faq-answer">
-              Use one of your backup codes to sign in, then set up MFA on your new device from the Manage MFA section.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <span>What if I lose my MFA device and can't access my backup codes?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor"
-                  d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/>
-              </svg>
-            </div>
-            <div class="faq-answer">
-              Contact our support team. They'll verify your identity and help you regain access to your account.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <span>Will I be informed when an MFA method is added or removed?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor"
-                  d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/>
-              </svg>
-            </div>
-            <div class="faq-answer">
-              Yes. We'll send an email notification to your account address whenever an MFA method is added or removed.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <span>I am running out of backup codes. What should I do?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24"><path fill="currentColor"
-                  d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"/>
-              </svg>
-            </div>
-            <div class="faq-answer">
-              Generate a new set from the "Manage MFA" section. Note: new codes will invalidate all previously issued backup codes.
-            </div>
+          <div class="faq-answer">
+            MFA adds an extra layer of security. In addition to your password, you'll provide
+            a one-time code from an authenticator app each time you sign in.
           </div>
         </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What apps can I use for multi-factor authentication (MFA)?</span>
+            <span class="icon icon-chevron faq-chevron"></span>
+          </div>
+          <div class="faq-answer">
+            Any TOTP-compatible app works: Google Authenticator, Microsoft Authenticator,
+            Authy, or 1Password — available on iOS and Android.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I disable MFA?</span>
+            <span class="icon icon-chevron faq-chevron"></span>
+          </div>
+          <div class="faq-answer">
+            Click "Manage MFA" and follow the steps to remove your authenticator.
+            You'll be asked to verify your identity first.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What if I lose my MFA device?</span>
+            <span class="icon icon-chevron faq-chevron"></span>
+          </div>
+          <div class="faq-answer">
+            Use one of your backup codes to sign in, then set up MFA on your new device
+            from the Manage MFA section.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What if I lose my MFA device and can't access my backup codes?</span>
+            <span class="icon icon-chevron faq-chevron"></span>
+          </div>
+          <div class="faq-answer">
+            Contact our support team. They'll verify your identity and help you regain access.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Will I be notified when an MFA method is added or removed?</span>
+            <span class="icon icon-chevron faq-chevron"></span>
+          </div>
+          <div class="faq-answer">
+            Yes. We'll send an email notification to your account address whenever
+            an MFA method is added or removed.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>I am running out of backup codes. What should I do?</span>
+            <span class="icon icon-chevron faq-chevron"></span>
+          </div>
+          <div class="faq-answer">
+            Generate a new set from the "Manage MFA" section. Note: new codes will
+            invalidate all previously issued backup codes.
+          </div>
+        </div>
+
+      </div>
     </div>
+
   </div>
 </div>
 `;
 
-// --- ACCOUNT SETTINGS HTML CONTENT (Template) ---
+
+// -----------------------------------------------------------------------------
+// HTML Loader
+// -----------------------------------------------------------------------------
+
+/** Returns the account settings HTML template as a resolved Promise. */
 function fetchAccountSettingsHTML() {
   return Promise.resolve(ACCOUNT_SETTINGS_HTML);
 }
 
-// --- INIT ACCOUNT SETTINGS EVENTS ---
+
+// -----------------------------------------------------------------------------
+// Event Initialisation
+// -----------------------------------------------------------------------------
+
+/**
+ * Resolves the current user's email and Google status, populates the UI,
+ * and attaches all button event listeners.
+ *
+ * Call this after the account settings HTML has been injected into the DOM.
+ */
 function initAccountSettingsEvents() {
   const resolvedEmail    = Navigate.getEmail();
-  const resolvedIsGoogle = (window.AppPrefill?.isGoogle) ||
-    sessionStorage.getItem("is_google") === "1";
+  const resolvedIsGoogle = window.AppPrefill?.isGoogle ||
+                           sessionStorage.getItem("is_google") === "1";
 
+  // Populate email & avatar fields if a real email is available
   if (resolvedEmail) {
-    currentEmail = resolvedEmail;
-    googleEmail  = resolvedEmail;
+    currentEmail      = resolvedEmail;
+    googleEmail       = resolvedEmail;
     isGoogleConnected = resolvedIsGoogle;
-
-    const displayEmail = document.getElementById("displayEmail");
-    if (displayEmail) displayEmail.textContent = resolvedEmail;
-
-    const chipEmail = document.getElementById("chipEmail");
-    if (chipEmail) chipEmail.textContent = resolvedEmail;
-
-    const menuEmail = document.getElementById("menuEmail");
-    if (menuEmail) menuEmail.textContent = resolvedEmail;
-
-    const initial = resolvedEmail.charAt(0).toUpperCase();
-    const chipAvatar = document.getElementById("chipAvatar");
-    if (chipAvatar) chipAvatar.textContent = initial;
-    const menuAvatar = document.getElementById("menuAvatar");
-    if (menuAvatar) menuAvatar.textContent = initial;
+    _applyEmailToDOM(resolvedEmail);
   }
 
-  const disconnectBtn = document.getElementById("disconnectGoogleBtn");
-  const connectFbBtn = document.getElementById("connectFacebookBtn");
-  const changeEmailBtn = document.getElementById("changeEmailBtn");
-  const changePasswordBtn = document.getElementById("changePasswordBtn");
-  const deleteAccountBtn = document.getElementById("deleteAccountBtn");
-
-  if (disconnectBtn) {
-    const newBtn = disconnectBtn.cloneNode(true);
-    disconnectBtn.parentNode.replaceChild(newBtn, disconnectBtn);
-    newBtn.addEventListener("click", function () {
-      if (isGoogleConnected) {
-        isGoogleConnected = false;
-        googleEmail = "";
-        updateGoogleUI();
-        showToast("Akun Google diputuskan.");
-      } else {
-        let email = prompt("Hubungkan akun Google\nMasukkan email:", "user@gmail.com");
-        if (email && email.trim()) {
-          isGoogleConnected = true;
-          googleEmail = email.trim();
-          updateGoogleUI();
-          showToast("Google terhubung sebagai " + googleEmail);
-        } else showToast("Dibatalkan", true);
-      }
-    });
-  }
-
-  if (connectFbBtn) {
-    const newBtn = connectFbBtn.cloneNode(true);
-    connectFbBtn.parentNode.replaceChild(newBtn, connectFbBtn);
-    newBtn.addEventListener("click", function () {
-      if (isFacebookConnected) {
-        isFacebookConnected = false;
-        facebookEmail = "";
-        updateFacebookUI();
-        showToast("Facebook diputuskan.");
-      } else {
-        let email = prompt("Hubungkan Facebook\nEmail:", "user@facebook.com");
-        if (email && email.trim()) {
-          isFacebookConnected = true;
-          facebookEmail = email.trim();
-          updateFacebookUI();
-          showToast("Facebook terhubung (" + facebookEmail + ")");
-        } else showToast("Dibatalkan", true);
-      }
-    });
-  }
-
-  if (changeEmailBtn) {
-    const newBtn = changeEmailBtn.cloneNode(true);
-    changeEmailBtn.parentNode.replaceChild(newBtn, changeEmailBtn);
-    newBtn.addEventListener("click", function () {
-      let newEmail = prompt("Ubah email", currentEmail);
-      if (newEmail && newEmail.includes("@") && confirm("Verifikasi ke " + newEmail + "?")) {
-        currentEmail = newEmail.trim();
-        const displayEmail = document.getElementById("displayEmail");
-        if (displayEmail) displayEmail.textContent = currentEmail;
-        const menuEmail = document.getElementById("menuEmail");
-        if (menuEmail) menuEmail.textContent = currentEmail;
-        const menuAvatar = document.getElementById("menuAvatar");
-        if (menuAvatar) menuAvatar.textContent = currentEmail[0].toUpperCase();
-        const chipEmail = document.getElementById("chipEmail");
-        if (chipEmail) chipEmail.textContent = currentEmail;
-        const chipAvatar = document.getElementById("chipAvatar");
-        if (chipAvatar) chipAvatar.textContent = currentEmail[0].toUpperCase();
-        showToast("Email diperbarui menjadi " + currentEmail);
-      } else if (newEmail && !newEmail.includes("@")) showToast("Email tidak valid", true);
-    });
-  }
-
-  if (changePasswordBtn) {
-    const newBtn = changePasswordBtn.cloneNode(true);
-    changePasswordBtn.parentNode.replaceChild(newBtn, changePasswordBtn);
-    newBtn.addEventListener("click", () => ChangePassword.open());
-  }
-
-  if (deleteAccountBtn) {
-    const newBtn = deleteAccountBtn.cloneNode(true);
-    deleteAccountBtn.parentNode.replaceChild(newBtn, deleteAccountBtn);
-    newBtn.addEventListener("click", function () {
-      let v = prompt("Verifikasi email:", currentEmail);
-      if (v === currentEmail && confirm("Hapus akun secara permanen?"))
-        showToast("Permintaan penghapusan akun dikirimkan.");
-      else showToast("Dibatalkan", true);
-    });
-  }
+  // Bind each button, cloning to remove any stale listeners
+  _bindButton("disconnectGoogleBtn",  _onGoogleToggle);
+  _bindButton("connectFacebookBtn",   _onFacebookToggle);
+  _bindButton("changeEmailBtn",       _onChangeEmail);
+  _bindButton("changePasswordBtn",    _onChangePassword);
+  _bindButton("deleteAccountBtn",     _onDeleteAccount);
+  _bindButton("manageMfaBtn",         _onManageMfa, /* skipClone */ true);
 
   updateGoogleUI();
   updateFacebookUI();
 
-  if (typeof window.showLoadingPlaceholders === 'function') {
+  if (typeof window.showLoadingPlaceholders === "function") {
     window.showLoadingPlaceholders();
   }
 }
 
-// --- TAB SWITCHING ---
+
+// -----------------------------------------------------------------------------
+// Button Handlers
+// -----------------------------------------------------------------------------
+
+function _onGoogleToggle(e) {
+  _rippleThen(e, () => {
+    if (!isGoogleConnected) {
+      const email = prompt("Connect Google Account\nEnter your email:", "user@gmail.com");
+      if (email?.trim()) {
+        isGoogleConnected = true;
+        googleEmail       = email.trim();
+        updateGoogleUI();
+        showToast(`Google connected as ${googleEmail}`);
+      } else {
+        showToast("Cancelled", true);
+      }
+    } else {
+      isGoogleConnected = false;
+      googleEmail       = "";
+      updateGoogleUI();
+      showToast("Google account disconnected.");
+    }
+  });
+}
+
+function _onFacebookToggle(e) {
+  _rippleThen(e, () => {
+    if (isFacebookConnected) {
+      isFacebookConnected = false;
+      facebookEmail       = "";
+      updateFacebookUI();
+      showToast("Facebook account disconnected.");
+    } else {
+      const email = prompt("Connect Facebook Account\nEnter your email:", "user@facebook.com");
+      if (email?.trim()) {
+        isFacebookConnected = true;
+        facebookEmail       = email.trim();
+        updateFacebookUI();
+        showToast(`Facebook connected as ${facebookEmail}`);
+      } else {
+        showToast("Cancelled", true);
+      }
+    }
+  });
+}
+
+function _onChangeEmail(e) {
+  _rippleThen(e, () => {
+    const newEmail = prompt("Change Email", currentEmail);
+    if (!newEmail) return;
+
+    if (!newEmail.includes("@")) {
+      showToast("Invalid email address.", true);
+      return;
+    }
+
+    if (confirm(`Send verification to ${newEmail}?`)) {
+      currentEmail = newEmail.trim();
+      _applyEmailToDOM(currentEmail);
+      showToast(`Email updated to ${currentEmail}`);
+    }
+  });
+}
+
+function _onChangePassword(e) {
+  _rippleThen(e, () => {
+    if (typeof ChangePassword?.open === "function") {
+      ChangePassword.open();
+    }
+  });
+}
+
+function _onDeleteAccount(e) {
+  _rippleThen(e, () => {
+    const verification = prompt("To confirm, enter your email address:", currentEmail);
+    if (verification === currentEmail && confirm("Permanently delete your account? This cannot be undone.")) {
+      showToast("Account deletion request submitted.");
+    } else {
+      showToast("Cancelled", true);
+    }
+  });
+}
+
+function _onManageMfa(e) {
+  _rippleThen(e, () => switchTab("mfa"));
+}
+
+
+// -----------------------------------------------------------------------------
+// Tab Switching
+// -----------------------------------------------------------------------------
+
+/**
+ * Shows the requested tab panel, updates tab button states,
+ * and syncs the document title and browser history.
+ *
+ * @param {"account"|"mfa"} tab
+ */
 function switchTab(tab) {
-  const tabAccount = document.getElementById("tab-account");
-  const tabMfa = document.getElementById("tab-mfa");
+  const tabAccount    = document.getElementById("tab-account");
+  const tabMfa        = document.getElementById("tab-mfa");
   const settingsPanel = document.getElementById("panel-account-settings");
-  const tabBtns = (settingsPanel || document).querySelectorAll(".tab-btn");
+  const tabBtns       = (settingsPanel || document).querySelectorAll(".tab-btn");
+  const appName       = window.AppSettings?.app_name ||
+                        sessionStorage.getItem("app_name") ||
+                        "App";
 
   if (tabAccount) tabAccount.style.display = tab === "account" ? "block" : "none";
-  if (tabMfa) tabMfa.style.display = tab === "mfa" ? "block" : "none";
+  if (tabMfa)     tabMfa.style.display     = tab === "mfa"     ? "block" : "none";
 
   tabBtns.forEach((btn, i) => {
-    btn.classList.toggle(
-      "active",
+    btn.classList.toggle("active",
       (tab === "account" && i === 0) || (tab === "mfa" && i === 1)
     );
   });
 
-  const appName = window.AppSettings?.app_name || sessionStorage.getItem("app_name") || "App";
   const pageTitle = document.getElementById("pageTitle");
 
   if (tab === "mfa") {
@@ -387,22 +461,109 @@ function switchTab(tab) {
   }
 }
 
-// --- FAQ TOGGLING ---
+
+// -----------------------------------------------------------------------------
+// FAQ Toggle
+// -----------------------------------------------------------------------------
+
+/**
+ * Opens or closes the FAQ item that contains the clicked question header.
+ *
+ * @param {HTMLElement} element - The `.faq-question` element that was clicked.
+ */
 function toggleFaq(element) {
-  const faqItem = element.closest(".faq-item");
-  if (faqItem) faqItem.classList.toggle("open");
+  element.closest(".faq-item")?.classList.toggle("open");
 }
 
-// --- EXPOSE GLOBAL FUNCTIONS ---
-// initChipState, updateActiveMenu, navigateTo dll. sudah ada di navigate.js
+
+// -----------------------------------------------------------------------------
+// Private Helpers
+// -----------------------------------------------------------------------------
+
+/**
+ * Clones a button (removing stale listeners), then attaches a new click handler.
+ *
+ * @param {string}   id         - Element ID.
+ * @param {Function} handler    - Click handler to attach.
+ * @param {boolean}  skipClone  - If true, attaches directly without cloning.
+ */
+function _bindButton(id, handler, skipClone = false) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  if (skipClone) {
+    el.addEventListener("click", handler);
+    return;
+  }
+
+  const fresh = el.cloneNode(true);
+  el.parentNode.replaceChild(fresh, el);
+  fresh.addEventListener("click", handler);
+}
+
+/**
+ * Fires the ripple animation, then executes `action` after the animation completes.
+ * Captures `e.currentTarget` immediately — before the event cycle ends — so
+ * createRipple can reference the correct element.
+ *
+ * @param {MouseEvent} e
+ * @param {Function}   action
+ * @param {number}     [delay=550] - Milliseconds to wait after ripple before running action.
+ */
+function _rippleThen(e, action, delay = 550) {
+  createRipple(e, e.currentTarget);
+  setTimeout(action, delay);
+}
+
+/**
+ * Sets textContent on a DOM element referenced by ID or direct reference.
+ *
+ * @param {string|HTMLElement} target
+ * @param {string}             text
+ */
+function _setTextContent(target, text) {
+  const el = typeof target === "string" ? document.getElementById(target) : target;
+  if (el) el.textContent = text;
+}
+
+/**
+ * Sets innerHTML on a DOM element.
+ *
+ * @param {HTMLElement} el
+ * @param {string}      html
+ */
+function _setHTML(el, html) {
+  if (el) el.innerHTML = html;
+}
+
+/**
+ * Replaces all className on a DOM element.
+ *
+ * @param {HTMLElement} el
+ * @param {string}      className
+ */
+function _setClass(el, className) {
+  if (el) el.className = className;
+}
+
+
+// -----------------------------------------------------------------------------
+// Public API
+// -----------------------------------------------------------------------------
+
+// initChipState, updateActiveMenu, navigateTo, etc. are handled by navigate.js
+
 window.updateEmailFromData       = updateEmailFromData;
 window.fetchAccountSettingsHTML  = fetchAccountSettingsHTML;
 window.initAccountSettingsEvents = initAccountSettingsEvents;
 window.switchTab                 = switchTab;
 window.toggleFaq                 = toggleFaq;
 
-// --- INITIALIZE ON DOM READY ---
+
+// -----------------------------------------------------------------------------
+// DOM Ready
+// -----------------------------------------------------------------------------
+
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("[account-settings] initialized");
-  // Burger menu, sidebar nav, chip popup, routing — ditangani navigate.js
+  console.log("[account-settings] Module loaded — awaiting initAccountSettingsEvents().");
 });

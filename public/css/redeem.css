@@ -1,395 +1,316 @@
+/* ============================================
+   RESET & GLOBAL
+   ============================================ */
 button,
 [role="button"] {
   -webkit-tap-highlight-color: transparent;
 }
 
-:root {
-    --redeem-sidebar-width: 330px;
-    --topbar-height: 60px;
-}
-
 html, body {
-    height: 100%;
-    overflow: hidden;
+  height: 100%;
+  overflow: hidden;
 }
 
-body {
-    overflow: hidden;
-}
 
+/* ============================================
+   ROOT LAYOUT
+   ============================================ */
 .redeem-root {
-    height: 100vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    padding-top: var(--topbar-height);
-}
-
-body:not(.dark) .redeem-root {
-  background: linear-gradient(180deg,
-    #dce8f7 0%, #e4edf6 60%, #eef3f9 100%);
-}
-body.dark .redeem-root {
-  background: linear-gradient(180deg, #0f151f 0%, #06090e 100%);
-}
-
-/* ── Topbar ── */
-.redeem-topbar {
-  position: fixed;
-  top: 0;
-  left: var(--redeem-sidebar-width);
-  right: 0;
-  height: var(--topbar-height);
+  height: 100vh;
+  overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 32px;
-  z-index: 100;
-  transition: background 0.2s, left 0.3s;
-  gap: 10px;
+  flex-direction: column;
+  padding-top: var(--topbar-height);
 }
 
-.topbar-title { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
-.topbar-right { display: flex; align-items: center; gap: 16px; }
+.redeem-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
 
-.redeem-sidebar-brand {
+
+/* ============================================
+   TOPBAR
+   ============================================ */
+.topbar.redeem {
+  justify-content: flex-end;
+  padding-left: 0;
+}
+
+.brand-icon.mobile.redeem {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.redeem-topbar-user {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-top: 20px;
-  padding-right: 35px;
-  justify-content: center;
-}
-
-.redeem-sidebar-brand-logo { width: 40px; height: 40px; flex-shrink: 0; }
-.redeem-sidebar-brand-name { font-size: 15px; font-weight: 700; color: var(--text-primary); }
-.redeem-sidebar-brand-sub { font-size: 15px; color: var(--text-muted); font-weight: 400; }
-
-.redeem-topbar-user {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px 6px 6px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background 0.15s;
-    font-size: 14px;
-    color: var(--text-primary);
-    font-weight: 500;
-    border: none;
-    background: none;
-    font-family: inherit;
+  padding: 6px 10px 6px 6px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+  border: none;
+  background: none;
+  font-family: inherit;
 }
 
 .redeem-topbar-user:hover {
-    background: var(--bg-secondary);
+  background: var(--bg-secondary);
 }
 
 .redeem-topbar-avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: var(--accent-blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    color: white;
-    flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
 }
 
 .redeem-topbar-chevron {
-    width: 14px;
-    height: 14px;
-    stroke: var(--text-muted);
-    stroke-width: 2;
-    fill: none;
+  width: 14px;
+  height: 14px;
+  stroke: var(--text-muted);
+  stroke-width: 2;
+  fill: none;
 }
 
-/* ── Hero banner ── */
+
+/* ============================================
+   HERO BANNER
+   ============================================ */
 .redeem-hero-banner {
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-light);
-    padding: 14px 32px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-left: var(--redeem-sidebar-width);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-light);
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: var(--sidebar-width);
 }
 
 .redeem-hero-banner-text {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
-/* ── Main body ── */
+
+/* ============================================
+   MAIN BODY LAYOUT
+   ============================================ */
 .redeem-body {
-    display: flex;
-    flex: 1;
-    margin-left: var(--redeem-sidebar-width);
-    background: transparent;
-}
-
-/* ── Sidebar ── */
-.redeem-sidebar {
-  width: var(--redeem-sidebar-width);
-  border-right: 1px solid var(--border-light);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  overflow-y: auto;
-  z-index: 200;
-  transition: background 0.2s;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-body:not(.dark) .redeem-sidebar {
-  background: linear-gradient(180deg, #dce8f7 0%, #e4edf6 60%, #eef3f9 100%);
-}
-body.dark .redeem-sidebar {
-  background: linear-gradient(180deg, #0f151f 0%, #06090e 100%);
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  background: transparent;
 }
 
 .redeem-sidebar-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-    padding-bottom: 20px;
-    padding-right: 40px;
-    text-transform: uppercase;
-    margin: 0 auto;
-    margin-top: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  padding-bottom: 20px;
+  padding-right: 40px;
+  text-transform: uppercase;
+  margin: 0 auto;
+  margin-top: auto;
 }
 
+
+/* ============================================
+   STEPS (LEFT SIDEBAR)
+   ============================================ */
 .redeem-steps {
-    display: flex;
-    flex-direction: column;
-    padding: 0 20px;
-    margin: 0 auto;
-    margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  margin: 0 auto;
+  margin-bottom: auto;
 }
 
 .redeem-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  position: relative;
 }
 
 .redeem-step:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    left: 11px;
-    top: 26px;
-    width: 2px;
-    height: calc(100% - 6px);
-    background: var(--border-light);
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 26px;
+  width: 2px;
+  height: calc(100% - 6px);
+  background: var(--border-light);
 }
 
 .redeem-step-indicator {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 2px solid var(--border-light);
-    background: var(--bg-body);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-    z-index: 1;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  background: var(--bg-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  z-index: 1;
 }
 
 .redeem-step.active .redeem-step-indicator {
-    border-color: var(--accent-blue);
-    background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  background: var(--accent-blue);
 }
 
 .redeem-step.active .redeem-step-indicator::after {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }
 
 .redeem-step-label {
-    font-size: 14px;
-    color: var(--text-muted);
-    padding: 2px 0 24px;
-    line-height: 1.4;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 2px 0 24px;
+  line-height: 1.4;
 }
 
 .redeem-step.active .redeem-step-label {
-    color: var(--text-primary);
-    font-weight: 500;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
-/* ── Content area ── */
+
+/* ============================================
+   CONTENT AREA (CENTER)
+   ============================================ */
 .redeem-content {
-    flex: 1;
-    padding: 40px 48px;
-    max-width: 760px;
+  flex: 1;
+  padding: 40px 48px;
+  max-width: 760px;
 }
 
 .redeem-content-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 28px;
-}
-
-/* ── Support sidebar (right) ── */
-.redeem-support {
-    flex-shrink: 0;
-    padding: 40px 24px;
-    min-width: 250px;
-}
-
-.redeem-support-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 14px;
-}
-
-body:not(.dark) .redeem-content .float-field input.has-value ~ label,
-body:not(.dark) .redeem-content .float-field input:focus ~ label {
-  background: #dfeaf6;
-}
-body:not(.dark) .redeem-content .float-field input:not(:placeholder-shown) ~ label {
-  background: #dfeaf6;
-}
-
-body.dark .redeem-content .float-field input.has-value ~ label,
-body.dark .redeem-content .float-field input:focus ~ label {
-  background: #0c121a;
-}
-body.dark .redeem-content .float-field input:not(:placeholder-shown) ~ label {
-  background: #0c121a;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 28px;
 }
 
 .redeem-content .float-field {
-    max-width: 400px;
+  max-width: 400px;
 }
 
-.redeem-label {
-    display: block;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 7px;
-    font-weight: 500;
+
+/* ============================================
+   SUPPORT SIDEBAR (RIGHT)
+   ============================================ */
+.redeem-support {
+  flex-shrink: 0;
+  padding: 40px 24px;
+  min-width: 250px;
 }
 
-.redeem-input {
-    width: 100%;
-    padding: 13px 16px;
-    border: 1.5px solid var(--border-input);
-    border-radius: 10px;
-    background: var(--bg-body);
-    color: var(--text-primary);
-    font-size: 15px;
-    font-family: inherit;
-    outline: none;
-    transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-    box-sizing: border-box;
-    letter-spacing: 0.02em;
+.redeem-support-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 14px;
 }
 
-.redeem-input:focus {
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.12);
-}
 
-.redeem-input.error {
-    border-color: var(--accent-red);
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-}
-
-.redeem-input[readonly],
-.redeem-input:disabled {
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
-    cursor: default;
-    border-color: var(--border-input);
-}
-
-.redeem-input[readonly]:focus,
-.redeem-input:disabled:focus {
-    box-shadow: none;
-    border-color: var(--border-input);
-}
-
+/* ============================================
+   LINKS & BUTTONS
+   ============================================ */
 .redeem-diff-link {
-    display: inline-block;
-    margin-top: 8px;
-    font-size: 13.5px;
-    color: var(--accent-blue);
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-    font-family: inherit;
-}
-.redeem-diff-link:hover {
-    text-decoration: underline;
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13.5px;
+  color: var(--accent-blue);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
 }
 
-/* ── Info notice ── */
+.redeem-diff-link:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================
+   NOTICE & INFO
+   ============================================ */
 .redeem-notice {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
 }
 
 .warning-icon.redeem {
-    width: 16px;
-    height: 16px;
-    max-width: 100%;
-    max-height: 100%;
-    background: var(--accent-blue);
-    flex-shrink: 0;
-    padding-top: 20px;
+  width: 16px;
+  height: 16px;
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--accent-blue);
+  flex-shrink: 0;
+  padding-top: 20px;
 }
 
 .redeem-notice-text {
-    font-size: 13.5px;
-    color: var(--text-secondary);
-    line-height: 1.5;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
-/* ── Legal text ── */
+
+/* ============================================
+   LEGAL TEXT
+   ============================================ */
 .redeem-legal {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
 }
 
 .redeem-legal a {
-    color: var(--text-secondary);
-    text-decoration: underline;
+  color: var(--text-secondary);
+  text-decoration: underline;
 }
 
 .redeem-legal a:hover {
-    color: var(--text-primary);
+  color: var(--text-primary);
 }
 
+
+/* ============================================
+   TURNSTILE CAPTCHA
+   ============================================ */
 .redeem-turnstile {
   display: flex;
   align-items: center;
@@ -403,7 +324,9 @@ body.dark .redeem-content .float-field input:not(:placeholder-shown) ~ label {
   transition: border-color 0.15s;
 }
 
-.redeem-turnstile.turnstile--error { border-color: #dc2626; }
+.redeem-turnstile.turnstile--error {
+  border-color: #dc2626;
+}
 
 .turnstile-check {
   display: flex;
@@ -413,7 +336,9 @@ body.dark .redeem-content .float-field input:not(:placeholder-shown) ~ label {
   user-select: none;
 }
 
-.turnstile-check input { display: none; }
+.turnstile-check input {
+  display: none;
+}
 
 .turnstile-box {
   width: 20px;
@@ -452,7 +377,10 @@ body.dark .redeem-content .float-field input:not(:placeholder-shown) ~ label {
   gap: 2px;
 }
 
-.cf-logo { height: 18px; width: auto; }
+.cf-logo {
+  height: 18px;
+  width: auto;
+}
 
 .turnstile-links {
   display: flex;
@@ -461,25 +389,37 @@ body.dark .redeem-content .float-field input:not(:placeholder-shown) ~ label {
   color: var(--text-muted, #9ca3af);
 }
 
-.turnstile-links a { color: var(--text-muted, #9ca3af); text-decoration: none; }
-.turnstile-links a:hover { text-decoration: underline; }
+.turnstile-links a {
+  color: var(--text-muted, #9ca3af);
+  text-decoration: none;
+}
 
-/* ── Error row ── */
+.turnstile-links a:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================
+   ERROR ROW
+   ============================================ */
 .error-row {
-    display: none;
-    align-items: center;
-    gap: 7px;
-    font-size: 13px;
-    color: var(--accent-red);
-    margin-top: 8px;
-    margin-bottom: 4px;
+  display: none;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--accent-red);
+  margin-top: 8px;
+  margin-bottom: 4px;
 }
 
 .error-row.show {
-    display: flex;
+  display: flex;
 }
 
-/* ── Continue button ── */
+
+/* ============================================
+   CONTINUE / REDEEM BUTTON
+   ============================================ */
 .btn-redeem {
   display: inline-flex;
   align-items: center;
@@ -500,227 +440,213 @@ body.dark .redeem-content .float-field input:not(:placeholder-shown) ~ label {
 }
 
 .btn-redeem:disabled {
-    background: var(--text-muted);
-    color: var(--text-secondary);
-    cursor: not-allowed;
-    transform: none;
-    pointer-events: none;
+  background: var(--text-muted);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  transform: none;
+  pointer-events: none;
 }
 
 .btn-redeem.loading {
-    background: var(--accent-blue);
-    cursor: wait;
-    pointer-events: none;
+  background: var(--accent-blue);
+  cursor: wait;
+  pointer-events: none;
 }
 
 .btn-redeem:not(:disabled) {
-    background: var(--accent-blue);
+  background: var(--accent-blue);
 }
 
 .btn-redeem:hover:not(:disabled) {
-    background: var(--accent-blue-hover);
+  background: var(--accent-blue-hover);
 }
 
 .btn-redeem:active:not(:disabled) {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .btn-spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--accent-blue-hover);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    display: inline-block;
-    flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--accent-blue-hover);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* ── Topbar brand (mobile only) ── */
-.topbar-brand-mobile {
+
+/* ============================================
+   MOBILE STEPS (HIDDEN ON DESKTOP)
+   ============================================ */
+.redeem-mobile-steps {
   display: none;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  padding: 30px 20px 16px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 0;
 }
 
-.topbar-brand-mobile .sidebar-brand-name {
-  font-size: 14px;
+.redeem-mobile-progress {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+  margin-bottom: 14px;
+}
+
+.redeem-mob-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  background: var(--bg-body);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.redeem-mob-dot.active {
+  position: relative;
+  border-color: var(--accent-blue);
+  background: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.15);
+}
+
+.redeem-mob-dot.active::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.redeem-mob-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border-light);
+}
+
+.redeem-mobile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.redeem-mobile-step-count {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.redeem-mobile-step-name {
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
 }
 
-.topbar-brand-mobile .sidebar-brand-sub {
-  font-size: 14px;
-  color: var(--text-muted);
-  font-weight: 400;
-}
-
-@media (max-width: 960px) {
-    .redeem-support {
-        background: transparent;
-        border-top: none;
-        padding-top: 0;
-    }
-
-    .topbar-brand-mobile {
-        display: flex;
-    }
-
-    .redeem-sidebar {
-        display: none;
-    }
-
-    .redeem-topbar {
-        left: 0;
-        padding: 0 20px;
-        justify-content: space-between;
-    }
-
-    .redeem-body {
-        flex-direction: column;
-        margin-left: 0;
-    }
-
-    .redeem-hero-banner {
-        margin-left: 0;
-        border-bottom: none;
-    }
-
-    .redeem-content {
-        padding: 24px 20px 40px;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .redeem-content-title {
-        font-size: 22px;
-        margin-bottom: 22px;
-    }
-
-    .redeem-mobile-steps {
-        display: flex !important;
-        align-items: center;
-        padding: 16px 20px 0;
-        gap: 0;
-    }
-
-    .redeem-hero-banner {
-        padding: 12px 20px;
-    }
-
-    .lang-select {
-        padding: 16px 20px;
-    }
-}
-
-@media (min-width: 961px) {
-    .lang-select {
-        display: flex;
-        margin-left: var(--redeem-sidebar-width);
-        padding: 16px 20px;
-    }
-}
-
-/* Desktop hides mobile steps bar */
-.redeem-mobile-steps {
-    display: none;
-    flex-direction: column;
-    padding: 30px 20px 16px;
-    border-bottom: 1px solid var(--border-light);
-    margin-bottom: 0;
-}
-
-.redeem-mobile-progress {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 0;
-    margin-bottom: 14px;
-}
-
-.redeem-mob-dot {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid var(--border-light);
-    background: var(--bg-body);
-    flex-shrink: 0;
-    z-index: 1;
-}
-
-.redeem-mob-dot.active {
-    position: relative;
-    border-color: var(--accent-blue);
-    background: var(--accent-blue);
-    box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.15);
-}
-
-.redeem-mob-dot.active::after {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.redeem-mob-line {
-    flex: 1;
-    height: 2px;
-    background: var(--border-light);
-}
-
-.redeem-mobile-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.redeem-mobile-step-count {
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-.redeem-mobile-step-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
 .redeem-mobile-step-next {
-    font-size: 13px;
-    color: var(--text-muted);
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 @keyframes fadeInUp {
-    from {
+  from {
     opacity: 0;
     transform: translateY(16px);
-    }
-    to {
+  }
+  to {
     opacity: 1;
     transform: translateY(0);
-    }
+  }
 }
 
 .redeem-content {
-    animation: fadeInUp 0.4s ease-out both;
-    animation-delay: 0.05s;
+  animation: fadeInUp 0.4s ease-out both;
+  animation-delay: 0.05s;
 }
+
 .redeem-support {
-    animation: fadeInUp 0.4s ease-out both;
-    animation-delay: 0.1s;
+  animation: fadeInUp 0.4s ease-out both;
+  animation-delay: 0.1s;
 }
+
 .lang-select {
-    animation: fadeInUp 0.4s ease-out both;
-    animation-delay: 0.15s;
+  animation: fadeInUp 0.4s ease-out both;
+  animation-delay: 0.15s;
+}
+
+
+/* ============================================
+   RESPONSIVE (max-width: 960px)
+   ============================================ */
+@media (max-width: 960px) {
+  .topbar.redeem {
+    left: 0;
+    padding: 0 20px;
+    justify-content: space-between;
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .brand-icon.mobile.redeem {
+    display: flex;
+  }
+
+  .redeem-support {
+    background: transparent;
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .redeem-body {
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  .redeem-hero-banner {
+    margin-left: 0;
+    border-bottom: none;
+  }
+
+  .redeem-content {
+    padding: 24px 20px 40px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .redeem-content-title {
+    font-size: 22px;
+    margin-bottom: 22px;
+  }
+
+  .redeem-mobile-steps {
+    display: flex !important;
+    align-items: center;
+    padding: 16px 20px 0;
+    gap: 0;
+  }
+
+  .redeem-hero-banner {
+    padding: 12px 20px;
+  }
+
+  .lang-select {
+    padding: 16px 20px;
+  }
 }

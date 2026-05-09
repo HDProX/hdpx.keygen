@@ -30,18 +30,6 @@
   gap: 10px;
 }
 
-.support-topbar-brand-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.support-topbar-brand-sub {
-  font-size: 13px;
-  color: var(--text-secondary);
-  font-weight: 400;
-}
-
 .support-topbar-right {
   display: flex;
   align-items: center;
@@ -599,6 +587,23 @@
 @media (max-width: 600px) {
   .support-topbar {
     padding: 0 16px;
+    height: auto;
+    gap: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .support-topbar-brand {
+    flex-wrap: wrap;
+    max-width: 30%;
+    padding: 0;
+  }
+  .support-topbar-brand .brand-sub {
+    width: 100%;
+    padding-left: 38px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: -6px;
   }
   .support-body {
     padding: 32px 16px 48px;

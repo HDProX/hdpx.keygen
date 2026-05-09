@@ -16,20 +16,19 @@
   gap: 8px;
   margin-bottom: 24px;
 }
+
 .refer-brand-logo {
-  width: 24px;
-  height: 24px;
   border-radius: 50%;
-  background: var(--bg-secondary);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-blue);
 }
-.refer-brand-name {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--text-primary);
+
+.refer-brand-logo .icon {
+  width: 24px;
+  height: 24px;
+  background: var(--color-primary);
 }
 
 /* ── Hero ── */
@@ -55,9 +54,9 @@
   color: var(--text-muted);
   margin: 0 0 16px;
 }
+
 .refer-hero-illustration {
   flex-shrink: 0;
-  opacity: 0.92;
 }
 
 /* ── Referral link row ── */
@@ -80,27 +79,34 @@
   text-overflow: ellipsis;
   min-width: 0;
 }
+
 .refer-copy-btn {
+  min-width: 100px;
   flex-shrink: 0;
   padding: 12px 20px;
   font-size: 12px;
   border-radius: 30px;
   transition: background 0.2s, transform 0.1s;
 }
+
 .refer-copy-btn--copied {
   background: var(--success-green, #2e7d32) !important;
 }
 
 /* ── Terms ── */
 .refer-terms {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-muted);
   margin: 0;
   line-height: 1.5;
 }
-.refer-terms-link {
-  color: var(--accent-blue);
-  text-decoration: underline;
+
+.navigate-link.refer {
+  font-size: 13px;
+}
+
+.navigate-link.refer::after {
+	height: 1px;
 }
 
 /* ── Divider ── */
@@ -136,11 +142,16 @@
   justify-content: center;
   flex-shrink: 0;
   z-index: 1;
+  background: var(--color-primary);
 }
-.refer-step-icon--blue {
-  background: var(--accent-blue, #3b5bdb);
-  color: #fff;
+
+.refer-step-icon .icon {
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  color: whitesmoke;
 }
+
 .refer-step-connector {
   position: absolute;
   left: 17px;
@@ -202,6 +213,7 @@
   align-items: center;
   gap: 14px;
 }
+
 .refer-rewards-icon {
   width: 44px;
   height: 44px;
@@ -213,6 +225,13 @@
   color: var(--text-muted);
   flex-shrink: 0;
 }
+
+.refer-rewards-icon .icon {
+  width: 28px;
+  height: 28px;
+  background: currentColor;
+}
+
 .refer-rewards-label {
   font-size: 12px;
   color: var(--text-muted);

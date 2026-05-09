@@ -203,6 +203,7 @@ function _renderGrid(tabKey, period) {
   const allPlans = orderedKeys.map(k => plans[k]).filter(Boolean);
   const maxFeatures = Math.max(...allPlans.map(p => p.features.length));
   gridEl.innerHTML = allPlans.map(plan => _buildCardHTML(plan, period, maxFeatures)).join("");
+  attachRipples(".btn-buy");
 }
 
 // ============================================================
@@ -234,17 +235,18 @@ function pricingToggleAccordion(btn) {
 // BUY HANDLER
 // ============================================================
 function pricingHandleBuy(plan, e) {
-  e.preventDefault();
-  const email  = Navigate.getEmail();
-  const appVer = Navigate.getAppVer();
-  const base   = "https://keygen.qzz.io//checkout";
-  const qs     = new URLSearchParams({
-    plan,
-    period: _pricingCurrentPeriod,
-    ...(email  && { email }),
-    ...(appVer && { ver: appVer })
-  });
-  window.open(`${base}?${qs}`, "_blank");
+  setTimeout(() => {
+    const email  = Navigate.getEmail();
+    const appVer = Navigate.getAppVer();
+    const base   = "https://keygen.qzz.io//checkout";
+    const qs     = new URLSearchParams({
+      plan,
+      period: _pricingCurrentPeriod,
+      ...(email  && { email }),
+      ...(appVer && { ver: appVer })
+    });
+    window.open(`${base}?${qs}`, "_blank");
+  }, 550);
 }
 
 // ============================================================
@@ -291,7 +293,6 @@ document.addEventListener("click", (e) => {
     if (chevron)  chevron.style.transform = "";
   }
 });
-
 
 // ============================================================
 // EXPOSE GLOBALS

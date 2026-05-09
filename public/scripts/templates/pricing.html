@@ -15,21 +15,21 @@
     <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
 
     <div class="pricing-root">
-      <!-- ── Topbar ── -->
-      <header class="pricing-topbar">
-        <div class="pricing-topbar-brand">
-          <span
-            class="icon brand-logo"
+      <header class="topbar pricing">
+        <span class="brand-icon mobile pricing">
+          <div
+            class="icon icon-logo"
             style="--icon-size: 28px; --icon-color: var(--accent-blue)"
-          ></span>
-          <span class="pricing-topbar-brand-name" data-placeholder="app_name"
-            >{appName}
-          </span>
-          <span class="pricing-topbar-brand-sub"> Account</span>
-        </div>
-        <div class="pricing-topbar-right">
+          ></div>
+          <div>
+            <span class="brand-name">{appName}</span>
+            <span class="brand-sub"> Account</span>
+          </div>
+        </span>
+        <span class="topbar-right">
+          <div class="language-wrapper"></div>
           <button
-            class="theme-toggle-btn"
+            class="theme-toggle"
             id="darkModeToggle"
             aria-label="Toggle theme"
           >
@@ -42,15 +42,14 @@
           <div class="user-chip-wrapper">
             <div class="user-chip" id="userChip">
               <div class="user-chip-avatar" id="chipAvatar">C</div>
-              <span id="chipEmail" style="font-size: 12.5px"
-                >{_USER_EMAIL}</span
-              >
+              <span id="chipEmail" style="font-size: 12.5px">{userEmail}</span>
               <span class="user-chip-caret">
                 <svg viewBox="0 0 24 24">
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </span>
             </div>
+
             <div class="chip-popup" id="chipPopup">
               <button class="chip-popup-item" id="chipLogoutBtn">
                 <svg viewBox="0 0 24 24" width="16" height="16">
@@ -62,15 +61,15 @@
               </button>
             </div>
           </div>
-        </div>
+        </span>
       </header>
 
       <!-- ── Main content ── -->
-      <main class="pricing-main">
+      <main class="content pricing">
         <!-- Hero -->
-        <div class="pricing-hero">
+        <div class="pricing title">
           <h1>Premium plans for you<br />and all your devices!</h1>
-          <p class="pricing-hero-sub">
+          <p class="pricing title-sub">
             All plans include <strong>free customer support</strong> and a
             <strong>60-day money back guarantee.</strong>
           </p>
@@ -174,7 +173,7 @@
             </div>
           </div>
 
-          <p class="pricing-hero-note" id="pricingHeroNote">
+          <p class="pricing title-note" id="pricingHeroNote">
             Current customer? <a href="/">Log into MyAccount</a> for your
             personalized deals.
           </p>
@@ -186,7 +185,7 @@
         </div>
 
         <!-- Trust bar -->
-        <div class="trust-bar">
+        <footer class="trust-bar">
           <div class="trust-bar-inner">
             <div class="trust-item">
               <svg viewBox="0 0 24 24">
@@ -212,46 +211,31 @@
               Secure checkout
             </div>
           </div>
-        </div>
+          <div class="page-footer">
+            <div class="footer-links">
+              <a href="#" style="padding: 4px 10px; border-radius: 6px"
+                >Support center</a
+              >
+              <a href="#" style="padding: 4px 10px; border-radius: 6px"
+                >Terms of service</a
+              >
+              <a href="#" style="padding: 4px 10px; border-radius: 6px"
+                >Privacy policy</a
+              >
+              <span style="padding: 4px 10px; border-radius: 6px"
+                >© 2026 {appName} security. All rights reserved.</span
+              >
+            </div>
+          </div>
+        </footer>
       </main>
-
-      <footer class="pricing-footer">
-        <div class="page-footer">
-          <div class="lang-select">
-            <div class="icon icon-lang" style="--icon-size: 24px"></div>
-            <select id="languageSelect">
-              <option value="en">English</option>
-              <option value="id">Bahasa Indonesia</option>
-              <option value="es">Español</option>
-              <option value="fr">Français</option>
-              <option value="de">Deutsch</option>
-              <option value="zh">中文</option>
-              <option value="ja">日本語</option>
-              <option value="ko">한국어</option>
-              <option value="ru">Русский</option>
-            </select>
-          </div>
-          <div class="footer-links">
-            <a href="#" style="padding: 4px 10px; border-radius: 6px"
-              >Support center</a
-            >
-            <a href="#" style="padding: 4px 10px; border-radius: 6px"
-              >Terms of service</a
-            >
-            <a href="#" style="padding: 4px 10px; border-radius: 6px"
-              >Privacy policy</a
-            >
-            <span style="padding: 4px 10px; border-radius: 6px"
-              >© 2026 {appName} security. All rights reserved.</span
-            >
-          </div>
-        </div>
-      </footer>
     </div>
 
+    <script src="/scripts/utils/language-widget.js"></script>
+    <script src="/scripts/utils/button.js"></script>
     <script src="/scripts/utils/prefill_from_app.js"></script>
-    <script src="/scripts/utils/switcher.js"></script>
     <script src="/scripts/utils/navigate.js"></script>
+    <script src="/scripts/utils/switcher.js"></script>
     <script src="/scripts/pages/pricing.js"></script>
   </body>
 </html>

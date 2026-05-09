@@ -15,17 +15,17 @@
   <body>
     <div class="app-layout">
       <aside class="sidebar">
-        <div class="sidebar-brand">
-          <span class="icon brand-logo"></span>
+        <div class="brand-icon">
+          <span class="icon icon-logo"></span>
           <div>
-            <span class="sidebar-brand-name">{appName}</span>
-            <span class="sidebar-brand-sub"> Account</span>
+            <span class="brand-name">{appName}</span>
+            <span class="brand-sub"> Account</span>
           </div>
         </div>
 
         <nav class="sidebar-nav">
           <div
-            class="sidebar-nav-item active"
+            class="nav-item active"
             onclick="navigateTo('home')"
             data-page="home"
           >
@@ -33,14 +33,14 @@
             Home
           </div>
 
-          <div class="sidebar-divider"></div>
+          <div class="divider"></div>
 
-          <div class="sidebar-nav-item" onclick="showToast('Downloads')">
+          <div class="nav-item" onclick="showToast('Downloads')">
             <span class="icon icon-download"></span>
             Downloads
           </div>
           <div
-            class="sidebar-nav-item"
+            class="nav-item"
             onclick="navigateTo('pricing')"
             data-page="pricing"
           >
@@ -48,7 +48,7 @@
             Available plans
           </div>
           <div
-            class="sidebar-nav-item"
+            class="nav-item"
             onclick="navigateTo('billing')"
             data-page="billing"
           >
@@ -56,18 +56,14 @@
             Billing
           </div>
           <div
-            class="sidebar-nav-item"
+            class="nav-item"
             onclick="navigateTo('redeem')"
             data-page="redeem"
           >
             <span class="icon icon-redeem"></span>
             Redeem
           </div>
-          <div
-            class="sidebar-nav-item"
-            data-page="refer"
-            onclick="navigateTo('refer')"
-          >
+          <div class="nav-item" data-page="refer" onclick="navigateTo('refer')">
             <span class="icon icon-gift"></span>
             Refer a friend
           </div>
@@ -78,11 +74,8 @@
       <header class="topbar">
         <span class="topbar-title">Home</span>
         <span class="topbar-right">
-          <button
-            class="theme-toggle-btn"
-            id="darkModeToggle"
-            aria-label="Toggle theme"
-          >
+          <div class="language-wrapper"></div>
+          <button class="theme-toggle" id="darkModeToggle">
             <span
               id="themeIcon"
               class="icon icon-theme"
@@ -97,21 +90,14 @@
               return false;
             "
           >
-            <span
-              class="icon icon-support"
-              style="--icon-size: 18px; --icon-color: var(--text-muted)"
-            ></span>
+            <span class="icon icon-support"></span>
             <span>Support center</span>
           </a>
           <div class="user-chip-wrapper">
             <div class="user-chip" id="userChip">
               <div class="user-chip-avatar" id="chipAvatar"></div>
               <span id="chipEmail" style="font-size: 12.5px">{userEmail}</span>
-              <span class="user-chip-caret" id="chipCaret">
-                <svg viewBox="0 0 24 24">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </span>
+              <span class="icon icon-chevron-down" id="chipCaret"></span>
             </div>
 
             <div class="chip-popup" id="chipPopup">
@@ -123,20 +109,11 @@
                   closeChipPopup();
                 "
               >
-                <svg viewBox="0 0 24 24" width="16" height="16">
-                  <circle cx="12" cy="12" r="3" />
-                  <path
-                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
-                  />
-                </svg>
+                <span class="icon icon-settings"></span>
                 Account settings
               </button>
               <button class="chip-popup-item" id="chipLogoutBtn">
-                <svg viewBox="0 0 24 24" width="16" height="16">
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                  <polyline points="16 17 21 12 16 7" />
-                  <line x1="21" y1="12" x2="9" y2="12" />
-                </svg>
+                <span class="icon icon-logout"></span>
                 Log out
               </button>
             </div>
@@ -146,29 +123,22 @@
 
       <!-- MOBILE TOPBAR -->
       <header class="mobile-topbar">
-        <div class="mobile-brand">
-          <span class="icon brand-logo"></span>
-          <span class="mobile-brand-name">{appName}</span>
-          <span class="mobile-brand-sub">Account</span>
+        <div class="brand-icon mobile">
+          <span class="icon icon-logo"></span>
+          <span class="brand-name">{appName}</span>
+          <span class="brand-sub">Account</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px">
-          <button
-            class="mobile-theme-toggle"
-            id="mobileThemeToggle"
-            aria-label="Toggle theme"
-          >
+          <div class="language-wrapper"></div>
+          <button class="theme-toggle" id="mobileThemeToggle">
             <span
-              id="mobileThemeIcon"
+              id="themeIcon"
               class="icon icon-theme"
               style="--icon-size: 18px"
             ></span>
           </button>
-          <button class="mobile-burger" id="burgerMenuBtn" aria-label="Menu">
-            <svg viewBox="0 0 24 24">
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
+          <button class="burger" id="burgerMenuBtn">
+            <span class="icon icon-burger"></span>
           </button>
         </div>
       </header>
@@ -182,45 +152,24 @@
         aria-label="Navigation menu"
       >
         <div class="menu-panel">
-          <!-- Panel top bar -->
           <div class="menu-topbar">
-            <div class="menu-brand">
-              <div class="icon brand-logo"></div>
-              <span class="menu-brand-name">{appName}</span>
-              <span class="menu-brand-sub">Account</span>
+            <div class="brand-icon menu">
+              <div class="icon icon-logo"></div>
+              <span class="brand-name">{appName}</span>
+              <span class="brand-sub">Account</span>
             </div>
             <button
               class="close-menu-btn"
               id="closeMenuBtn"
               aria-label="Close menu"
             >
-              <svg viewBox="0 0 24 24">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
+              <span class="icon icon-close"></span>
             </button>
           </div>
 
           <!-- User info -->
           <div class="user-row" id="menuUserRow">
-            <div class="user-avatar" id="menuAvatar">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <g fill="none">
-                  <path
-                    d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
-                  />
-                  <path
-                    fill="currentColor"
-                    d="M16 14a5 5 0 0 1 4.995 4.783L21 19v1a2 2 0 0 1-1.85 1.995L19 22H5a2 2 0 0 1-1.995-1.85L3 20v-1a5 5 0 0 1 4.783-4.995L8 14zM12 2a5 5 0 1 1 0 10a5 5 0 0 1 0-10"
-                  />
-                </g>
-              </svg>
-            </div>
+            <div class="user-avatar" id="menuAvatar"></div>
             <span class="user-email" id="menuEmail">{userEmail}</span>
           </div>
 
@@ -236,84 +185,106 @@
             Account settings
           </button>
 
-          <div class="menu-nav-divider"></div>
+          <div class="divider menu"></div>
 
           <!-- Nav items -->
           <nav class="menu-nav" aria-label="Main navigation">
-            <div class="nav-item" data-action="Home" role="button" tabindex="0">
+            <div
+              class="nav-item menu"
+              data-action="Home"
+              role="button"
+              tabindex="0"
+            >
               <span class="icon icon-home"></span>
               <span class="nav-label">Home</span>
-              <span class="chevron-right-icon nav"></span>
+              <span
+                class="icon icon-chevron-right"
+                style="--icon-size: 17px"
+              ></span>
             </div>
             <div
-              class="nav-item"
+              class="nav-item menu"
               data-action="Downloads"
               role="button"
               tabindex="0"
             >
               <span class="icon icon-download"></span>
               <span class="nav-label">Downloads</span>
-              <span class="chevron-right-icon nav"></span>
+              <span
+                class="icon icon-chevron-right"
+                style="--icon-size: 17px"
+              ></span>
             </div>
             <div
-              class="nav-item"
+              class="nav-item menu"
               data-action="Available plans"
               role="button"
               tabindex="0"
             >
               <span class="icon icon-pricing"></span>
               <span class="nav-label">Available plans</span>
-              <span class="chevron-right-icon nav"></span>
+              <span
+                class="icon icon-chevron-right"
+                style="--icon-size: 17px"
+              ></span>
             </div>
             <div
-              class="nav-item"
+              class="nav-item menu"
               data-action="Billing"
               role="button"
               tabindex="0"
             >
               <span class="icon icon-billing"></span>
               <span class="nav-label">Billing</span>
-              <span class="chevron-right-icon nav"></span>
+              <span
+                class="icon icon-chevron-right"
+                style="--icon-size: 17px"
+              ></span>
             </div>
             <div
-              class="nav-item"
+              class="nav-item menu"
               data-action="Redeem"
               role="button"
               tabindex="0"
             >
               <span class="icon icon-redeem"></span>
               <span class="nav-label">Redeem</span>
-              <span class="chevron-right-icon nav"></span>
+              <span
+                class="icon icon-chevron-right"
+                style="--icon-size: 17px"
+              ></span>
             </div>
             <div
-              class="nav-item"
+              class="nav-item menu"
               data-action="Refer a friend"
               role="button"
               tabindex="0"
             >
               <span class="icon icon-gift"></span>
               <span class="nav-label">Refer a friend</span>
-              <span class="chevron-right-icon nav"></span>
+              <span
+                class="icon icon-chevron-right"
+                style="--icon-size: 17px"
+              ></span>
             </div>
             <div
-              class="nav-item"
+              class="nav-item menu"
               data-action="Support"
               role="button"
               tabindex="0"
             >
               <span class="icon icon-support"></span>
               <span class="nav-label">Support center</span>
-              <span class="chevron-right-icon nav"></span>
+              <span
+                class="icon icon-chevron-right"
+                style="--icon-size: 17px"
+              ></span>
             </div>
           </nav>
 
           <!-- Logout -->
           <button class="logout-btn" id="menuLogoutBtn">
-            <svg viewBox="0 0 24 24">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
+            <span class="icon icon-logout"></span>
             Log out
           </button>
         </div>
@@ -336,126 +307,6 @@
             <p class="home-welcome-sub">
               Download apps, manage your billing and account settings.
             </p>
-          </div>
-
-          <!-- MOBILE: Quick access cards -->
-          <div class="home-mobile-section">
-            <p class="section-label">Quick access</p>
-            <div class="home-quick-list">
-              <a
-                href="#"
-                onclick="
-                  navigateTo('account-settings');
-                  return false;
-                "
-                class="home-quick-item"
-                id="quickItemAccountSettings"
-              >
-                <span class="home-quick-icon">
-                  <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="3" />
-                    <path
-                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
-                    />
-                  </svg>
-                </span>
-                <span class="home-quick-label">Account settings</span>
-                <span class="home-quick-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </span>
-              </a>
-              <a
-                href="#"
-                onclick="
-                  navigateTo('billing');
-                  return false;
-                "
-                class="home-quick-item"
-              >
-                <span class="home-quick-icon">
-                  <svg viewBox="0 0 24 24">
-                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                    <line x1="1" y1="10" x2="23" y2="10" />
-                  </svg>
-                </span>
-                <span class="home-quick-label">Billing information</span>
-                <span class="home-quick-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </span>
-              </a>
-              <a
-                href="#"
-                onclick="
-                  navigateTo('pricing');
-                  return false;
-                "
-                class="home-quick-item"
-              >
-                <span class="home-quick-icon">
-                  <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                    <line x1="12" y1="17" x2="12.01" y2="17" />
-                  </svg>
-                </span>
-                <span class="home-quick-label">Your deals</span>
-                <span class="home-quick-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </span>
-              </a>
-              <a
-                href="#"
-                onclick="
-                  navigateTo('downloads');
-                  return false;
-                "
-                class="home-quick-item"
-              >
-                <span class="home-quick-icon">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                </span>
-                <span class="home-quick-label">Downloads</span>
-                <span class="home-quick-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </span>
-              </a>
-              <a
-                href="#"
-                onclick="
-                  navigateTo('refer');
-                  return false;
-                "
-                class="home-quick-item"
-              >
-                <span class="home-quick-icon">
-                  <svg viewBox="0 0 24 24">
-                    <polyline points="20 12 20 22 4 22 4 12" />
-                    <rect x="2" y="7" width="20" height="5" />
-                    <path d="M12 22V7" />
-                    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
-                    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
-                  </svg>
-                </span>
-                <span class="home-quick-label">Refer a friend</span>
-                <span class="home-quick-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </span>
-              </a>
-            </div>
           </div>
 
           <!-- DESKTOP: Products + Sidebar cards -->
@@ -543,7 +394,7 @@
                 </p>
                 <a href="#" class="navigate-link">
                   <span>Download apps</span>
-                  <span class="arrow-right-icon"></span>
+                  <span class="icon icon-arrow-right"></span>
                 </a>
               </div>
               <div class="home-side-card" id="desktopCardAccountSettings">
@@ -560,7 +411,7 @@
                   class="navigate-link"
                 >
                   <span>Manage account</span>
-                  <span class="arrow-right-icon"></span>
+                  <span class="icon icon-arrow-right"></span>
                 </a>
               </div>
               <div class="home-side-card">
@@ -584,8 +435,8 @@
                   class="navigate-link"
                 >
                   <span>View your deals</span>
-                  <span class="arrow-right-icon"></span
-                ></a>
+                  <span class="icon icon-arrow-right"></span>
+                </a>
               </div>
             </div>
           </div>
@@ -602,20 +453,6 @@
 
         <!-- Footer -->
         <div class="page-footer">
-          <div class="lang-select">
-            <div class="icon icon-lang" style="--icon-size: 24px"></div>
-            <select id="languageSelect">
-              <option value="en">English</option>
-              <option value="id">Bahasa Indonesia</option>
-              <option value="es">Español</option>
-              <option value="fr">Français</option>
-              <option value="de">Deutsch</option>
-              <option value="zh">中文</option>
-              <option value="ja">日本語</option>
-              <option value="ko">한국어</option>
-              <option value="ru">Русский</option>
-            </select>
-          </div>
           <div class="footer-links">
             <a href="#" style="padding: 4px 10px; border-radius: 6px"
               >Support center</a
@@ -634,6 +471,8 @@
       </main>
     </div>
     <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
+    <script src="/scripts/utils/language-widget.js"></script>
+    <script src="/scripts/utils/button.js"></script>
     <script src="/scripts/utils/app_settings.js"></script>
     <script src="/scripts/utils/navigate.js"></script>
     <script src="/scripts/utils/prefill_from_app.js"></script>

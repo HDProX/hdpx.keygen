@@ -37,6 +37,20 @@
         margin: 0 auto;
       }
 
+      .theme-toggle.mobile {
+        position: static;
+      }
+
+      .topbar-actions {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 100;
+      }
+
       @keyframes fadeInUp {
         from {
           opacity: 0;
@@ -68,24 +82,24 @@
         padding: 10px 10px 10px;
       }
 
-      /* Divider */
-      .divider {
+      .divider.login {
         display: flex;
         align-items: center;
-        margin: 20px 0;
+        margin: 30px 0;
         color: var(--text-muted);
+        background: transparent;
         font-size: 13px;
         font-weight: 700;
         letter-spacing: 0.06em;
       }
-      .divider::before,
-      .divider::after {
+      .divider.login::before,
+      .divider.login::after {
         content: "";
         flex: 1;
         height: 2px;
-        background: var(--divider);
+        background: var(--border-light);
       }
-      .divider span {
+      .divider.login span {
         padding: 0 14px;
       }
 
@@ -105,7 +119,6 @@
         animation: shake 0.3s ease;
       }
 
-      /* OTP single input */
       .otp-inputs {
         display: flex;
         flex-direction: column;
@@ -144,7 +157,6 @@
         box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.12);
       }
 
-      /* Resend row */
       .resend-row {
         text-align: center;
         margin-top: 14px;
@@ -162,7 +174,6 @@
         text-decoration: underline;
       }
 
-      /* Email clear button */
       .email-clear-btn {
         position: absolute;
         right: 25px;
@@ -207,6 +218,11 @@
           gap: 8px;
           margin-bottom: 16px;
         }
+        .brand-mobile .icon {
+          width: 28px;
+          height: 28px;
+          background: var(--accent-blue);
+        }
         .card-header h1 {
           font-size: 24px;
         }
@@ -218,17 +234,20 @@
   </head>
   <body>
     <div id="toastMsg" class="toast-msg" role="status" aria-live="polite"></div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-      <span
-        id="themeIcon"
-        class="icon icon-theme"
-        style="--icon-size: 18px"
-      ></span>
-    </button>
+    <div class="topbar-actions">
+      <div class="language-wrapper"></div>
+      <button class="theme-toggle mobile" id="themeToggle">
+        <span
+          id="themeIcon"
+          class="icon icon-theme"
+          style="--icon-size: 18px"
+        ></span>
+      </button>
+    </div>
 
     <div class="brand-top" id="brandTop">
       <div
-        class="icon brand-logo"
+        class="icon icon-logo"
         style="--icon-size: 28px; --icon-color: var(--accent-blue)"
       ></div>
       <span class="brand-top-name" data-placeholder="app_name">Loading...</span>
@@ -236,12 +255,8 @@
 
     <div class="container">
       <div class="signup-card">
-        <!-- ── BRAND MOBILE ── -->
         <div class="brand-mobile">
-          <div
-            class="icon brand-logo"
-            style="--icon-size: 28px; --icon-color: var(--accent-blue)"
-          ></div>
+          <div class="icon icon-logo"></div>
           <span class="brand-top-name" data-placeholder="app_name"
             >Loading...</span
           >
@@ -250,7 +265,6 @@
         <!-- ══════════════════════════════════════════════
              PANEL 1: EMAIL
         ══════════════════════════════════════════════ -->
-        <!-- <div id="emailPanel" style="display: none"> -->
         <div id="emailPanel">
           <div class="card-header">
             <h1>Create or sign in</h1>
@@ -319,7 +333,7 @@
               </button>
             </form>
 
-            <div class="divider"><span>OR</span></div>
+            <div class="divider login"><span>OR</span></div>
             <div class="social-buttons">
               <button class="social-btn" id="googleBtn">
                 <img src="/assets/images/google.svg" alt="Google" /> Continue
@@ -341,6 +355,7 @@
       </div>
     </div>
 
+    <script src="/scripts/utils/language-widget.js"></script>
     <script src="/scripts/utils/app_settings.js"></script>
     <script src="/scripts/utils/switcher.js"></script>
     <script src="/scripts/utils/prefill_from_app.js"></script>
