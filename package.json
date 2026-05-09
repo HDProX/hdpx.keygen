@@ -7,7 +7,7 @@
   },
   "type": "module",
   "scripts": {
-    "build": "echo 'static site, no build needed'"
+    "build": "echo no-build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
