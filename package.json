@@ -6,6 +6,9 @@
     "node": "20.x"
   },
   "type": "module",
+  "scripts": {
+    "build": "echo 'static site, no build needed'"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "pg": "^8.12.0",
