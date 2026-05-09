@@ -2,9 +2,6 @@
   "name": "keygen",
   "version": "1.0.0",
   "description": "Keygen signup system - Vercel serverless",
-  "engines": {
-    "node": "20.x"
-  },
   "type": "module",
   "scripts": {
     "build": "echo no-build"
