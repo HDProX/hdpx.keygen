@@ -1,9 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" },
-    { "src": "**/*", "use": "@vercel/static" }
-  ],
+  "outputDirectory": "public",
   "routes": [
     {
       "src": "/api/(.*)",
@@ -95,7 +92,7 @@
     },
     {
       "src": "/forgot-password/verify",
-      "dest": "/scripts/templates/password.html"
+      "dest": "/scripts/templates/recover.html"
     },
     {
       "src": "/forgot-password/new-password",
