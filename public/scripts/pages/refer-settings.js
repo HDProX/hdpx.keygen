@@ -227,9 +227,15 @@ function referToggleFaq(el) {
   if (!item) return;
   const isOpen = item.classList.contains("open");
 
-  item.closest(".faq-list")?.querySelectorAll(".faq-item.open").forEach(i => i.classList.remove("open"));
+  item.closest(".faq-list")?.querySelectorAll(".faq-item").forEach(i => {
+    i.classList.remove("open");
+  });
 
-  if (!isOpen) item.classList.add("open");
+  if (!isOpen) {
+    requestAnimationFrame(() => {
+      item.classList.add("open");
+    });
+  }
 }
 
 function initReferPanel() {
