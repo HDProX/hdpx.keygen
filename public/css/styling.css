@@ -2058,21 +2058,24 @@ body {
 	color: var(--text-secondary);
 	gap: 12px;
 	user-select: none;
-	transition: color 0.2s;
+}
+
+.faq-question span:first-child {
+	display: inline-block;
+	flex: 1;
+	color: var(--text-secondary);
+	transition: transform 0.3s ease, color 0.2s ease;
 }
 
 .faq-chevron {
 	width: 16px;
 	height: 16px;
-	transform-origin: center center;
-	transition: transform 0.25s ease;
-}
-
-.faq-item:not(.open) .faq-chevron {
 	background: var(--text-secondary);
-	transform: rotate(0deg);
+	transform-origin: center center;
+	transition: transform 0.25s ease, background 0.2s ease;
 }
 
+/* ── State: OPEN ── */
 .faq-item.open .faq-question span:first-child {
 	color: var(--color-primary);
 }
@@ -2082,20 +2085,20 @@ body {
 	background: var(--color-primary);
 }
 
-@media (hover: hover) {
-	.faq-question span:first-child {
-		transition: 0.3s ease;
-		display: inline-block;
-		flex: 1;
-		transition: transform 0.3s ease, color 0.2s ease;
-	}
+/* ── State: CLOSED reset eksplisit ── */
+.faq-item:not(.open) .faq-chevron {
+	background: var(--text-secondary);
+	transform: rotate(0deg);
+}
 
-	.faq-question:hover span:first-child {
+/* ── Hover: desktop only ── */
+@media (hover: hover) {
+	.faq-item:not(.open) .faq-question:hover span:first-child {
 		transform: translateX(4px);
 		color: var(--color-primary);
 	}
 
-	.faq-question:hover .faq-chevron {
+	.faq-item:not(.open) .faq-question:hover .faq-chevron {
 		background: var(--color-primary);
 	}
 }
