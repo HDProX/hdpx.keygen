@@ -2166,6 +2166,11 @@ body {
 /* ============================================================
    12. ANIMATIONS
    ============================================================ */
+@keyframes underline-tap {
+	0%   { width: 0; }
+	60%  { width: 100%; }
+	100% { width: 0; }
+}
 
 @keyframes spin {
 	to {
@@ -2498,4 +2503,8 @@ body {
 
 	width: 100%;
 	}
+
+	.navigate-link:active::after {
+	animation: underline-tap 0.5s ease;
+}
 }
