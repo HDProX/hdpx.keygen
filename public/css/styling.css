@@ -2061,12 +2061,6 @@ body {
 	transition: color 0.2s;
 }
 
-.faq-question span:first-child {
-	display: inline-block;
-	flex: 1;
-	transition: transform 0.3s ease, color 0.2s ease;
-}
-
 .faq-chevron {
 	width: 16px;
 	height: 16px;
@@ -2093,6 +2087,7 @@ body {
 		transition: 0.3s ease;
 		display: inline-block;
 		flex: 1;
+		transition: transform 0.3s ease, color 0.2s ease;
 	}
 
 	.faq-question:hover span:first-child {
