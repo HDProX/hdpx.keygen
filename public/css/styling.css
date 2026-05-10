@@ -2135,6 +2135,12 @@ body {
 	transition: width 0.3s ease;
 }
 
+.navigate-link .icon {
+	width: 16px;
+	height: 16px;
+	background: var(--color-primary);
+}
+
 .navigate-link span {
 	position: relative;
 	display: inline-block;
@@ -2158,28 +2164,17 @@ body {
 }
 
 .navigate-link:active::after {
-	animation: underline-replay 0.3s ease forwards;
-}
-
-.navigate-link .icon {
-	width: 16px;
-	height: 16px;
-	background: var(--color-primary);
-}
-
-@keyframes underline-replay {
-	0% {
-		width: 0;
-	}
-
-	100% {
-		width: 100%;
-	}
+	animation: underline-tap 0.5s ease forwards;
 }
 
 /* ============================================================
    12. ANIMATIONS
    ============================================================ */
+@keyframes underline-tap {
+	0%   { width: 0; }
+	60%  { width: 100%; }
+	100% { width: 0; }
+}
 
 @keyframes spin {
 	to {
