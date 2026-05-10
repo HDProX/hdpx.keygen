@@ -2135,12 +2135,6 @@ body {
 	transition: width 0.3s ease;
 }
 
-.navigate-link .icon {
-	width: 16px;
-	height: 16px;
-	background: var(--color-primary);
-}
-
 .navigate-link span {
 	position: relative;
 	display: inline-block;
@@ -2163,18 +2157,15 @@ body {
 	transition: width 0.3s ease;
 }
 
-.navigate-link.tapped::after {
-  animation: underline-tap 0.5s ease;
+.navigate-link .icon {
+	width: 16px;
+	height: 16px;
+	background: var(--color-primary);
 }
 
 /* ============================================================
    12. ANIMATIONS
    ============================================================ */
-@keyframes underline-tap {
-	0%   { width: 0; }
-	60%  { width: 100%; }
-	100% { width: 0; }
-}
 
 @keyframes spin {
 	to {

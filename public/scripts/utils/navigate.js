@@ -725,22 +725,6 @@
     navigateTo("home");
   });
 
-  // Reset navigate-link animation saat balik ke tab
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      document.querySelectorAll('.navigate-link').forEach(el => {
-        const after = el;
-        after.style.setProperty('--link-anim', 'none');
-        el.classList.remove('link-active');
-        // Force reflow lalu reset
-        void el.offsetHeight;
-        el.style.animation = 'none';
-        void el.offsetHeight;
-        el.style.animation = '';
-      });
-    }
-  });
-
   // ──────────────────────────────────────────────
   // AUTO-INIT saat DOM siap
   // ──────────────────────────────────────────────
@@ -765,6 +749,7 @@
     initChipState();
     initScrollbarHover();
     initAppNamePlaceholders();
+    initTopbarOverflowDetect();
     checkInitialRoute();
   }
 
