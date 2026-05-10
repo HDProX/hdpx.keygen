@@ -2047,17 +2047,6 @@ body {
 	overflow: hidden;
 }
 
-.faq-question span:first-child {
-	transition: 0.3s ease;
-	display: inline-block;
-	flex: 1;
-}
-
-.faq-question:hover span:first-child {
-	transform: translateX(4px);
-	color: var(--color-primary);
-}
-
 .faq-question {
 	display: flex;
 	align-items: center;
@@ -2072,17 +2061,31 @@ body {
 	transition: color 0.2s;
 }
 
+.faq-question span:first-child {
+	display: inline-block;
+	flex: 1;
+	transition: transform 0.3s ease, color 0.2s ease;
+}
+
 .faq-chevron {
 	width: 16px;
 	height: 16px;
 	transform-origin: center center;
-	transition: transform 0.25s ease;
+	transition: transform 0.25s ease, background 0.2s ease;
 }
 
-.faq-item.open .faq-chevron {
-	transform: rotate(180deg);
+/* ── State: CLOSED (eksplisit reset) ── */
+.faq-item:not(.open) .faq-question span:first-child {
+	color: var(--text-secondary);
+	transform: translateX(0);
 }
 
+.faq-item:not(.open) .faq-chevron {
+	background: var(--text-secondary);
+	transform: rotate(0deg);
+}
+
+/* ── State: OPEN ── */
 .faq-item.open .faq-question span:first-child {
 	color: var(--color-primary);
 }
@@ -2092,10 +2095,19 @@ body {
 	background: var(--color-primary);
 }
 
-.faq-question:hover .faq-chevron {
-	background: var(--color-primary);
+/* ── Hover: hanya desktop (mouse) ── */
+@media (hover: hover) {
+	.faq-question:hover span:first-child {
+		transform: translateX(4px);
+		color: var(--color-primary);
+	}
+
+	.faq-question:hover .faq-chevron {
+		background: var(--color-primary);
+	}
 }
 
+/* ── Answer ── */
 .faq-answer {
 	font-size: 13px;
 	color: var(--text-muted);
@@ -2109,7 +2121,6 @@ body {
 .faq-item.open .faq-answer {
 	max-height: 300px;
 	padding: 0 8px 14px;
-	transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
 /* ============================================================
