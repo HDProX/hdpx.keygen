@@ -2061,6 +2061,12 @@ body {
 	transition: color 0.2s;
 }
 
+.faq-question span:first-child {
+	display: inline-block;
+	flex: 1;
+	transition: transform 0.3s ease, color 0.2s ease;
+}
+
 .faq-chevron {
 	width: 16px;
 	height: 16px;
@@ -2068,8 +2074,9 @@ body {
 	transition: transform 0.25s ease;
 }
 
-.faq-item.open .faq-chevron {
-	transform: rotate(180deg);
+.faq-item:not(.open) .faq-chevron {
+	background: var(--text-secondary);
+	transform: rotate(0deg);
 }
 
 .faq-item.open .faq-question span:first-child {
@@ -2111,7 +2118,6 @@ body {
 .faq-item.open .faq-answer {
 	max-height: 300px;
 	padding: 0 8px 14px;
-	transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
 /* ============================================================
