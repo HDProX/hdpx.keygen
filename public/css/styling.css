@@ -451,13 +451,12 @@ body {
 	color: var(--text-secondary);
 }
 
-.theme-toggle:active .icon {
-	translate: 0 2px;
+.theme-toggle.is-active {
+  background: var(--hover-btn);
 }
 
-.theme-toggle:active {
-	background: var(--hover-btn);
-	transform: none;
+.theme-toggle.is-active .icon {
+  translate: 0 2px;
 }
 
 .theme-toggle.mobile {
@@ -1295,7 +1294,6 @@ button .icon {
 		margin-top: 0;
 	}
 }
-
 
 /* =========================================
    ICON SYSTEM
@@ -2241,7 +2239,7 @@ button .icon {
    15. HOVER EFFECTS (Desktop Only)
    ============================================================ */
 
-@media (hover: hover) {
+@media (hover: none) and (pointer: fine) {
 	/* FAQ */
 	.faq-item:not(.open) .faq-question:hover span:first-child {
 		transform: translateX(4px);
@@ -2308,7 +2306,13 @@ button .icon {
 		width: 100%;
 	}
 
-	/* Button Hovers */
+  .theme-toggle:active {
+    background: var(--hover-btn);
+    transform: none;
+  }
+  .theme-toggle:active .icon {
+    translate: 0 2px;
+  }
 
 	/* Footer Hover */
 	.footer-links a:is(:hover, :active) {

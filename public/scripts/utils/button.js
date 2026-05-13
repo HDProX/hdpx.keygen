@@ -40,9 +40,22 @@
     applyTheme(saved);
     document.querySelectorAll('.theme-toggle').forEach(btn => {
       btn.addEventListener('click', toggleTheme);
-      btn.addEventListener('touchend', () => btn.blur());
+
+      // Fix stuck :active on Android — class-based instead of CSS :active
+      btn.addEventListener('touchstart', () => {
+        btn.classList.add('is-active');
+      }, { passive: true });
+
+      btn.addEventListener('touchend', () => {
+        setTimeout(() => btn.classList.remove('is-active'), 150);
+        btn.blur();
+      });
+
+      btn.addEventListener('touchcancel', () => {
+        btn.classList.remove('is-active');
+      });
     });
-    // Jika belum ada preferensi tersimpan, ikut perubahan OS secara real-time
+
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
       if (getSavedTheme() === null) applyTheme(null);
     });
