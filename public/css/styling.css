@@ -479,9 +479,9 @@ body {
 	color: var(--text-secondary);
 }
 
-/* .language-btn .lang-label {
+.language-btn .lang-label {
   margin-top: -2px;
-} */
+}
 
 .language-btn .icon-lang {
   width: 22px;
@@ -1289,6 +1289,10 @@ button .icon {
 
 	.detail-row {
 		align-items: center;
+	}
+
+	.language-btn .lang-label {
+		margin-top: 0;
 	}
 }
 
