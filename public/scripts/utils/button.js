@@ -163,7 +163,7 @@
         setTimeout(() => {
           this.classList.remove('is-active');
           navigateTo(target);
-        }, 100);
+        }, 150);
       });
     });
   });

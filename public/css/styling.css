@@ -1179,7 +1179,7 @@ button .icon {
 	width: 0;
 	height: 1.5px;
 	background-color: var(--color-primary);
-	transition: width 0.3s ease;
+	transition: width 0.2s ease;
 }
 
 .navigate-link.is-active::after {
@@ -1194,7 +1194,7 @@ button .icon {
 	width: 14px;
 	height: 14px;
 	background: currentColor;
-  transition: translate 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: translate 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: translate;
 }
 
