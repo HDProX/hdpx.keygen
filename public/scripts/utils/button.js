@@ -156,14 +156,16 @@
     document.querySelectorAll('.navigate-link[data-navigate]').forEach(link => {
       link.addEventListener('click', function () {
         const target = this.dataset.navigate;
-        
-        // Trigger animasi dulu
-        this.classList.add('is-active');
-        
-        setTimeout(() => {
-          this.classList.remove('is-active');
+        const el = this;
+
+        el.classList.add('is-active');
+
+        // Tunggu semua transisi selesai baru navigate
+        el.addEventListener('transitionend', function handler() {
+          el.removeEventListener('transitionend', handler);
+          el.classList.remove('is-active');
           navigateTo(target);
-        }, 300);
+        });
       });
     });
   });
