@@ -37,9 +37,10 @@
 
   function initTheme() {
     const saved = getSavedTheme();
-    applyTheme(saved); // null → ikut system, 'light'/'dark' → pakai yang tersimpan
+    applyTheme(saved);
     document.querySelectorAll('.theme-toggle').forEach(btn => {
       btn.addEventListener('click', toggleTheme);
+      btn.addEventListener('touchend', () => btn.blur());
     });
     // Jika belum ada preferensi tersimpan, ikut perubahan OS secara real-time
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
