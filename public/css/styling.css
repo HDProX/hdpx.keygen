@@ -2072,14 +2072,27 @@ button .icon {
 	text-decoration: none;
 	margin-bottom: 10px;
 	position: relative;
+	border: none;
+	padding: 0;
+}
+
+.navigate-link::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 1.5px;
+	background-color: var(--color-primary);
 	transition: width 0.3s ease;
 }
 
 .navigate-link .icon {
-	margin-top: 3px;
 	width: 14px;
 	height: 14px;
 	background: currentColor;
+  transition: translate 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: translate;
 }
 
 
@@ -2387,7 +2400,8 @@ button .icon {
 	.btn.logout:hover::after,
 	.btn.delete:hover::after,
 	.btn.outline:hover::after,
-	.btn.connect:hover::after {
+	.btn.connect:hover::after,
+	.navigate-link:hover::after {
 		width: 100%;
 	}
 
@@ -2404,6 +2418,10 @@ button .icon {
 		background: var(--menu-hover);
 		color: var(--color-primary);
 	}
+
+	.navigate-link:hover .icon {
+    translate: 3px 0;
+  }
 
   .theme-toggle:hover {
     background: var(--hover-btn);
