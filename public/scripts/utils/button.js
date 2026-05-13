@@ -162,8 +162,8 @@
         
         setTimeout(() => {
           this.classList.remove('is-active');
-          navigateTo(target); // baru navigasi setelah 300ms
-        }, 300);
+          navigateTo(target);
+        }, 500);
       });
     });
   });
