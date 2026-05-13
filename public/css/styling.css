@@ -1182,8 +1182,12 @@ button .icon {
 	transition: width 0.3s ease;
 }
 
-.navigate-link.is-active {
-	width: 100%;
+.navigate-link.is-active::after {
+  width: 100%;
+}
+
+.navigate-link.is-active .icon {
+  translate: 5px 0;
 }
 
 .navigate-link .icon {
@@ -2468,11 +2472,10 @@ button .icon {
 		transform: rotate(180deg);
 	}
 
+	.navigate-link.is-active::after {
+    width: 100%;
+  }
 	.navigate-link.is-active .icon {
     translate: 3px 0;
-  }
-  
-  .navigate-link.is-active::after {
-    width: 100%;
   }
 }

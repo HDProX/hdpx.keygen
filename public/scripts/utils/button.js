@@ -151,6 +151,21 @@
     initTheme();
     initLanguageWidgets();
     attachTouchActive('button, .navigate-link');
+
+    // Navigate link dengan delay untuk animasi
+    document.querySelectorAll('.navigate-link[data-navigate]').forEach(link => {
+      link.addEventListener('click', function () {
+        const target = this.dataset.navigate;
+        
+        // Trigger animasi dulu
+        this.classList.add('is-active');
+        
+        setTimeout(() => {
+          this.classList.remove('is-active');
+          navigateTo(target); // baru navigasi setelah 300ms
+        }, 300);
+      });
+    });
   });
 
   window.LanguageWidget = { init: initLanguageWidgets };
