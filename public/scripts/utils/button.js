@@ -128,7 +128,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initLanguageWidgets();
-    attachTouchActive();
+    attachTouchActive('button, .navigate-link');
   });
 
   window.LanguageWidget = { init: initLanguageWidgets };
