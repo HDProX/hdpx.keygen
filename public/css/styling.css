@@ -479,9 +479,9 @@ body {
 	color: var(--text-secondary);
 }
 
-.language-btn .lang-label {
+/* .language-btn .lang-label {
   margin-top: -2px;
-}
+} */
 
 .language-btn .icon-lang {
   width: 22px;
