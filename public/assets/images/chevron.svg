@@ -2,10 +2,17 @@
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
-  viewBox="0 0 24 24"
+  viewBox="-8 -5 24 24"
+  fill="currentColor"
 >
-  <path
-    fill="currentColor"
-    d="M18.53 9.53a.75.75 0 0 0 0-1.06H5.47a.75.75 0 0 0 0 1.06l6 6a.75.75 0 0 0 1.06 0z"
-  />
+  <path d="
+    m5.314 7.071
+    -4.95-4.95
+    A1 1 0 0 1 1.778.707
+    l5.657 5.657
+    a1 1 0 0 1 0 1.414
+    l-5.657 5.657
+    a1 1 0 0 1-1.414-1.414
+    z
+  " />
 </svg>

@@ -62,44 +62,6 @@
   }
 
   // ──────────────────────────────────────────────
-  // THEME
-  // ──────────────────────────────────────────────
-  function setTheme(theme) {
-    if (theme === "dark") {
-      document.body.classList.add("dark");
-      localStorage.setItem("keygen-theme", "dark");
-    } else {
-      document.body.classList.remove("dark");
-      localStorage.setItem("keygen-theme", "light");
-    }
-  }
-
-  function initTheme() {
-    const saved = localStorage.getItem("keygen-theme");
-    const prefersDark = global.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (saved === "dark" || (!saved && prefersDark)) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }
-
-  function initThemeToggle() {
-    ["darkModeToggle", "mobileThemeToggle"].forEach(function (id) {
-      const btn = document.getElementById(id);
-      if (btn) {
-        btn.addEventListener("click", function () {
-          document.body.classList.contains("dark")
-            ? setTheme("light")
-            : setTheme("dark");
-        });
-      }
-    });
-  }
-
-  initTheme();
-
-  // ──────────────────────────────────────────────
   // TOAST NOTIFICATION
   // ──────────────────────────────────────────────
   var toastTimeout;
@@ -456,7 +418,7 @@
       var action = item.dataset.action;
       if (!action) return;
       var newItem = item.cloneNode(true);
-      newItem.removeAttribute("onclick"); // ← hapus onclick attribute dari HTML
+      newItem.removeAttribute("onclick");
       item.parentNode.replaceChild(newItem, item);
       newItem.addEventListener("click", function () {
         var page = ACTION_TO_PAGE[action];
@@ -502,14 +464,17 @@
       var loginBtn   = document.getElementById("menuLoginBtn");
       var menuEmail  = document.getElementById("menuEmail");
       var menuAvatar = document.getElementById("menuAvatar");
+      var logoutDiv = document.getElementById("menuLogoutDivider");
+      var userRow = document.getElementById("menuUserRow");
 
       if (!email) {
-        if (menuAvatar) menuAvatar.style.display = "none";
-        if (menuEmail)  menuEmail.textContent     = "";
+        if (userRow)    userRow.style.display     = "none";
         if (accountBtn) accountBtn.style.display  = "none";
         if (logoutBtn)  logoutBtn.style.display   = "none";
+        if (logoutDiv)  logoutDiv.style.display   = "none";
         if (loginBtn) {
           loginBtn.style.display = "";
+          loginBtn.style.marginTop = "20px";
           loginBtn.onclick = function () {
             closeMenu();
             if (global.Switcher) global.Switcher.redirect("/login");
@@ -537,7 +502,9 @@
           }
         }
         if (accountBtn) accountBtn.style.display = "";
+        if (accountBtn) accountBtn.style.marginTop = "";
         if (logoutBtn)  logoutBtn.style.display  = "";
+        if (logoutDiv)  logoutDiv.style.display   = "";
         if (loginBtn)   loginBtn.style.display   = "none";
       }
     }, 0);
@@ -557,17 +524,15 @@
   // NAVIGATION — navigateTo (SPA router)
   // ──────────────────────────────────────────────
   async function navigateTo(page) {
-    // ── Halaman standalone — buka tab baru, jangan ganggu panel sekarang ──
-    if (page === "pricing") {
-      global.open("/pricing/", "_blank");
-      return;
-    }
-    if (page === "redeem") {
-      global.open("/activate/", "_blank");
-      return;
-    }
-    if (page === "support") {
-      global.open("/support-center/", "_blank");
+    // Tab Standalone
+    var STANDALONE_PAGES = {
+      "pricing" : "/pricing/",
+      "redeem"  : "/activate/",
+      "support" : "/support-center/",
+    };
+
+    if (STANDALONE_PAGES[page]) {
+      global.open(STANDALONE_PAGES[page], "_blank");
       return;
     }
 
@@ -730,18 +695,17 @@
   // ──────────────────────────────────────────────
   function initNavigate() {
 
-    // Cek expired saat halaman dibuka
-    if (isSessionExpired() && sessionStorage.getItem("app_email")) {
-      clearExpiredSession();
-      showToast("Session expired. Please login again.");
-      setTimeout(() => {
-        if (global.Switcher) global.Switcher.redirect("/login");
-        else location.href = "/login";
-      }, 1500);
-      return; // stop init
-    }
+    // // Cek expired saat halaman dibuka
+    // if (isSessionExpired() && sessionStorage.getItem("app_email")) {
+    //   clearExpiredSession();
+    //   showToast("Session expired. Please login again.");
+    //   setTimeout(() => {
+    //     if (global.Switcher) global.Switcher.redirect("/login");
+    //     else location.href = "/login";
+    //   }, 1500);
+    //   return; // stop init
+    // }
 
-    initThemeToggle();
     initBurgerMenu();
     initBurgerMenuNavItems();
     initMenuButtons();
@@ -749,7 +713,6 @@
     initChipState();
     initScrollbarHover();
     initAppNamePlaceholders();
-    initTopbarOverflowDetect();
     checkInitialRoute();
   }
 
@@ -766,8 +729,6 @@
     getEmail                : getEmail,
     getAppName              : getAppName,
     getAppVer               : getAppVer,
-    setTheme                : setTheme,
-    initTheme               : initTheme,
     showToast               : showToast,
     logoutUser              : logoutUser,
     closeChipPopup          : closeChipPopup,
@@ -788,7 +749,6 @@
   global.showToast        = showToast;
   global.logoutUser       = logoutUser;
   global.closeChipPopup   = closeChipPopup;
-  global.setTheme         = setTheme;
   global.navigateTo       = navigateTo;
   global.updateActiveMenu = updateActiveMenu;
   global.hideAllPanels    = hideAllPanels;

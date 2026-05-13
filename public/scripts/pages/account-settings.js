@@ -1,7 +1,7 @@
 // =============================================================================
 // ACCOUNT SETTINGS
 // Handles account state, UI updates, event binding, tab switching, and FAQ.
-// Dependencies: button.js (createRipple), navigate.js (Navigate), ChangePassword
+// Dependencies: navigate.js (Navigate), ChangePassword
 // =============================================================================
 
 
@@ -74,11 +74,11 @@ function updateGoogleUI() {
   if (isGoogleConnected) {
     _setTextContent(status,  `Connected to ${googleEmail}`);
     _setHTML(btn, "<span>Disconnect</span>");
-    _setClass(btn, "btn-disconnect");
+    _setClass(btn, "btn disconnect");
   } else {
     _setTextContent(status, "Not connected");
-    _setHTML(btn, "+ Connect");
-    _setClass(btn, "btn-connect");
+    _setHTML(btn, "<span class=\"icon icon-plus\"></span><span>Connect</span>");
+    _setClass(btn, "btn connect");
   }
 }
 
@@ -90,11 +90,11 @@ function updateFacebookUI() {
   if (isFacebookConnected) {
     _setTextContent(status, `Connected to ${facebookEmail || "facebook@example.com"}`);
     _setHTML(btn, "<span>Disconnect</span>");
-    _setClass(btn, "btn-disconnect");
+    _setClass(btn, "btn disconnect");
   } else {
     _setTextContent(status, "Not connected");
-    _setHTML(btn, "+ Connect");
-    _setClass(btn, "btn-connect");
+    _setHTML(btn, "<span class=\"icon icon-plus\"></span><span>Connect</span>");
+    _setClass(btn, "btn connect");
   }
 }
 
@@ -120,14 +120,14 @@ const ACCOUNT_SETTINGS_HTML = `
         <div class="detail-label">Email address</div>
         <div class="detail-value" id="displayEmail">{userEmail}</div>
       </div>
-      <button class="btn-outline" id="changeEmailBtn">Change email</button>
+      <button class="btn outline" id="changeEmailBtn">Change email</button>
     </div>
     <div class="detail-row">
       <div class="detail-left">
         <div class="detail-label">Password</div>
         <div class="detail-hint">Never share your password with anyone.</div>
       </div>
-      <button class="btn-outline" id="changePasswordBtn">Change password</button>
+      <button class="btn outline" id="changePasswordBtn">Change password</button>
     </div>
   </div>
 
@@ -140,7 +140,7 @@ const ACCOUNT_SETTINGS_HTML = `
         <div class="provider-name">Google</div>
         <div class="provider-status" id="googleStatus">Connected to {userEmail}</div>
       </div>
-      <button class="btn-disconnect" id="disconnectGoogleBtn"><span>Disconnect</span></button>
+      <button class="btn disconnect" id="disconnectGoogleBtn"><span>Disconnect</span></button>
     </div>
     <div class="connected-item">
       <div class="provider-row">
@@ -148,7 +148,10 @@ const ACCOUNT_SETTINGS_HTML = `
         <div class="provider-name">Facebook</div>
         <div class="provider-status" id="facebookStatus">Not connected</div>
       </div>
-      <button class="btn-connect" id="connectFacebookBtn">+ Connect</button>
+      <button class="btn connect" id="connectFacebookBtn">
+      <span class="icon icon-plus"></span>
+      <span>Connect</span>
+      </button>
     </div>
   </div>
 
@@ -163,7 +166,7 @@ const ACCOUNT_SETTINGS_HTML = `
           and agree to the account termination.
         </div>
       </div>
-      <button class="btn-delete" id="deleteAccountBtn">Delete account</button>
+      <button class="btn delete" id="deleteAccountBtn">Delete account</button>
     </div>
   </div>
 
@@ -189,7 +192,7 @@ const ACCOUNT_SETTINGS_HTML = `
               OFF
             </div>
           </div>
-          <button class="btn-outline" id="manageMfaBtn">Manage MFA</button>
+          <button class="btn outline" id="manageMfaBtn">Manage MFA</button>
         </div>
       </div>
     </div>
@@ -337,86 +340,82 @@ function initAccountSettingsEvents() {
 // -----------------------------------------------------------------------------
 
 function _onGoogleToggle(e) {
-  _rippleThen(e, () => {
-    if (!isGoogleConnected) {
-      const email = prompt("Connect Google Account\nEnter your email:", "user@gmail.com");
-      if (email?.trim()) {
-        isGoogleConnected = true;
-        googleEmail       = email.trim();
-        updateGoogleUI();
-        showToast(`Google connected as ${googleEmail}`);
-      } else {
-        showToast("Cancelled", true);
-      }
-    } else {
-      isGoogleConnected = false;
-      googleEmail       = "";
+  if (!isGoogleConnected) {
+    const email = prompt("Connect Google Account\nEnter your email:", "user@gmail.com");
+    if (email?.trim()) {
+      isGoogleConnected = true;
+      googleEmail       = email.trim();
       updateGoogleUI();
-      showToast("Google account disconnected.");
+      showToast(`Google connected as ${googleEmail}`);
+    } else {
+      showToast("Cancelled", true);
     }
-  });
+  } else {
+    isGoogleConnected = false;
+    googleEmail       = "";
+    updateGoogleUI();
+    showToast("Google account disconnected.");
+  }
 }
 
 function _onFacebookToggle(e) {
-  _rippleThen(e, () => {
-    if (isFacebookConnected) {
-      isFacebookConnected = false;
-      facebookEmail       = "";
+  if (isFacebookConnected) {
+    isFacebookConnected = false;
+    facebookEmail       = "";
+    updateFacebookUI();
+    showToast("Facebook account disconnected.");
+  } else {
+    const email = prompt("Connect Facebook Account\nEnter your email:", "user@facebook.com");
+    if (email?.trim()) {
+      isFacebookConnected = true;
+      facebookEmail       = email.trim();
       updateFacebookUI();
-      showToast("Facebook account disconnected.");
+      showToast(`Facebook connected as ${facebookEmail}`);
     } else {
-      const email = prompt("Connect Facebook Account\nEnter your email:", "user@facebook.com");
-      if (email?.trim()) {
-        isFacebookConnected = true;
-        facebookEmail       = email.trim();
-        updateFacebookUI();
-        showToast(`Facebook connected as ${facebookEmail}`);
-      } else {
-        showToast("Cancelled", true);
-      }
+      showToast("Cancelled", true);
     }
-  });
+  }
 }
 
 function _onChangeEmail(e) {
-  _rippleThen(e, () => {
-    const newEmail = prompt("Change Email", currentEmail);
-    if (!newEmail) return;
+  const newEmail = prompt("Change Email", currentEmail);
+  if (!newEmail) return;
 
-    if (!newEmail.includes("@")) {
-      showToast("Invalid email address.", true);
-      return;
-    }
+  if (!newEmail.includes("@")) {
+    showToast("Invalid email address.", true);
+    return;
+  }
 
-    if (confirm(`Send verification to ${newEmail}?`)) {
-      currentEmail = newEmail.trim();
-      _applyEmailToDOM(currentEmail);
-      showToast(`Email updated to ${currentEmail}`);
-    }
-  });
+  if (confirm(`Send verification to ${newEmail}?`)) {
+    currentEmail = newEmail.trim();
+    _applyEmailToDOM(currentEmail);
+    showToast(`Email updated to ${currentEmail}`);
+  }
 }
 
 function _onChangePassword(e) {
-  _rippleThen(e, () => {
-    if (typeof ChangePassword?.open === "function") {
-      ChangePassword.open();
-    }
-  });
+  if (typeof ChangePassword?.open === "function") {
+    ChangePassword.open();
+  }
 }
 
 function _onDeleteAccount(e) {
-  _rippleThen(e, () => {
+  const btn = e.currentTarget;
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.disabled = false;
     const verification = prompt("To confirm, enter your email address:", currentEmail);
     if (verification === currentEmail && confirm("Permanently delete your account? This cannot be undone.")) {
       showToast("Account deletion request submitted.");
     } else {
       showToast("Cancelled", true);
     }
-  });
+  }, 1000);
 }
 
 function _onManageMfa(e) {
-  _rippleThen(e, () => switchTab("mfa"));
+  switchTab("mfa");
 }
 
 
@@ -501,19 +500,6 @@ function _bindButton(id, handler, skipClone = false) {
   fresh.addEventListener("click", handler);
 }
 
-/**
- * Fires the ripple animation, then executes `action` after the animation completes.
- * Captures `e.currentTarget` immediately — before the event cycle ends — so
- * createRipple can reference the correct element.
- *
- * @param {MouseEvent} e
- * @param {Function}   action
- * @param {number}     [delay=550] - Milliseconds to wait after ripple before running action.
- */
-function _rippleThen(e, action, delay = 550) {
-  createRipple(e, e.currentTarget);
-  setTimeout(action, delay);
-}
 
 /**
  * Sets textContent on a DOM element referenced by ID or direct reference.

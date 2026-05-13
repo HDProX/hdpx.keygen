@@ -8,6 +8,7 @@
 	box-sizing: border-box;
 	user-select: none;
 	touch-action: manipulation;
+	font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, sans-serif;
 	-webkit-tap-highlight-color: transparent;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -21,107 +22,96 @@ textarea,
 }
 
 :root {
-	--bg-body: #ebf1f9;
-	--bg-sidebar: #e4edf6;
-	--bg-card: #ffffff;
-	--bg-topbar: #ffffff;
-	--text-primary: #1a2c3e;
-	--text-secondary: #5b6e8c;
-	--text-muted: #7d8eaa;
-	--border-light: #cbd5e1;
-	--border-input: #cbd5e1;
-	--color-primary: #0861e7;
-	--color-primary-hover: #05439f;
-	--button-bg: rgba(5, 67, 159, 0.3);
-	--accent-purple: #7f56d9;
-	--accent-purple-hover: #6b46c1;
-	--accent-red: #e53e3e;
-	--logout-btn-bg: rgba(248, 113, 113, 0.3);
-	--accent-red-hover: #c53030;
-	--hover-btn: #f8f9fa;
-	--accent-gray: #d9dfe7;
-	--accent-gray-hover: #e2e8f0;
-	--connected-badge-bg: #e6f7e6;
-	--connected-badge-text: #2e7d32;
-	--disconnect-btn: #e53e3e;
-	--disconnect-btn-bg: #fff5f5;
-	--footer-text: #6c7a91;
-	--shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
-	--shadow-md: 0 8px 24px rgba(0, 0, 0, 0.05);
+	--bg-body:                     #ebf1f9;
+	--bg-sidebar:                  #d6e4f5;
+	--bg-card:                     #ffffff;
+	--bg-topbar:                   #ffffff;
+	--text-primary:                #1a2c3e;
+	--text-secondary:              #5b6e8c;
+	--text-muted:                  #7d8eaa;
+	--border-light:                #cbd5e1;
+	--border-input:                #cbd5e1;
+	--divider:                     #c9d0d8;
+  --border-rgb:                  rgba(203, 213, 225, 0.5);
+	--color-primary:               #0861e7;
+	--color-primary-hover:         #05439f;
+	--button-bg:                   rgba(5, 67, 159, 0.3);
+	--accent-purple:               #7f56d9;
+	--accent-purple-hover:         #6b46c1;
+	--accent-red:                  #e53e3e;
+	--accent-red-hover:            #c53030;
+	--logout-btn-bg:               rgba(248, 113, 113, 0.3);
+	--accent-gray:                 #d9dfe7;
+	--accent-gray-hover:           #e2e8f0;
+	--connected-badge-bg:          #e6f7e6;
+	--connected-badge-text:        #2e7d32;
+	--accent-green:                #34bd34;
+	--disconnect-btn:              #e53e3e;
+	--disconnect-btn-bg:           #fff5f5;
+	--footer-text:                 #6c7a91;
+	--hover-btn:                   #d6e4f5;
+	--hover-link:                  rgba(26, 44, 62, 0.2);
+	--icon-color:                  #5b6e8c;
+	--avatar-bg:                   #0861e7;
+	--menu-hover:                  #c4d6eb;
+	--menu-active:                 var(--bg-body);
+	--shadow-sm: 0 4px 12px        rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 8px 24px        rgba(0, 0, 0, 0.05);
 	--shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
-	--divider: #c9d0d8;
-	--menu-bg: #e4edf6;
-	--menu-hover: #c4d2e2;
-	--menu-border: #cbd5e1;
-	--menu-active: #f1f5f9;
-	--avatar-bg: #0861e7;
-	--icon-color: #5b6e8c;
 	--sidebar-width: 250px;
 	--topbar-height: 56px;
-	--hover-link: rgba(26, 44, 62, 0.2);
 }
 
 body.dark {
-	--bg-body: #060a11;
-	--bg-sidebar: #06090e;
-	--bg-card: #151e2e;
-	--bg-topbar: #1A1A1A;
-	--text-primary: #F5F5F5;
-	--text-secondary: #cbd5e6;
-	--text-muted: #94a3b8;
-	--border-light: #1e2d45;
-	--border-input: #3b4a62;
-	--accent-purple: #7f56d9;
-	--accent-purple-hover: #6b46c1;
-	--accent-red: #f87171;
-	--accent-red-hover: #ef4444;
-	--hover-btn: #2d1f2a;
-	--accent-gray: #263244;
-	--accent-gray-hover: #475569;
-	--connected-badge-bg: #1e3a2f;
-	--connected-badge-text: #86efac;
-	--disconnect-btn: #f97373;
-	--disconnect-btn-bg: #2d1f2a;
-	--footer-text: #8ba0bc;
-	--shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-	--shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+	--bg-body:                     #060a11;
+	--bg-sidebar:                  #111c2a;
+	--bg-card:                     #151e2e;
+	--bg-topbar:                   #1A1A1A;
+	--text-primary:                #F5F5F5;
+	--text-secondary:              #cbd5e6;
+	--text-muted:                  #94a3b8;
+	--border-light:                #1e2d45;
+	--border-input:                #3b4a62;
+  --border-rgb:                  rgba(26, 44, 62, 0.5);
+	--divider:                     #333333;
+	--accent-purple:               #7f56d9;
+	--accent-purple-hover:         #6b46c1;
+	--accent-green:                #34bd34;
+	--accent-red:                  #f87171;
+	--accent-red-hover:            #ef4444;
+	--hover-btn:                   #111c2a;
+	--accent-gray:                 #263244;
+	--accent-gray-hover:           #475569;
+	--connected-badge-bg:          #1e3a2f;
+	--connected-badge-text:        #86efac;
+	--disconnect-btn:              #f97373;
+	--disconnect-btn-bg:           #2d1f2a;
+	--footer-text:                 #8ba0bc;
+	--shadow-sm: 0 4px 12px        rgba(0, 0, 0, 0.3);
+	--shadow-md: 0 8px 24px        rgba(0, 0, 0, 0.3);
 	--shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.4);
-	--divider: #333333;
-	--menu-bg: #06090e;
-	--menu-hover: #1a2540;
-	--menu-border: #172235;
-	--menu-active: #0a0f1a;
-	--icon-color: #94a3b8;
-	--hover-link: #334155;
+	--menu-hover:                  #0b111d;
+	--menu-active:                 #090e18;
+	--icon-color:                  #94a3b8;
+	--hover-link:                  #334155;
 }
 
+/* Background Gradients */
 body:not(.dark) {
 	background: radial-gradient(ellipse at top right,
-		#e8f0fb 0%, #eef2f8 60%, #f5f7fc 100%);
+			#e8f0fb 0%, #eef2f8 60%, #f5f7fc 100%);
 }
 
 body.dark {
 	background: radial-gradient(ellipse at top right,
-		#0b1625 0%, #04080e 60%, #04070c 100%);
+			#0b1625 0%, #04080e 60%, #04070c 100%);
 }
-
-body:not(.dark) .topbar {
-	background: transparent;
-	/* border-bottom: 1px solid rgba(0, 0, 0, 0.06); */
-}
-
-body.dark .topbar {
-	background: transparent;
-	/* border-bottom: 1px solid rgba(255, 255, 255, 0.05); */
-}
-
 
 /* ============================================================
    2. BASE STYLES
    ============================================================ */
 
 body {
-	font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, sans-serif;
 	background-color: var(--bg-body);
 	color: var(--text-primary);
 	transition: background-color 0.2s ease, color 0.2s ease;
@@ -135,6 +125,7 @@ body {
 	height: 100vh;
 	min-height: 100vh;
 }
+
 
 /* ============================================================
    3. SCROLLBAR STYLES
@@ -171,6 +162,7 @@ body {
 	background: var(--text-muted);
 }
 
+
 /* ============================================================
    4. LAYOUT - APP & SIDEBAR
    ============================================================ */
@@ -181,10 +173,10 @@ body {
 	width: 100%;
 }
 
+/* Sidebar */
 .sidebar {
 	width: var(--sidebar-width);
 	background: var(--bg-sidebar);
-	border-right: 1px solid var(--border-light);
 	display: flex;
 	flex-direction: column;
 	position: fixed;
@@ -193,24 +185,26 @@ body {
 	height: 100vh;
 	overflow-y: auto;
 	z-index: 200;
-	scrollbar-width: none;
 	opacity: 1;
 	transform: translateX(0);
 	transition: opacity 0.3s ease, transform 0.3s ease;
 	pointer-events: auto;
 	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 
 .redeem-sidebar::-webkit-scrollbar {
 	display: none;
 }
 
+/* Brand */
 .brand-icon {
 	display: flex;
 	align-items: center;
+  height: var(--topbar-height);
 	gap: 10px;
 	padding: 18px 20px 16px;
-	border-bottom: 1px solid var(--border);
+	border-bottom: 1px solid var(--border-rgb);
 }
 
 .brand-icon .icon {
@@ -234,6 +228,7 @@ body {
 	line-height: 1.3;
 }
 
+/* Sidebar Navigation */
 .sidebar-nav {
 	flex: 1;
 	padding: 12px 0;
@@ -256,6 +251,15 @@ body {
 	user-select: none;
 	overflow: hidden;
 	z-index: 1;
+}
+
+.nav-item .icon {
+  width: 20px;
+  height: 20px;
+  background-color: var(--icon-color);
+  border-radius: 100px;
+  flex-shrink: 0;
+  transition: background-color 0.25s ease;
 }
 
 .nav-item.active::before {
@@ -282,12 +286,6 @@ body {
 	background-color: var(--color-primary);
 }
 
-.divider {
-	height: 1px;
-	background: var(--border-light);
-	margin: 8px 0;
-}
-
 /* ============================================================
    5. TOPBAR (DESKTOP)
    ============================================================ */
@@ -304,13 +302,14 @@ body {
 	padding: 0 32px;
 	z-index: 100;
 	transition: opacity 0.3s ease, transform 0.3s ease;
+  border-bottom: 1px solid var(--border-rgb);
 }
 
 .topbar-title {
 	min-width: 200px;
 	color: var(--text-primary);
 	font-size: 1.25rem;
-	font-weight: 500;
+	font-weight: 700;
 }
 
 .topbar-right {
@@ -319,38 +318,42 @@ body {
 	gap: 8px;
 }
 
-.support-link {
-	display: flex;
-	align-items: center;
+/* Support Link */
+.support-btn {
+  display: flex;
+  align-items: center;
 	justify-content: center;
-	gap: 6px;
-	font-size: 13px;
-	color: var(--icon-color);
-	text-decoration: none;
-	cursor: pointer;
-	height: 35px;
-	min-width: 150px;
-	border-radius: 100px;
-	transition: background 0.15s;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
 }
 
-.support-link .icon {
-	width: 18px;
-	height: 18px;
-	background-color: var(--icon-color);
-	border-radius: 4px;
+.support-btn span:not(.icon) {
+  margin-top: -1px;
 }
 
-.support-link:active {
-	background-color: var(--menu-hover);
-	padding-top: 2px;
+.support-btn .icon {
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
 }
+
+.support-btn:active { background: var(--menu-hover); padding-top: 2px; }
 
 /* User Chip */
 .user-chip {
 	position: relative;
-  	overflow: hidden;
-	height: 38px;
+	overflow: hidden;
+	height: 34px;;
 	width: fit-content;
 	display: flex;
 	align-items: center;
@@ -441,17 +444,20 @@ body {
 }
 
 .theme-toggle {
-	width: 35px;
-	height: 35px;
-	border-radius: 100px;
-	background: transparent;
-	border: 1px solid transparent;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: background 0.2s;
-	z-index: 1000;
+  height: 34px;
+  width: 34px;
+	padding: 0;
+	border: none;
+	color: var(--text-secondary);
+}
+
+.theme-toggle:active .icon {
+	translate: 0 2px;
+}
+
+.theme-toggle:active {
+	background: var(--hover-btn);
+	transform: none;
 }
 
 .theme-toggle.mobile {
@@ -460,102 +466,81 @@ body {
 	right: 16px;
 }
 
-.theme-toggle .icon {
-	width: 18px;
-	height: 18px;
-	background-color: var(--icon-color);
-	border-radius: 4px;
-}
-
-.theme-toggle:active {
-	background-color: var(--menu-hover);
-	padding-top: 2px;
-}
-
 /* Language Button */
 .language-wrapper {
 	position: relative;
 }
 
 .language-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	justify-items: center;
-	height: 35px;
-	gap: 5px;
-	padding: 0 14px;
-	border-radius: 100px;
-	border: 1px solid var(--border-light);
-	background: transparent;
-	color: var(--text-secondary);
-	font-size: 13px;
+  gap: 5px;
+  height: 34px;;
+  padding: 0 10px;
 	font-weight: 500;
-	cursor: pointer;
-	transition: background 0.15s, color 0.15s;
-	white-space: nowrap;
+	color: var(--text-secondary);
+}
+
+.language-btn .lang-label {
+  margin-top: -2px;
 }
 
 .language-btn .icon-lang {
-	width: 18px;
-	height: 18px;
-	margin-top: -1px;
+  width: 22px;
+  height: 22px;
 }
 
-.language-btn .btn-chev {
-	width: 16px;
-	height: 16px;
+.language-btn .icon-chevron {
+  width: 14px;
+  height: 14px;
+  transform: rotate(90deg);
 }
 
-.language-btn.open {
-	background: var(--menu-hover);
-	color: var(--text-primary);
+.language-btn.open,
+.language-btn:active {
+	background: var(--hover-btn);
+	border-color: var(--hover-btn);
+	color: var(--color-primary);
 }
 
-.language-btn.open .icon {
-	background-color: currentColor;
-}
-
-/* Dropdown */
 .language-dropdown {
-	position: absolute;
-	top: calc(100% + 8px);
-	right: 0;
-	min-width: 190px;
-	background: var(--bg-body);
-	border: 1px solid var(--border-light);
-	border-radius: 12px;
-	box-shadow: var(--shadow-lg);
-	padding: 10px;
-	z-index: 500;
-	display: none;
-	flex-direction: column;
-	gap: 2px;
-	animation: fadeUp 0.15s ease-out both;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 190px;
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 8px;
+  z-index: 500;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .language-dropdown.open {
-	display: flex;
+  display: flex;
 }
 
 .lang-option {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 10px 12px;
-	border-radius: 8px;
+  display: flex;
+	justify-content: flex-start;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
 	border: none;
-	background: transparent;
-	color: var(--text-secondary);
-	font-size: 13px;
+	font-size: 0.8rem;
 	font-weight: 500;
-	cursor: pointer;
-	text-align: left;
-	transition: background 0.15s, color 0.15s;
+	color: var(--text-muted);
+}
+
+.lang-option:active {
+	background: var(--menu-hover);
+	color: var(--color-primary);
+	transform: none;
 }
 
 .lang-option.active {
-	background: var(--bg-card);
+	background: var(--menu-hover);
 	color: var(--color-primary);
 }
 
@@ -601,12 +586,11 @@ body {
 	font-weight: 500;
 	color: var(--text-muted);
 	cursor: pointer;
-	font-family: inherit;
 	transition: color 0.25s ease;
 	white-space: nowrap;
 	margin-bottom: -1px;
-  display: inline-block;
-  transition: color 0.25s ease, transform 0.15s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+	display: inline-block;
+	transition: color 0.25s ease, transform 0.15s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
 .tab-btn::after {
@@ -622,7 +606,7 @@ body {
 }
 
 .tab-btn:active::after {
-  animation: underline-replay 0.3s ease forwards;
+	animation: underline-replay 0.3s ease forwards;
 }
 
 .tab-btn.active {
@@ -707,33 +691,6 @@ body {
 	margin-top: 8px;
 }
 
-.btn-outline {
-	position: relative;
-	overflow: hidden;
-	background: none;
-	border: 1px solid var(--border-light);
-	border-radius: 40px;
-	padding: 10px 20px;
-	font-size: 12.5px;
-	font-weight: 500;
-	color: var(--text-primary);
-	cursor: pointer;
-	font-family: inherit;
-	white-space: nowrap;
-	flex-shrink: 0;
-	transition: background 0.15s, border-color 0.15s;
-}
-
-.btn-outline:active {
-	background: var(--text-muted);
-	border-color: var(--text-muted);
-	color: whitesmoke;
-}
-
-.btn-outline .ripple {
-  background: var(--text-muted);
-}
-
 /* Connected Accounts */
 .connected-item {
 	position: relative;
@@ -795,69 +752,6 @@ body {
 	padding-left: 40px;
 }
 
-.btn-disconnect {
-	background: none;
-	border: none;
-	padding: 10px 20px;
-	font-size: 12.5px;
-	font-weight: 500;
-	color: var(--color-primary);
-	cursor: pointer;
-	font-family: inherit;
-	white-space: nowrap;
-	flex-shrink: 0;
-	transition: color 0.3s ease;
-	min-height: 40px;
-	min-width: 100px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.btn-disconnect span {
-	position: relative;
-	display: inline-block;
-}
-
-.btn-disconnect span::after {
-	content: "";
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	width: 0;
-	height: 2px;
-	background-color: var(--color-primary);
-	transition: width 0.3s ease;
-}
-
-.btn-connect {
-		  position: relative;
-  overflow: hidden;
-	background: none;
-	border: 1px solid var(--border-light);
-	border-radius: 40px;
-	padding: 10px 20px;
-	font-size: 12.5px;
-	font-weight: 500;
-	color: var(--text-primary);
-	cursor: pointer;
-	font-family: inherit;
-	white-space: nowrap;
-	flex-shrink: 0;
-	transition: background 0.15s;
-}
-
-.btn-connect:active {
-	background: var(--text-muted);
-	border-color: var(--text-muted);
-	color: whitesmoke;
-}
-
-.btn-connect .ripple {
-  background: var(--text-muted);
-}
-
-
 /* Delete Zone */
 .delete-row {
 	display: flex;
@@ -865,33 +759,6 @@ body {
 	justify-content: space-between;
 	padding: 25px 24px;
 	gap: 12px;
-}
-
-.btn-delete {
-  position: relative;
-  overflow: hidden;
-	background: none;
-	border: 1px solid var(--border-light);
-	border-radius: 100px;
-	padding: 10px 20px;
-	font-size: 12.5px;
-	font-weight: 500;
-	color: var(--accent-red);
-	cursor: pointer;
-	font-family: inherit;
-	white-space: nowrap;
-	flex-shrink: 0;
-	transition: background 0.15s, border-color 0.15s;
-}
-
-.btn-delete:active {
-	background: var(--accent-red);
-	border-color: var(--accent-red);
-	color: whitesmoke;
-}
-
-.btn-delete .ripple {
-  background: var(--logout-btn-bg);
 }
 
 /* Footer */
@@ -981,6 +848,7 @@ body {
 	font-weight: 500;
 }
 
+
 /* ============================================================
    7. MOBILE LAYOUT
    ============================================================ */
@@ -1005,6 +873,7 @@ body {
 
 .brand-icon.mobile {
 	padding: 0;
+  border: none;
 }
 
 .burger {
@@ -1050,14 +919,15 @@ body {
 
 .menu-panel {
 	position: fixed;
-	top: 0;
-	right: 0;
-	width: 40%;
-	height: 100%;
-	background: var(--menu-bg);
+	top: 10px;
+	right: 10px;
+	width: 340px;
+	height: calc(100% - 20px);
+	padding: 0 20px 20px 20px;
+	background: var(--bg-sidebar);
 	box-shadow: var(--shadow-lg);
-	border-left: 1px solid var(--border-light);
 	transform: translateX(100%);
+	border-radius: 10px;
 	transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 	display: flex;
 	flex-direction: column;
@@ -1076,49 +946,32 @@ body {
 }
 
 .menu-topbar {
+  height: 60px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 18px 24px;
-	border-bottom: 1px solid var(--border-light);
 }
 
 .brand-icon.menu {
 	padding: 0;
-}
-
-.close-menu-btn {
-	width: 34px;
-	height: 34px;
-	border-radius: 50%;
-	border: none;
-	background: transparent;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: background 0.2s;
-}
-
-.close-menu-btn .icon {
-	background: var(--text-secondary);
+  border: none;
 }
 
 .user-row {
 	display: flex;
 	align-items: center;
 	gap: 14px;
-	padding: 24px 10px 20px 24px;
+	padding: 20px 3px;
 }
 
 .user-avatar {
-	width: 25px;
-	height: 25px;
+	width: 24px;
+	height: 24px;
 	border-radius: 50%;
 	background: var(--avatar-bg);
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 	font-size: 14px;
 	font-weight: 500;
 	color: whitesmoke;
@@ -1130,86 +983,179 @@ body {
 	font-weight: 500;
 	color: var(--text-primary);
 	word-break: break-all;
-}
-
-.settings-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 10px;
-	width: calc(100% - 48px);
-	margin: 0 24px;
-	padding: 11px 16px;
-	border: 1px solid var(--border-light);
-	border-radius: 100px;
-	background: var(--menu-active);
-	color: var(--text-secondary);
-	font-size: 13.5px;
-	font-weight: 600;
-	cursor: pointer;
-	transition: all 0.2s;
-	font-family: inherit;
-}
-
-.settings-btn:active {
-	background: var(--color-primary);
-	border-color: var(--color-primary);
-	color: whitesmoke;
-}
-
-.settings-btn .icon {
-	background: currentColor;
-}
-
-.settings-btn:active .icon {
-	background: currentColor;
+	margin-top: -2px;
 }
 
 .menu-nav {
 	flex: 1;
+	margin: 0 -15px 0 -15px;
 }
 
-.divider.menu {
-	margin: 20px 0 10px 0;
+.divider {
+  height: 1px;
+  background-color: var(--border-light);
 }
+
+.divider.menu-top    { margin: 0 -20px; }
+.divider.menu        { margin: 20px -20px 5px; }
+.divider.menu-footer { margin: 20px -20px; }
 
 .nav-item.menu {
 	gap: 16px;
-	padding: 18px 10px 18px 25px;
-	margin: 5px 10px;
+	margin: 4px 0;
+	padding: 15px 20px;
+}
+
+.nav-item.menu .icon-chevron {
+  width: 16px;
+  height: 16px;
+	margin-right: -10px;
 }
 
 .nav-label {
 	flex: 1;
 }
 
-.logout-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 10px;
-	width: calc(100% - 48px);
-	margin: 14px 24px 22px;
-	padding: 11px 16px;
-	border: 1px solid var(--border-light);
-	border-radius: 50px;
-	background: transparent;
-	color: var(--accent-red);
-	font-size: 13.5px;
-	font-weight: 500;
-	cursor: pointer;
-	transition: all 0.2s;
-	font-family: inherit;
+button,
+button .icon,
+button::after {
+	transition: all 0.3s ease;
 }
 
-.logout-btn .icon {
+button {
+	background: transparent;
+	border: 1px solid var(--border-light);
+	color: var(--text-primary);
+	cursor: pointer;
+	padding: 10px 20px;
+	gap: 10px;
+	border-radius: 100px;
+	display: flex;
+	font-size: 0.875rem;
+	font-weight: 600;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+}
+
+button::before,
+button::after {
+	content: "";
+	position: absolute;
+	z-index: -1;
+}
+
+button:active {
+  transform: scale(0.94);
+}
+
+button .icon {
 	background: currentColor;
 }
 
-.logout-btn:active {
-	background: var(--accent-red);
-	border-color: var(--accent-red);
-	color: whitesmoke
+.btn::after {
+	height: 100%;
+	left: 0;
+	top: 0;
+	width: 0;
+}
+
+.btn:active::after {
+	/* animation: btn-click 0.3s ease forwards; */
+	width: 100%;
+}
+
+.btn.settings::after {
+	background-color: var(--button-bg);
+}
+
+.btn.settings:active {
+	background: var(--color-primary);
+	border-color: var(--color-primary);
+	color: whitesmoke;
+}
+
+.btn.logout,
+.btn.delete {
+	border-color: var(--logout-btn-bg);
+	color: var(--accent-red);
+}
+
+.btn.logout::after,
+.btn.delete::after {
+	background-color: var(--logout-btn-bg);
+}
+
+.btn.delete:active,
+.btn.logout:active {
+  background: var(--accent-red);
+  border-color: var(--accent-red);
+  color: whitesmoke;
+}
+
+.btn.outline,
+.btn.connect {
+	gap: 2px;
+}
+
+.btn.connect .icon {
+	width: 16px;
+	height: 16px;
+}
+
+.btn.outline::after,
+.btn.connect::after {
+	background-color: var(--bg-body);
+}
+
+.btn.outline:active,
+.btn.connect:active {
+	background: var(--bg-body);
+	border-color: var(--bg-body);
+}
+
+.btn.disconnect {
+	border: none;
+}
+
+.btn.disconnect:active {
+	transform: none;
+}
+
+.btn.disconnect span {
+	position: relative;
+	display: inline-block;
+}
+
+.btn.disconnect span::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background-color: var(--color-primary);
+	transition: width 0.3s ease;
+}
+
+.btn.close-menu {
+	width: 30px;
+	height: 30px;
+	margin-top: -4px;
+	margin-right: -10px;
+	border-radius: 100px;
+	border: none;
+	padding: 0;
+}
+
+.btn.close-menu:active {
+	background: var(--menu-hover);
+}
+
+.btn.close-menu:active .icon {
+    transform: rotate(180deg);
 }
 
 /* ============================================================
@@ -1222,7 +1168,6 @@ body {
 		pointer-events: none;
 		visibility: hidden;
 		transform: translateX(-20px);
-		transition: opacity 0.2s ease, transform 0.3s ease;
 	}
 
 	.topbar {
@@ -1230,7 +1175,6 @@ body {
 		pointer-events: none;
 		visibility: hidden;
 		transform: translateY(-20px);
-		transition: opacity 0.2s ease, transform 0.3s ease;
 	}
 
 	.mobile-topbar {
@@ -1247,8 +1191,7 @@ body {
 	}
 
 	.mfa-layout {
-		flex-direction:
-			column;
+		flex-direction: column;
 		gap: 0;
 		width: 100%;
 	}
@@ -1317,7 +1260,6 @@ body {
 	}
 
 	.menu-panel {
-		width: 100%;
 		border-left: none;
 	}
 
@@ -1348,58 +1290,53 @@ body {
 	.detail-row {
 		align-items: center;
 	}
-
-	.topbar-right .support-link span {
-		display: none;
-	}
 }
 
-/* ============================================================
-   9. ICON MASKS & UTILITIES
-   ============================================================ */
 
+/* =========================================
+   ICON SYSTEM
+========================================= */
 .icon {
-	display: inline-block;
-	width: var(--icon-size, 20px);
-	height: var(--icon-size, 20px);
-	border-radius: 4px;
-	background-color: var(--icon-color, currentColor);
-	-webkit-mask-size: contain;
-	mask-size: contain;
-	-webkit-mask-repeat: no-repeat;
-	mask-repeat: no-repeat;
-	-webkit-mask-position: center;
-	mask-position: center;
-	-webkit-mask-image: var(--icon-url);
-	mask-image: var(--icon-url);
-	transition: background-color 0.2s ease;
+  display: inline-block;
+  width: var(--icon-size, 18px);
+  height: var(--icon-size, 18px);
+  background-color: var(--primary-color);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-image: var(--icon-url);
+  mask-image: var(--icon-url);
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
 }
 
-.icon-home          {--icon-url: url('../assets/images/home.svg');}
-.icon-download      {--icon-url: url('../assets/images/download.svg');}
-.icon-pricing       {--icon-url: url('../assets/images/pricing.svg');}
-.icon-billing       {--icon-url: url('../assets/images/wallet.svg');}
-.icon-redeem        {--icon-url: url('../assets/images/redeem.svg');}
-.icon-gift          {--icon-url: url('../assets/images/gift.svg');}
-.icon-support       {--icon-url: url('../assets/images/support.svg');}
-.icon-login         {--icon-url: url('../assets/images/login.svg');}
-.icon-settings      {--icon-url: url('../assets/images/settings.svg');}
-.icon-logo          {--icon-url: url('../assets/images/brand.svg');}
-.icon-lang          {--icon-url: url('../assets/images/lang_ic.svg');}
-.icon-deals         {--icon-url: url('../assets/images/percent.svg');}
-.icon-theme         {--icon-url: url('../assets/images/dark_mode.svg');}
-.dark .icon-theme   {--icon-url: url('../assets/images/light_mode.svg');}
-.icon-burger        {--icon-url: url('../assets/images/burger.svg');}
-.icon-chevron-right {--icon-url: url('../assets/images/chevron_right.svg');}
-.icon-close         {--icon-url: url('../assets/images/close.svg');}
-.icon-login         {--icon-url: url('../assets/images/login.svg');}
-.icon-logout        {--icon-url: url('../assets/images/logout.svg');}
-.icon-arrow-right   {--icon-url: url('../assets/images/arrow_right.svg');}
-.icon-chevron       {--icon-url: url('../assets/images/chevron.svg');}
-.icon-chevron-down  {--icon-url: url('../assets/images/chevron_down.svg');}
-.icon-warning       {--icon-url: url('../assets/images/warning.svg');}
-.icon-time 	   		{--icon-url: url('../assets/images/time.svg');}
-.icon-add-friend	{--icon-url: url('../assets/images/add_friend.svg');}
+.icon-home          { --icon-url: url('../assets/images/home.svg'); }
+.icon-download      { --icon-url: url('../assets/images/download.svg'); }
+.icon-pricing       { --icon-url: url('../assets/images/pricing.svg'); }
+.icon-billing       { --icon-url: url('../assets/images/wallet.svg'); }
+.icon-redeem        { --icon-url: url('../assets/images/redeem.svg'); }
+.icon-gift          { --icon-url: url('../assets/images/gift.svg'); }
+.icon-support       { --icon-url: url('../assets/images/support.svg'); }
+.icon-login         { --icon-url: url('../assets/images/login.svg'); }
+.icon-settings      { --icon-url: url('../assets/images/settings.svg'); }
+.icon-logo          { --icon-url: url('../assets/images/brand.svg'); }
+.icon-lang          { --icon-url: url('../assets/images/lang_ic.svg'); }
+.icon-deals         { --icon-url: url('../assets/images/percent.svg'); }
+.icon-burger        { --icon-url: url('../assets/images/burger.svg'); }
+.icon-close         { --icon-url: url('../assets/images/close.svg'); }
+.icon-logout        { --icon-url: url('../assets/images/logout.svg'); }
+.icon-arrow         { --icon-url: url('../assets/images/arrow.svg'); }
+.icon-chevron       { --icon-url: url('../assets/images/chevron.svg'); }
+.icon-warning       { --icon-url: url('../assets/images/warning.svg'); }
+.icon-time          { --icon-url: url('../assets/images/time.svg'); }
+.icon-add-friend    { --icon-url: url('../assets/images/add_friend.svg'); }
+.icon-theme         { --icon-url: url('../assets/images/dark_mode.svg'); }
+.icon-theme-light   { --icon-url: url('../assets/images/light_mode.svg'); }
+.icon-theme-dark    { --icon-url: url('../assets/images/dark_mode.svg'); }
+.icon-plus					{ --icon-url: url('../assets/images/plus.svg'); }
 
 /* ============================================================
    10. AUTH & FORM STYLES
@@ -1426,6 +1363,7 @@ body {
 	color: var(--text-muted);
 }
 
+/* Social Buttons */
 .social-buttons {
 	display: flex;
 	gap: 15px;
@@ -1433,8 +1371,8 @@ body {
 }
 
 .social-btn {
-	  position: relative;
-  overflow: hidden;
+	position: relative;
+	overflow: hidden;
 	flex: 1;
 	padding: 15px 15px 15px 20px;
 	border: 1px solid var(--border-input);
@@ -1449,7 +1387,6 @@ body {
 	justify-content: center;
 	gap: 10px;
 	transition: all 0.3s ease;
-	font-family: inherit;
 	width: 350px;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -1483,19 +1420,18 @@ body {
 	color: var(--text-primary);
 	outline: none;
 	transition: border-color 0.25s, box-shadow 0.25s;
-	font-family: inherit;
 	box-sizing: border-box;
 	padding-right: 44px;
 }
 
-.float-field input.has-value ~ label,
-.float-field input:focus ~ label,
-.float-field input:not(:placeholder-shown) ~ label {
-    top: 1px;
-    transform: translateY(-50%);
-    font-size: 14px;
+.float-field input.has-value~label,
+.float-field input:focus~label,
+.float-field input:not(:placeholder-shown)~label {
+	top: 1px;
+	transform: translateY(-50%);
+	font-size: 14px;
 	color: var(--text-muted);
-    background: var(--float-label-bg, var(--bg-body));
+	background: var(--float-label-bg, var(--bg-body));
 }
 
 .float-field input.has-value:focus~label,
@@ -1558,7 +1494,7 @@ body {
 	line-height: 1;
 }
 
-/* Error Row */
+/* Error Messages */
 .error-row {
 	display: none;
 	align-items: center;
@@ -1655,6 +1591,7 @@ body {
 	transition: background 0.3s;
 }
 
+/* Default Button */
 .btn-default {
 	width: 100%;
 	padding: 15px;
@@ -1665,7 +1602,6 @@ body {
 	font-size: 16px;
 	font-weight: 600;
 	cursor: pointer;
-	font-family: inherit;
 	min-width: fit-content;
 	display: inline-flex;
 	align-items: center;
@@ -1796,7 +1732,6 @@ body {
 	outline: none;
 	letter-spacing: 2px;
 	transition: border-color 0.2s, box-shadow 0.2s;
-	font-family: inherit;
 }
 
 .otp-single-input::placeholder {
@@ -1816,6 +1751,7 @@ body {
 }
 
 @keyframes shake {
+
 	0%,
 	100% {
 		transform: translateX(0);
@@ -1916,7 +1852,6 @@ body {
 	transition: transform 0.25s ease, background 0.2s ease;
 }
 
-/* ── State: OPEN ── */
 .faq-item.open .faq-question span:first-child {
 	color: var(--color-primary);
 }
@@ -1926,14 +1861,10 @@ body {
 	background: var(--color-primary);
 }
 
-/* ── State: CLOSED reset eksplisit ── */
 .faq-item:not(.open) .faq-chevron {
 	background: var(--text-secondary);
 	transform: rotate(0deg);
 }
-
-/* ── Hover: desktop only ── */
-
 
 .faq-answer {
 	font-size: 13px;
@@ -1949,6 +1880,7 @@ body {
 	max-height: 300px;
 	padding: 0 8px 14px;
 }
+
 
 /* ============================================================
    11. HOME PAGE STYLES
@@ -2106,13 +2038,19 @@ body {
 }
 
 .home-side-title {
-	font-size: 15px;
+	font-size: 1rem;
 	font-weight: 600;
-	color: var(--text-secondary);
+	color: var(--text-primary);
 	margin-bottom: 6px;
 	display: flex;
 	align-items: center;
 	gap: 6px;
+}
+
+.home-side-title .icon {
+	width: 18px;
+	height: 18px;
+	background: #ff8a3d;
 }
 
 .home-side-desc {
@@ -2125,52 +2063,27 @@ body {
 .navigate-link {
 	display: inline-flex;
 	align-items: center;
-	gap: 6px;
-	font-size: 14px;
+	gap: 4px;
+	font-size: 0.8rem;
+	font-weight: 500;
 	color: var(--color-primary);
 	text-decoration: none;
 	margin-bottom: 10px;
-	font-weight: 500;
 	position: relative;
-	transition: width 0.3s ease;
-}
-
-.navigate-link span {
-	position: relative;
-	display: inline-block;
-	flex: 1;
-	white-space: nowrap;
-}
-
-.navigate-link span::after {
-	display: none;
-}
-
-.navigate-link::after {
-	content: "";
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	width: 0;
-	height: 2px;
-	background-color: var(--color-primary);
 	transition: width 0.3s ease;
 }
 
 .navigate-link .icon {
-	width: 16px;
-	height: 16px;
-	background: var(--color-primary);
+	margin-top: 3px;
+	width: 14px;
+	height: 14px;
+	background: currentColor;
 }
+
 
 /* ============================================================
    12. ANIMATIONS
    ============================================================ */
-@keyframes underline-tap {
-	0%   { width: 0; }
-	60%  { width: 100%; }
-	100% { width: 0; }
-}
 
 @keyframes spin {
 	to {
@@ -2251,6 +2164,7 @@ body {
 	animation-delay: 0.1s;
 }
 
+
 /* ============================================================
    13. PAGE TRANSITION SPINNER
    ============================================================ */
@@ -2297,30 +2211,34 @@ body {
 	stroke-dashoffset: 60;
 }
 
-/* ============================================
-   RIPPLE EFFECT (global)
-   ============================================ */
+
+/* ============================================================
+   14. RIPPLE EFFECT
+   ============================================================ */
+
 .ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  transform: scale(0);
-  animation: ripple-effect 0.55s linear;
-  pointer-events: none;
+	position: absolute;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.35);
+	transform: scale(0);
+	animation: ripple-effect 0.55s linear;
+	pointer-events: none;
 }
 
 @keyframes ripple-effect {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
+	to {
+		transform: scale(4);
+		opacity: 0;
+	}
 }
 
-/* ============================================================
-   HOVER EFFECTS (desktop/mouse only)
-   ============================================================ */
-@media (hover: hover) {
 
+/* ============================================================
+   15. HOVER EFFECTS (Desktop Only)
+   ============================================================ */
+
+@media (hover: hover) {
+	/* FAQ */
 	.faq-item:not(.open) .faq-question:hover span:first-child {
 		transform: translateX(4px);
 		color: var(--color-primary);
@@ -2329,182 +2247,173 @@ body {
 	.faq-item:not(.open) .faq-question:hover .faq-chevron {
 		background: var(--color-primary);
 	}
+
+	/* Navigation Items */
 	.nav-item:hover {
-
-	color: var(--text-primary);
-	background: var(--menu-hover);
-	gap: 12px;
+		color: var(--text-primary);
+		background: var(--menu-hover);
+		gap: 12px;
 	}
-	.nav-item.active:hover {
 
-	background: var(--menu-hover);
-	font-weight: 600;
-	}
-	.nav-item:hover .icon {
+	.nav-item.active:hover {background: var(--menu-hover); font-weight: 600;}
+	.nav-item:hover .icon {background-color: var(--text-primary);}
 
-	background-color: var(--text-primary);
-	}
-	.support-link:hover {
-
-	background-color: var(--menu-hover);
-	}
+	/* User Chip Hover */
 	.user-chip:hover {
-
-	background: var(--color-primary-hover);
+		background: var(--color-primary-hover);
 	}
+
 	.user-chip:hover .user-chip-avatar {
-
-  background: var(--color-primary);
+		background: var(--color-primary);
 	}
+
+	/* Chip Popup Hover */
 	.chip-popup-item:hover {
-
-	background: var(--bg-body);
-	color: var(--color-primary);
-	gap: 12px;
+		background: var(--bg-body);
+		color: var(--color-primary);
+		gap: 12px;
 	}
-	.theme-toggle:hover {
 
-	background-color: var(--menu-hover);
+	/* Language Button */
+	.language-btn:hover {
+		background: var(--hover-btn);
+		color: var(--color-primary);
+		border-color: var(--hover-btn);
 	}
-	.language-btn:is(:hover, :active) {
 
-	background: var(--menu-hover);
-	color: var(--text-primary);
+	.language-btn:hover .icon {background-color: currentColor;}
+	.lang-option:hover {
+		background: var(--menu-hover);
+		color: var(--text-primary);
+		padding-left: 16px;
 	}
-	.language-btn:hover .icon {
 
-	background-color: currentColor;
-	}
-	.lang-option:is(:hover, :active) {
-
-	background: var(--menu-hover);
-	color: var(--text-primary);
-	}
-	.lang-option.active:hover {
-
-	background: var(--menu-hover);
-	color: var(--color-primary);
-	}
+	/* Tab Button Hover */
 	.tab-btn:hover::after {
-
-	width: 100%;
-	background: var(--text-primary);
+		width: 100%;
+		background: var(--text-primary);
 	}
+
 	.tab-btn:hover {
-
-	color: var(--text-primary);
+		color: var(--text-primary);
 	}
+
 	.tab-btn.active:hover::after {
-
-	background: var(--color-primary);
-	height: 2px;
-	width: 100%;
-	width: 100%;
+		background: var(--color-primary);
+		height: 2px;
+		width: 100%;
 	}
-	.btn-outline:hover {
 
-	background: var(--border-light);
-	border-color: var(--text-muted);
-	}
-	.btn-disconnect:hover {
+	/* Button Hovers */
 
-	color: var(--color-primary);
-	}
-	.btn-disconnect:hover span::after {
-
-	width: 100%;
-	}
-	.btn-connect:hover {
-
-	background: var(--border-light);
-	border-color: var(--text-muted);
-	}
-	.btn-delete:hover {
-
-	background: var(--logout-btn-bg);
-	border-color: var(--accent-red);
-	}
+	/* Footer Hover */
 	.footer-links a:is(:hover, :active) {
-
-	background-color: var(--menu-hover);
+		background-color: var(--menu-hover);
 	}
+
+	/* Navbar Links Hover */
 	.navbar-links a:hover {
-
-	background: transparent;
-	color: var(--color-primary);
+		background: transparent;
+		color: var(--color-primary);
 	}
+
+	/* Auth Link Hover */
 	.auth__link a:hover {
-
-	text-decoration: underline;
+		text-decoration: underline;
 	}
+
+	/* Mobile Menu Hovers */
 	.burger:hover .icon {
-
-	background-color: var(--color-primary);
+		background-color: var(--color-primary);
 	}
-	.close-menu-btn:is(:hover, :active) .icon {
 
-	background: var(--color-primary);
-	}
-	.close-menu-btn:is(:hover, :active) {
-
-	background: var(--menu-hover);
-	}
-	.settings-btn:hover {
-
-	background: var(--button-bg);
-	border-color: var(--color-primary);
-	color: var(--color-primary);
-	}
-	.settings-btn:hover .icon {
-
-	background: currentColor;
-	}
 	.nav-item.menu:hover {
-
-	gap: 20px;
+		gap: 20px;
 	}
-	.logout-btn:hover {
 
-	background: var(--logout-btn-bg);
-	border-color: var(--accent-red);
-	}
+	/* Social Button Hover */
 	.social-btn:hover {
-
-	transform: scale(0.97);
-	border-color: black;
-	background: black;
-	color: whitesmoke;
-	box-shadow: 0 6px 10px rgba(44, 123, 229, 0.3);
+		transform: scale(0.97);
+		border-color: black;
+		background: black;
+		color: whitesmoke;
+		box-shadow: 0 6px 10px rgba(44, 123, 229, 0.3);
 	}
+
+	/* Form Elements Hover */
 	.float-field .toggle-pw:hover {
-
-	color: var(--color-primary);
+		color: var(--color-primary);
 	}
+
 	.toggle-password:hover {
-
-	color: var(--color-primary);
+		color: var(--color-primary);
 	}
+
+	/* Default Button Hover */
 	.btn-default:hover {
-
-	background: linear-gradient(135deg, var(--color-primary-hover), var(--accent-purple-hover));
-	transform: scale(0.97);
-	box-shadow: 0 6px 10px rgba(44, 123, 229, 0.3);
+		background: linear-gradient(135deg, var(--color-primary-hover), var(--accent-purple-hover));
+		transform: scale(0.97);
+		box-shadow: 0 6px 10px rgba(44, 123, 229, 0.3);
 	}
+
+	/* Home Page Hovers */
 	.home-product-item:hover {
-
-	background: var(--menu-hover);
-	}
-	.navigate-link:hover {
-
-	gap: 8px;
-	transition: gap 0.2s ease-in-out;
-	}
-	.navigate-link:hover::after {
-
-	width: 100%;
+		background: var(--menu-hover);
 	}
 
-	.navigate-link:active::after {
-	animation: underline-tap 0.5s ease;
-}
+	.btn.settings:hover {
+		border-color: var(--button-bg);
+		color: var(--color-primary);
+	}
+
+	.btn.logout:hover,
+	.btn.delete:hover {
+		border-color: var(--logout-btn-bg);
+		color: var(--accent-red);
+	}
+
+	.btn.settings:active:hover,
+	.btn.logout:active:hover,
+	.btn.delete:active:hover {
+		color: whitesmoke;
+	}
+
+	.btn.outline:hover,
+	.btn.connect:hover {
+		border-color: var(--bg-body);
+	}
+
+	.btn.settings:hover::after,
+	.btn.logout:hover::after,
+	.btn.delete:hover::after,
+	.btn.outline:hover::after,
+	.btn.connect:hover::after {
+		width: 100%;
+	}
+
+	.btn.close-menu:hover .icon {
+		background: var(--color-primary);
+		transform: rotate(90deg);
+	}
+
+	.theme-toggle:hover,
+	.btn.close-menu:hover {
+		background: var(--hover-btn);
+		color: var(--color-primary);
+		border-color: var(--hover-btn);
+	}
+
+	.btn.disconnect:hover {
+		color: var(--color-primary);
+	}
+
+	.btn.disconnect:hover span::after {
+		width: 100%;
+	}
+
+	/* Support Button */
+  .support-btn:hover {
+		background: var(--menu-hover);
+		color: var(--color-primary);
+	}
 }

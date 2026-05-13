@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>Account Overview | {appName} Account</title>
+    <title>Account Overview | Loading.. Account</title>
     <link rel="icon" href="/assets/images/Favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/css/styling.css" />
     <link rel="stylesheet" href="/css/billing.css" />
@@ -18,8 +18,8 @@
         <div class="brand-icon">
           <span class="icon icon-logo"></span>
           <div>
-            <span class="brand-name">{appName}</span>
-            <span class="brand-sub"> Account</span>
+            <span class="brand-name">Loading..</span>
+            <span class="brand-sub">Account</span>
           </div>
         </div>
 
@@ -32,9 +32,6 @@
             <span class="icon icon-home"></span>
             Home
           </div>
-
-          <div class="divider"></div>
-
           <div class="nav-item" onclick="showToast('Downloads')">
             <span class="icon icon-download"></span>
             Downloads
@@ -75,16 +72,11 @@
         <span class="topbar-title">Home</span>
         <span class="topbar-right">
           <div class="language-wrapper"></div>
-          <button class="theme-toggle" id="darkModeToggle">
-            <span
-              id="themeIcon"
-              class="icon icon-theme"
-              style="--icon-size: 18px"
-            ></span>
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <span class="icon icon-theme-icon icon-theme"></span>
           </button>
-          <a
-            class="support-link"
-            href="#"
+          <button
+            class="support-btn"
             onclick="
               navigateTo('support');
               return false;
@@ -92,11 +84,11 @@
           >
             <span class="icon icon-support"></span>
             <span>Support center</span>
-          </a>
+          </button>
           <div class="user-chip-wrapper">
             <div class="user-chip" id="userChip">
               <div class="user-chip-avatar" id="chipAvatar"></div>
-              <span id="chipEmail" style="font-size: 12.5px">{userEmail}</span>
+              <span id="chipEmail" style="font-size: 12.5px">Loading...</span>
               <span class="icon icon-chevron-down" id="chipCaret"></span>
             </div>
 
@@ -125,17 +117,13 @@
       <header class="mobile-topbar">
         <div class="brand-icon mobile">
           <span class="icon icon-logo"></span>
-          <span class="brand-name">{appName}</span>
+          <span class="brand-name">Loading..</span>
           <span class="brand-sub">Account</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px">
           <div class="language-wrapper"></div>
-          <button class="theme-toggle" id="mobileThemeToggle">
-            <span
-              id="themeIcon"
-              class="icon icon-theme"
-              style="--icon-size: 18px"
-            ></span>
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <span class="icon icon-theme-icon icon-theme"></span>
           </button>
           <button class="burger" id="burgerMenuBtn">
             <span class="icon icon-burger"></span>
@@ -155,11 +143,11 @@
           <div class="menu-topbar">
             <div class="brand-icon menu">
               <div class="icon icon-logo"></div>
-              <span class="brand-name">{appName}</span>
+              <span class="brand-name">Loading..</span>
               <span class="brand-sub">Account</span>
             </div>
             <button
-              class="close-menu-btn"
+              class="btn close-menu"
               id="closeMenuBtn"
               aria-label="Close menu"
             >
@@ -167,22 +155,24 @@
             </button>
           </div>
 
+          <div class="divider menu-top"></div>
+
           <!-- User info -->
           <div class="user-row" id="menuUserRow">
             <div class="user-avatar" id="menuAvatar"></div>
-            <span class="user-email" id="menuEmail">{userEmail}</span>
+            <span class="user-email" id="menuEmail">Loading...</span>
           </div>
 
           <!-- Login shortcut (shown when no email) -->
-          <button class="settings-btn" id="menuLoginBtn" style="display: none">
+          <button class="btn settings" id="menuLoginBtn" style="display: none">
             <span class="icon icon-login"></span>
-            Login
+            <span>Log in</span>
           </button>
 
           <!-- Account settings shortcut (hidden when no email) -->
-          <button class="settings-btn" id="menuAccountSettingsBtn">
+          <button class="btn settings" id="menuAccountSettingsBtn">
             <span class="icon icon-settings"></span>
-            Account settings
+            <span>Account settings</span>
           </button>
 
           <div class="divider menu"></div>
@@ -197,10 +187,7 @@
             >
               <span class="icon icon-home"></span>
               <span class="nav-label">Home</span>
-              <span
-                class="icon icon-chevron-right"
-                style="--icon-size: 17px"
-              ></span>
+              <span class="icon icon-chevron"></span>
             </div>
             <div
               class="nav-item menu"
@@ -210,10 +197,7 @@
             >
               <span class="icon icon-download"></span>
               <span class="nav-label">Downloads</span>
-              <span
-                class="icon icon-chevron-right"
-                style="--icon-size: 17px"
-              ></span>
+              <span class="icon icon-chevron"></span>
             </div>
             <div
               class="nav-item menu"
@@ -223,10 +207,7 @@
             >
               <span class="icon icon-pricing"></span>
               <span class="nav-label">Available plans</span>
-              <span
-                class="icon icon-chevron-right"
-                style="--icon-size: 17px"
-              ></span>
+              <span class="icon icon-chevron"></span>
             </div>
             <div
               class="nav-item menu"
@@ -236,10 +217,7 @@
             >
               <span class="icon icon-billing"></span>
               <span class="nav-label">Billing</span>
-              <span
-                class="icon icon-chevron-right"
-                style="--icon-size: 17px"
-              ></span>
+              <span class="icon icon-chevron"></span>
             </div>
             <div
               class="nav-item menu"
@@ -249,10 +227,7 @@
             >
               <span class="icon icon-redeem"></span>
               <span class="nav-label">Redeem</span>
-              <span
-                class="icon icon-chevron-right"
-                style="--icon-size: 17px"
-              ></span>
+              <span class="icon icon-chevron"></span>
             </div>
             <div
               class="nav-item menu"
@@ -262,10 +237,7 @@
             >
               <span class="icon icon-gift"></span>
               <span class="nav-label">Refer a friend</span>
-              <span
-                class="icon icon-chevron-right"
-                style="--icon-size: 17px"
-              ></span>
+              <span class="icon icon-chevron"></span>
             </div>
             <div
               class="nav-item menu"
@@ -275,15 +247,13 @@
             >
               <span class="icon icon-support"></span>
               <span class="nav-label">Support center</span>
-              <span
-                class="icon icon-chevron-right"
-                style="--icon-size: 17px"
-              ></span>
+              <span class="icon icon-chevron"></span>
             </div>
           </nav>
 
           <!-- Logout -->
-          <button class="logout-btn" id="menuLogoutBtn">
+          <div class="divider menu-footer" id="menuLogoutDivider"></div>
+          <button class="btn logout" id="menuLogoutBtn">
             <span class="icon icon-logout"></span>
             Log out
           </button>
@@ -337,7 +307,7 @@
                     </svg>
                   </div>
                   <div class="home-product-info">
-                    <span class="home-product-name">{appName} Premium</span>
+                    <span class="home-product-name">Loading.. Premium</span>
                     <span class="home-product-renew"
                       >Renews on February 21, 2028
                       <svg viewBox="0 0 24 24" width="13" height="13">
@@ -373,7 +343,7 @@
                   <div class="home-product-info">
                     <span class="home-product-name">Multi Device</span>
                     <span class="home-product-sub"
-                      >Set up a {appName} between multiple devices.</span
+                      >Set up a Loading.. between multiple devices.</span
                     >
                   </div>
                   <span class="home-product-chevron"
@@ -394,46 +364,44 @@
                 </p>
                 <div class="navigate-link">
                   <span>Download apps</span>
-                  <span class="icon icon-arrow-right"></span>
+                  <span class="icon icon-arrow"></span>
                 </div>
               </div>
               <div class="home-side-card" id="desktopCardAccountSettings">
+                <h3 class="home-side-title">Account Settings</h3>
                 <p class="home-side-desc">
                   Manage your account details, multi-factor authentication
                   (MFA), and notification preferences.
                 </p>
                 <div
+                  class="navigate-link"
                   onclick="
                     navigateTo('account-settings');
                     return false;
                   "
-                  class="navigate-link"
                 >
                   <span>Manage account</span>
-                  <span class="icon icon-arrow-right"></span>
+                  <span class="icon icon-arrow"></span>
                 </div>
               </div>
               <div class="home-side-card">
                 <h3 class="home-side-title">
                   Your deals
-                  <span
-                    class="icon icon-deals"
-                    style="--icon-size: 20px; --icon-color: #ff8a3d"
-                  ></span>
+                  <span class="icon icon-deals"></span>
                 </h3>
                 <p class="home-side-desc">
                   Explore special offers and save on services that enhance your
                   online security.
                 </p>
                 <div
+                  class="navigate-link"
                   onclick="
                     navigateTo('pricing');
                     return false;
                   "
-                  class="navigate-link"
                 >
                   <span>View your deals</span>
-                  <span class="icon icon-arrow-right"></span>
+                  <span class="icon icon-arrow"></span>
                 </div>
               </div>
             </div>
@@ -462,7 +430,7 @@
               >Privacy policy</a
             >
             <span style="padding: 4px 10px; border-radius: 6px"
-              >© 2026 {appName} security. All rights reserved.</span
+              >© 2026 Loading.. security. All rights reserved.</span
             >
           </div>
         </div>
