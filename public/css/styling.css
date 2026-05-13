@@ -2053,7 +2053,6 @@ button .icon {
 	font-size: 0.8rem;
 	font-weight: 500;
 	color: var(--color-primary);
-	text-decoration: none;
 	margin-bottom: 10px;
 	position: relative;
 	border: none;

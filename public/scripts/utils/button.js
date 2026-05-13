@@ -128,7 +128,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initLanguageWidgets();
-    attachTouchActive('button, .navigate-link');
+    attachTouchActive();
   });
 
   window.LanguageWidget = { init: initLanguageWidgets };
@@ -137,7 +137,7 @@
   /* ─────────────────────────────────────────
    TOUCH ACTIVE FIX (Android)
   ───────────────────────────────────────── */
-  function attachTouchActive(selector = 'button') {
+  function attachTouchActive(selector = 'button, .navigate-link') {
     document.querySelectorAll(selector).forEach(btn => {
       btn.addEventListener('touchstart', () => {
         btn.classList.add('is-active');
