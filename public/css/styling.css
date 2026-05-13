@@ -2239,7 +2239,7 @@ button .icon {
    15. HOVER EFFECTS (Desktop Only)
    ============================================================ */
 
-@media (hover: none) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
 	/* FAQ */
 	.faq-item:not(.open) .faq-question:hover span:first-child {
 		transform: translateX(4px);
@@ -2305,14 +2305,6 @@ button .icon {
 		height: 2px;
 		width: 100%;
 	}
-
-  .theme-toggle:active {
-    background: var(--hover-btn);
-    transform: none;
-  }
-  .theme-toggle:active .icon {
-    translate: 0 2px;
-  }
 
 	/* Footer Hover */
 	.footer-links a:is(:hover, :active) {
@@ -2404,7 +2396,6 @@ button .icon {
 		transform: rotate(90deg);
 	}
 
-	.theme-toggle:hover,
 	.btn.close-menu:hover {
 		background: var(--hover-btn);
 		color: var(--color-primary);
@@ -2424,4 +2415,31 @@ button .icon {
 		background: var(--menu-hover);
 		color: var(--color-primary);
 	}
+
+  .theme-toggle:hover {
+    background: var(--hover-btn);
+    color: var(--color-primary);
+    border-color: var(--hover-btn);
+  }
+
+  .theme-toggle:active {
+    background: var(--hover-btn);
+    transform: none;
+  }
+
+  .theme-toggle:active .icon {
+    translate: 0 2px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .theme-toggle:active {
+    background: transparent;
+  }
+  .theme-toggle.is-active {
+    background: var(--hover-btn);
+  }
+  .theme-toggle.is-active .icon {
+    translate: 0 2px;
+  }
 }
