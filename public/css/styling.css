@@ -1127,6 +1127,14 @@ button .icon {
 	padding: 0;
 }
 
+.close-menu.is-active {
+	background: var(--menu-hover);
+}
+
+.close-menu.is-active .icon {
+	transform: rotate(180deg);
+}
+
 .theme-toggle {
   height: 34px;
   width: 34px;
@@ -1135,10 +1143,55 @@ button .icon {
 	color: var(--text-secondary);
 }
 
+.theme-toggle.is-active {
+  background: var(--hover-btn);
+}
+
+.theme-toggle.is-active .icon {
+  translate: 0 2px;
+}
+
 .theme-toggle.mobile {
 	position: fixed;
 	top: 14px;
 	right: 16px;
+}
+
+.navigate-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	color: var(--color-primary);
+	text-decoration: none;
+	margin-bottom: 10px;
+	position: relative;
+	border: none;
+	padding: 0;
+}
+
+.navigate-link::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 1.5px;
+	background-color: var(--color-primary);
+	transition: width 0.3s ease;
+}
+
+.navigate-link.is-active {
+	width: 100%;
+}
+
+.navigate-link .icon {
+	width: 14px;
+	height: 14px;
+	background: currentColor;
+  transition: translate 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: translate;
 }
 
 /* ============================================================
@@ -2046,39 +2099,6 @@ button .icon {
 	margin-bottom: 10px;
 }
 
-.navigate-link {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
-	font-size: 0.8rem;
-	font-weight: 500;
-	color: var(--color-primary);
-	margin-bottom: 10px;
-	position: relative;
-	border: none;
-	padding: 0;
-}
-
-.navigate-link::after {
-	content: "";
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	width: 0;
-	height: 1.5px;
-	background-color: var(--color-primary);
-	transition: width 0.3s ease;
-}
-
-.navigate-link .icon {
-	width: 14px;
-	height: 14px;
-	background: currentColor;
-  transition: translate 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: translate;
-}
-
-
 /* ============================================================
    12. ANIMATIONS
    ============================================================ */
@@ -2448,9 +2468,10 @@ button .icon {
 		transform: rotate(180deg);
 	}
 
-  .navigate-link.is-active .icon {
+	.navigate-link.is-active .icon {
     translate: 3px 0;
   }
+  
   .navigate-link.is-active::after {
     width: 100%;
   }

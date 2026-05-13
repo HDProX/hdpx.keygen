@@ -125,15 +125,6 @@
   document.addEventListener('click', closeAllDropdowns);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllDropdowns(); });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
-    initLanguageWidgets();
-    attachTouchActive('button, .navigate-link');
-  });
-
-  window.LanguageWidget = { init: initLanguageWidgets };
-  window.ThemeManager   = { apply: applyTheme };
-
   /* ─────────────────────────────────────────
    TOUCH ACTIVE FIX (Android)
   ───────────────────────────────────────── */
@@ -155,4 +146,13 @@
   }
 
   window.attachTouchActive = attachTouchActive;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    initLanguageWidgets();
+    attachTouchActive('button, .navigate-link');
+  });
+
+  window.LanguageWidget = { init: initLanguageWidgets };
+  window.ThemeManager   = { apply: applyTheme };
 })();
