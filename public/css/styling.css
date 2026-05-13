@@ -443,28 +443,6 @@ body {
 	flex-shrink: 0;
 }
 
-.theme-toggle {
-  height: 34px;
-  width: 34px;
-	padding: 0;
-	border: none;
-	color: var(--text-secondary);
-}
-
-.theme-toggle.is-active {
-  background: var(--hover-btn);
-}
-
-.theme-toggle.is-active .icon {
-  translate: 0 2px;
-}
-
-.theme-toggle.mobile {
-	position: fixed;
-	top: 14px;
-	right: 16px;
-}
-
 /* Language Button */
 .language-wrapper {
 	position: relative;
@@ -1139,7 +1117,7 @@ button .icon {
 	transition: width 0.3s ease;
 }
 
-.btn.close-menu {
+.close-menu {
 	width: 30px;
 	height: 30px;
 	margin-top: -4px;
@@ -1149,12 +1127,34 @@ button .icon {
 	padding: 0;
 }
 
-.btn.close-menu:active {
+.close-menu.is-active {
 	background: var(--menu-hover);
 }
 
-.btn.close-menu:active .icon {
-    transform: rotate(180deg);
+.close-menu.is-active .icon {
+	transform: rotate(180deg);
+}
+
+.theme-toggle {
+  height: 34px;
+  width: 34px;
+	padding: 0;
+	border: none;
+	color: var(--text-secondary);
+}
+
+.theme-toggle.is-active {
+  background: var(--hover-btn);
+}
+
+.theme-toggle.is-active .icon {
+  translate: 0 2px;
+}
+
+.theme-toggle.mobile {
+	position: fixed;
+	top: 14px;
+	right: 16px;
 }
 
 /* ============================================================
@@ -2391,17 +2391,6 @@ button .icon {
 		width: 100%;
 	}
 
-	.btn.close-menu:hover .icon {
-		background: var(--color-primary);
-		transform: rotate(90deg);
-	}
-
-	.btn.close-menu:hover {
-		background: var(--hover-btn);
-		color: var(--color-primary);
-		border-color: var(--hover-btn);
-	}
-
 	.btn.disconnect:hover {
 		color: var(--color-primary);
 	}
@@ -2421,19 +2410,27 @@ button .icon {
     color: var(--color-primary);
     border-color: var(--hover-btn);
   }
-
   .theme-toggle:active {
     background: var(--hover-btn);
     transform: none;
   }
-
   .theme-toggle:active .icon {
     translate: 0 2px;
   }
+
+	.close-menu:hover {
+    background: var(--menu-hover);
+    color: var(--color-primary);
+    border-color: var(--menu-hover);
+  }
+	.close-menu:hover .icon {
+		transform: rotate(90deg);
+	}
 }
 
 @media (hover: none) and (pointer: coarse) {
-  .theme-toggle:active {
+  .theme-toggle:active,
+	.close-menu:active {
     background: transparent;
   }
   .theme-toggle.is-active {
@@ -2442,4 +2439,11 @@ button .icon {
   .theme-toggle.is-active .icon {
     translate: 0 2px;
   }
+
+	.close-menu.is-active {
+		background: var(--menu-hover);
+	}
+	.close-menu.is-active .icon {
+		transform: rotate(180deg);
+	}
 }
